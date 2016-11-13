@@ -1,0 +1,33 @@
+.error_message {
+	color: red;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+th {
+	font-weight: bold;
+}
+
+table, th, td {
+	border: 1px solid lightgray;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+a:link {
+	text-decoration: none;
+}
+
+.edit_delete {
+	font-size: x-small;
+}
+
+.execution {
+	background-color: gray;
+}
+
+.current {
+	background-color: green;
+}
