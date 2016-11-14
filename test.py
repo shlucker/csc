@@ -35,6 +35,6 @@ if __name__ == '__main__':
     users = User.select().where(User.name > 'd')
     for u in users:
         print(u.name, u.school.name)
-        # clubs = Club.select().join(UserClub).join(Club).where(User.id==u.id)
-        # for c in clubs:
-        #     print('Club:', c.name)
+        clubs = Club.select().join(UserClub).join(User).where(User.id==u.id)
+        for c in clubs:
+            print('Club:', c.name)
