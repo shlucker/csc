@@ -29,12 +29,15 @@ def create():
 
 if __name__ == '__main__':
     create()
+
+    print('== Get user by name ==')
     u1 = User.get(User.name == 'shlucker')
     print(u1.name, u1.school.name)
 
-    users = User.select().where(User.name > 'd')
+    print('== Get all clubs of all users < ste ==')
+    users = User.select().where(User.name < 'ste')
     for u in users:
         print(u.name, u.school.name)
-        # clubs = Club.select().join(UserClub).join(Club).where(User.id==u.id)
-        # for c in clubs:
-        #     print('Club:', c.name)
+        clubs = Club.select().join(UserClub).join(User).where(User.id == u.id)
+        for c in clubs:
+            print('Club:', c.name)
