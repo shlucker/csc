@@ -1,3 +1,5 @@
+import xlrd
+
 from models import create_tables, User, db, State, School, Club, UserClub
 import datetime
 import random
@@ -27,8 +29,24 @@ def create():
         UserClub.create(user=u2, club=c3)
 
 
+def import_from_excel():
+    book = xlrd.open_workbook('test.xlsx')
+    sheet = book.sheet_by_index(0)
+    with db.atomic():
+        for r in range(sheet.nrows):
+            state_name = sheet.cell(r, 2).value
+            school_name = sheet.cell(r, 1).value
+            club_name = sheet.cell(r, 0).value
+
+            state, created = State.get_or_create(name=state_name)
+            school, created = School.get_or_create(name=school_name, state=state)
+            Club.create(name=club_name, school=school)
+
+
 if __name__ == '__main__':
     create()
+
+    import_from_excel()
 
     print('== Get user by name ==')
     u1 = User.get(User.name == 'shlucker')
