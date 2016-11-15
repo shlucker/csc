@@ -4,7 +4,7 @@ import random
 
 
 def create():
-    with db.transaction() as _txn:
+    with db.atomic():
         create_tables(True)
 
         s1 = State.create(name='missouri')
