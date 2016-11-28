@@ -1,8 +1,5 @@
 import xlrd
-
 from models import create_tables, User, db, State, School, Club, UserClub
-import datetime
-import random
 
 
 def create():
@@ -43,6 +40,16 @@ def import_from_excel():
             Club.create(name=club_name, school=school)
 
 
+def clubs_by_user():
+    print('== Get all clubs of all users < ste ==')
+    users = User.select().where(User.name < 'ste')
+    for u in users:
+        print(u.name, u.school.name)
+        clubs = Club.select().join(UserClub).join(User).where(User.id == u.id)
+        for c in clubs:
+            print('Club:', c.name)
+
+
 if __name__ == '__main__':
     create()
 
@@ -52,10 +59,4 @@ if __name__ == '__main__':
     u1 = User.get(User.name == 'shlucker')
     print(u1.name, u1.school.name)
 
-    print('== Get all clubs of all users < ste ==')
-    users = User.select().where(User.name < 'ste')
-    for u in users:
-        print(u.name, u.school.name)
-        clubs = Club.select().join(UserClub).join(User).where(User.id == u.id)
-        for c in clubs:
-            print('Club:', c.name)
+    clubs_by_user()
