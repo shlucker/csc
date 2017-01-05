@@ -16,13 +16,13 @@ class PeeweeModel(peewee.Model):
         database = db
 
 
-class State(PeeweeModel):
-    name = peewee.CharField(index=True)
+
 
 
 class School(PeeweeModel):
     name = peewee.CharField(index=True)
-    state = peewee.ForeignKeyField(State, related_name='schools')
+    city = peewee.CharField(index=True)
+    state = peewee.CharField(index=True)
 
 
 class User(PeeweeModel):
@@ -33,11 +33,15 @@ class User(PeeweeModel):
 
 class Club(PeeweeModel):
     name = peewee.CharField(index=True)
-    school = peewee.ForeignKeyField(School, related_name='clubs')
 
 
 class UserClub(PeeweeModel):
     user = peewee.ForeignKeyField(User)
+    club = peewee.ForeignKeyField(Club)
+
+
+class SchoolClub(PeeweeModel):
+    school = peewee.ForeignKeyField(School)
     club = peewee.ForeignKeyField(Club)
 
 
@@ -64,4 +68,3 @@ def create_tables(drop_existing_tables):
             cls.create_table(fail_silently=True)
 
 
-create_tables(False)
