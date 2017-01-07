@@ -1,45 +1,62 @@
+import pony.orm as ponyorm
 import xlrd
-from models import create_tables, User, db, School, Club, UserClub
+from models import db, School, Club, User, JobOffer, Competition, Achievement, Notification, Post, CompetitionHost, \
+    Member, Company, Video, Photo, Resume
 
 
-
+@ponyorm.db_session
 def import_from_excel():
     book = xlrd.open_workbook('test.xlsx')
 
-    sheet = book.sheet_by_name('Schools')
-    print(sheet.nrows)
-    with db.atomic():
-        for r in range(sheet.nrows):
-            school_name = sheet.cell(r, 0).value
-            city_name = sheet.cell(r, 1).value
-            state_name = sheet.cell(r, 2).value
-            print(r,school_name,city_name,state_name)
-            School.get_or_create(name=school_name, city=city_name, state=state_name)
+    sheet = book.sheet_by_name('School')
+    for r in range(sheet.nrows):
+        name = sheet.cell(r, 0).value
+        city = sheet.cell(r, 1).value
+        state = sheet.cell(r, 2).value
+        School(name=name, city=city, state=state)
 
-    sheet = book.sheet_by_name('Clubs')
-    with db.atomic():
-        for r in range(sheet.nrows):
-            club_name = sheet.cell(r, 0).value
-            Club.get_or_create(name=club_name)
+    sheet = book.sheet_by_name('Member')
+    for r in range(sheet.nrows):
+        name = sheet.cell(r, 0).value
+        major = sheet.cell(r, 1).value
+        city = sheet.cell(r, 2).value
+        state = sheet.cell(r, 3).value
+        school = School.get(name=sheet.cell(r, 4).value)
+        email = name.replace(' ', '.') + '@gmail.com'
+        Member(name=name, major=major, state=state, city=city, email=email, school=school)
 
+    sheet = book.sheet_by_name('Club')
+    for r in range(sheet.nrows):
+        name = sheet.cell(r, 0).value
+        school = School.get(name=sheet.cell(r, 1).value)
+        Club(name=name, school=school)
 
-def clubs_by_user():
-    print('== Get all clubs of all users < ste ==')
-    users = User.select().where(User.name < 'ste')
-    for u in users:
-        print(u.name, u.school.name)
-        clubs = Club.select().join(UserClub).join(User).where(User.id == u.id)
-        for c in clubs:
-            print('Club:', c.name)
+    sheet = book.sheet_by_name('Company')
+    for r in range(sheet.nrows):
+        name = sheet.cell(r, 0).value
+        city = sheet.cell(r, 1).value
+        state = sheet.cell(r, 2).value
+        email = name.replace(' ', '.') + '@gmail.com'
+        Company(name=name, city=city, state=state, email=email)
+
+    sheet = book.sheet_by_name('CompetitionHost')
+    for r in range(sheet.nrows):
+        name = sheet.cell(r, 0).value
+        city = sheet.cell(r, 1).value
+        state = sheet.cell(r, 2).value
+        email = name.replace(' ', '.') + '@gmail.com'
+        CompetitionHost(name=name, city=city, state=state, email=email)
 
 
 if __name__ == '__main__':
-    create_tables(True)
-
+    # ponyorm.sql_debug(True)
+    db.bind('sqlite', 'csc.db', create_db=True)
+    db.generate_mapping(create_tables=True)
+    db.drop_all_tables(with_all_data=True)
+    db.create_tables()
     import_from_excel()
 
-    print('== Get user by name ==')
-    u1 = User.get(User.name == 'shlucker')
-    print(u1.name, u1.school.name)
-
-    clubs_by_user()
+    with ponyorm.db_session:
+        print('== Get member by name ==')
+        u1 = User.get(name='Sade Berney')
+        print(u1.name, u1.major, u1.city, u1.state)
