@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CSC {{ name }}</title>
+</head>
+<body>
+
+<div>
+    <ul id="top_menu">
+        {% if view.logged_in %}
+            <li><a href="{{ request.route_url('user_profile', user_id=user.id) }}">{{ user.name }}</a></li>
+            <li><a href="{{ request.route_url('logout') }}">Logout</a></li>
+        {% else %}
+            <li><a href="{{ request.route_url('login') }}">Log In</a></li>
+        {% endif %}
+    </ul>
+</div>
+
+<h1>Welcome to CSC</h1>
+
+{% if notifications %}
+    <h2>Notifications</h2>
+    {% for n in notifications %}
+    <div class="notification">
+        <p class="post_from">{{ n.from_competition.name or '' }}{{ n.from_job_offer or '' }}</p>
+        <p class="post_date">{{ n.date }}</p>
+        <p class="post_title">{{ n.post.title }}</p>
+        <p class="post_text">{{ n.post.text }}</p>
+    </div>
+    {% endfor %}
+{% endif %}
+<p>Visit <a href="{{ request.route_url('hello') }}">hello</a></p>
+</body>
+</html>

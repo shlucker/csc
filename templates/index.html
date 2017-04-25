@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-
-{% block body %}
-<form>
-	Name: <input type="text" name="user_name" value="{{ user_name }}"><br>
-	{% if error_message['user_name'] %}<span class="error_message">Error: {{ error_message['user_name'] }}<br><br></span>{% endif %}
-	<input type="submit" name="login" value="Login">
-</form>
-{% endblock %}
