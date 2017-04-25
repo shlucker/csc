@@ -7,7 +7,7 @@
 
 <div>
     <ul id="top_menu">
-        {% if view.logged_in %}
+        {% if user %}
             <li><a href="{{ request.route_url('user_profile', user_id=user.id) }}">{{ user.name }}</a></li>
             <li><a href="{{ request.route_url('logout') }}">Logout</a></li>
         {% else %}
