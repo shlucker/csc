@@ -24,10 +24,10 @@
     <h2>Notifications</h2>
     {% for n in notifications %}
     <div class="notification">
-        <p class="post_from">{{ n.from_competition.name or '' }}{{ n.from_job_offer or '' }}</p>
-        <p class="post_date">{{ n.date }}</p>
-        <p class="post_title">{{ n.post.title }}</p>
-        <p class="post_text">{{ n.post.text }}</p>
+        <p class="post_from">From: {{ n.from_competition.name or '' }}{{ n.from_job_offer or '' }}</p>
+        <p class="post_date">On: {{ n.date }}</p>
+        <p class="post_title">Title: {{ n.post.title }}</p>
+        <p class="post_text">Info: {{ n.post.text }}</p>
     </div>
     {% endfor %}
 {% endif %}
