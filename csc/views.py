@@ -1,40 +1,48 @@
 # from pony.converting import str2date
 import pony.orm as orm
-from pyramid.httpexceptions import HTTPFound
+from pyramid.httpexceptions import HTTPFound, HTTPForbidden
 from pyramid.renderers import render_to_response
 from pyramid.security import remember, forget
-from pyramid.view import view_config, view_defaults
+from pyramid.view import view_config
 
 import csc.models as models
 from .security import check_password
 
 
-@view_defaults(renderer='templates/home.jinja2')
 class CscViews:
+    @orm.db_session()
     def __init__(self, request):
-        with orm.db_session():
-            self.request = request
-            self.logged_in = request.authenticated_userid
+        self.request = request
+        self.user_id = request.authenticated_userid
+
+    def _get_user(self):
+        if self.user_id:
+            self.user = models.User.get(email=self.user_id)
+        else:
+            self.user = None
+
+    @view_config(route_name='create_user', renderer='templates/create_user.jinja2')
+    @orm.db_session()
+    def create_user(self):
+        self._get_user()
+        if not self.user or self.user.classtype != 'Administrator':
+            raise HTTPForbidden()
+        return {}
 
     @view_config(route_name='home')
+    @orm.db_session()
     def home(self):
-        with orm.db_session():
-            if self.logged_in:
-                user = models.User.get(email=self.logged_in)
-                # notifications = (n.post.title for n in user.to_notifications if n.date < str2date('2003-02-02'))
-                # notifications = (n for n in user.to_notifications)
-                notifications = orm.select(n for n in models.Notification if n in user.to_notifications).order_by(orm.desc(models.Notification.date))
-            else:
-                user = None
-                notifications = []
-            return render_to_response('templates/home.jinja2',
-                                      {'name': 'Home', 'user': user, 'notifications': notifications},
-                                      request=self.request)
-            # return {'name': 'Home', 'user': user, 'notifications': notifications}
-
-    @view_config(route_name='hello')
-    def hello(self):
-        return {'name': 'Hello View'}
+        self._get_user()
+        if self.user:
+            notifications = orm.select(n for n in models.Notification if n in self.user.to_notifications).order_by(
+                orm.desc(models.Notification.date))
+        else:
+            notifications = []
+        return render_to_response('templates/home.jinja2',
+                                  {'name': 'Home',
+                                   'user': self.user,
+                                   'notifications': notifications},
+                                  request=self.request)
 
     @view_config(route_name='login', renderer='templates/login.jinja2')
     def login(self):
@@ -45,13 +53,11 @@ class CscViews:
             referrer = '/'  # never use login form itself as came_from
         came_from = request.params.get('came_from', referrer)
         message = ''
-        email = ''
-        password = ''
+        email = request.params.get('email', '')
+        password = request.params.get('password', '')
         if 'form.submitted' in request.POST:
-            email = request.params['email']
-            password = request.params['password']
             with orm.db_session():
-                user = models.User.get(email=email)
+                user = models.User.get(email=email) if email else None
             if user and check_password(password, user.password):
                 headers = remember(request, email)
                 return HTTPFound(location=came_from, headers=headers)
@@ -72,6 +78,20 @@ class CscViews:
         url = request.route_url('home')
         return HTTPFound(location=url, headers=headers)
 
-    @view_config(route_name='user_profile', renderer='templates/user_profile.jinja2')
+    @view_config(route_name='user_profile')
+    @orm.db_session()
     def user_profile(self):
-        return {}
+        self._get_user()
+        user_profile_id = self.request.params['user_id']
+
+        if not self.user:
+            return HTTPFound(self.request.route_url('login'))
+        if self.user.classtype != 'Administrator' and self.user.id != int(user_profile_id):
+            raise HTTPForbidden()
+
+        user_profile = models.User[user_profile_id]
+        return render_to_response('templates/user_profile.jinja2',
+                                  {'name': 'User profile',
+                                   'user': self.user,
+                                   'user_profile': user_profile},
+                                  request=self.request)

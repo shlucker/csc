@@ -4,12 +4,14 @@
     <title>CSC {{ name }}</title>
 </head>
 <body>
-
 <div>
     <ul id="top_menu">
         {% if user %}
             <li><a href="{{ request.route_url('user_profile', user_id=user.id) }}">{{ user.name }}</a></li>
             <li><a href="{{ request.route_url('logout') }}">Logout</a></li>
+            {% if user.classtype == 'Administrator' %}
+                <li><a href="{{ request.route_url('create_user') }}">Create user</a></li>
+            {% endif %}
         {% else %}
             <li><a href="{{ request.route_url('login') }}">Log In</a></li>
         {% endif %}
@@ -29,6 +31,5 @@
     </div>
     {% endfor %}
 {% endif %}
-<p>Visit <a href="{{ request.route_url('hello') }}">hello</a></p>
 </body>
 </html>

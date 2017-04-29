@@ -14,6 +14,4 @@ def check_password(pw, hashed_pw):
 
 
 def groupfinder(userid, request):
-    user = models.User.get(email=userid)
-    if user:
-        return ['group:' + user.classtype]
+    return []
