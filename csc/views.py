@@ -82,7 +82,7 @@ class CscViews:
     @orm.db_session()
     def user_profile(self):
         self._get_user()
-        user_profile_id = self.request.params['user_id']
+        user_profile_id = self.request.matchdict['user_id']
 
         if not self.user:
             return HTTPFound(self.request.route_url('login'))
