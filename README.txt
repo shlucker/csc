@@ -18,7 +18,7 @@ cd \workspace
 conda config -y --add channels conda-forge
 conda create -y -n csc pyramid pip
 activate csc
-pip install pony bcrypt
+pip install pony bcrypt xlrd pyramid_jinja2 pyramid_debugtoolbar waitress
 conda install -y cookiecutter
 
 - create project
