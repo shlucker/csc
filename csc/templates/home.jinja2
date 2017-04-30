@@ -19,11 +19,33 @@
 </div>
 
 <h1>Welcome to CSC</h1>
-
+{% if user and user.classtype == 'Member' %}
+    <p>Your school is: {{ user.school.name }}</p>
+{% endif %}
+{% if user and user.clubs %}
+    <p>Your clubs are:</p>
+    <ul>
+    {% for club in user_clubs %}
+        <li>{{ club.name }} - {{ club.school.name }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
 {% if notifications %}
-    <h2>Notifications</h2>
+    <h2>Notifications to you</h2>
     {% for n in notifications %}
     <div class="notification">
+        <p class="post_from">From: {{ n.from_competition.name or '' }}{{ n.from_job_offer or '' }}</p>
+        <p class="post_date">On: {{ n.date }}</p>
+        <p class="post_title">Title: {{ n.post.title }}</p>
+        <p class="post_text">Info: {{ n.post.text }}</p>
+    </div>
+    {% endfor %}
+{% endif %}
+{% if notifications_from_clubs %}
+    <h2>Notifications from your clubs</h2>
+    {% for n, c in notifications_from_clubs %}
+    <div class="notification">
+        <p>Club: {{ c.name }}</p>
         <p class="post_from">From: {{ n.from_competition.name or '' }}{{ n.from_job_offer or '' }}</p>
         <p class="post_date">On: {{ n.date }}</p>
         <p class="post_title">Title: {{ n.post.title }}</p>

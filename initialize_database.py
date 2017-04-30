@@ -6,7 +6,7 @@ try:
 except FileNotFoundError:
     pass
 
-import pony.orm as orm
+from pony import orm
 import xlrd
 
 import csc.models as models
