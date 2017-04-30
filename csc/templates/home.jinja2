@@ -1,23 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>CSC {{ name }}</title>
-</head>
-<body>
-<div>
-    <ul id="top_menu">
-        {% if user %}
-            <li><a href="{{ request.route_url('user_profile', user_id=user.id) }}">{{ user.name }}</a></li>
-            <li><a href="{{ request.route_url('logout') }}">Logout</a></li>
-            {% if user.classtype == 'Administrator' %}
-                <li><a href="{{ request.route_url('create_user') }}">Create user</a></li>
-            {% endif %}
-        {% else %}
-            <li><a href="{{ request.route_url('login') }}">Log In</a></li>
-        {% endif %}
-    </ul>
-</div>
+{% extends "base.jinja2" %}
 
+{% block content %}
 <h1>Welcome to CSC</h1>
 {% if user and user.classtype == 'Member' %}
     <p>Your school is: {{ user.school.name }}</p>
@@ -53,5 +36,4 @@
     </div>
     {% endfor %}
 {% endif %}
-</body>
-</html>
+{% endblock %}
