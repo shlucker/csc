@@ -2,23 +2,24 @@
 <html lang="en">
 <head>
     <title>CSC {{ name }}</title>
+    <link rel="stylesheet" href="static/csc.css"/>
 </head>
 <body>
 {%- block header -%}
-    <div>
-        <ul id="top_menu">
-            <li><a href="{{ request.route_url('home') }}">Home</a></li>
-            {% if user %}
-                <li><a href="{{ request.route_url('user_profile', user_id=user.id) }}">{{ user.name }}</a></li>
-                <li><a href="{{ request.route_url('logout') }}">Logout</a></li>
-                {% if user.classtype == 'Administrator' %}
-                    <li><a href="{{ request.route_url('create_user') }}">Create user</a></li>
-                {% endif %}
-            {% else %}
-                <li><a href="{{ request.route_url('login') }}">Log In</a></li>
+    <ul id="top_menu">
+        <li><a href="{{ request.route_url('home') }}">Home</a></li>
+        {% if user %}
+            <li><a href="{{ request.route_url('user_profile', user_id=user.id) }}">{{ user.name }}</a></li>
+            <li><a href="{{ request.route_url('logout') }}">Logout</a></li>
+            {% if user.classtype == 'Administrator' %}
+                <li><a href="{{ request.route_url('create_user') }}">Create user</a></li>
             {% endif %}
-        </ul>
-    </div>
+        {% else %}
+            <li><a href="{{ request.route_url('login') }}">Log In</a></li>
+        {% endif %}
+    </ul>
+    <br>
+    <hr>
 {%- endblock -%}
 {%- block content -%}
     Missing "content" block in jinja template!

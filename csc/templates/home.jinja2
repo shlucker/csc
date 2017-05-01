@@ -17,7 +17,12 @@
     <h2>Notifications to you</h2>
     {% for n in notifications %}
     <div class="notification">
-        <p class="post_from">From: {{ n.from_competition.name or '' }}{{ n.from_job_offer or '' }}</p>
+        {% if n.from_competition %}
+            <p class="post_from">From competition: {{ n.from_competition.name }}</p>
+        {% endif %}
+        {% if n.from_job_offer %}
+            <p class="post_from">From job offer: {{ n.from_job_offer.name }}</p>
+        {% endif %}
         <p class="post_date">On: {{ n.date }}</p>
         <p class="post_title">Title: {{ n.post.title }}</p>
         <p class="post_text">Info: {{ n.post.text }}</p>
@@ -29,7 +34,12 @@
     {% for n, c in notifications_from_clubs %}
     <div class="notification">
         <p>Club: {{ c.name }}</p>
-        <p class="post_from">From: {{ n.from_competition.name or '' }}{{ n.from_job_offer or '' }}</p>
+        {% if n.from_competition %}
+            <p class="post_from">From competition: {{ n.from_competition.name }}</p>
+        {% endif %}
+        {% if n.from_job_offer %}
+            <p class="post_from">From job offer: {{ n.from_job_offer.name }}</p>
+        {% endif %}
         <p class="post_date">On: {{ n.date }}</p>
         <p class="post_title">Title: {{ n.post.title }}</p>
         <p class="post_text">Info: {{ n.post.text }}</p>
