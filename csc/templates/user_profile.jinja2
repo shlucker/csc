@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>CSC - {{ name }} - {{ user_profile.name }}</title>
-</head>
-<body>
+{% extends "base.jinja2" %}
+
+{% block content %}
 This page shows the user profile for {{ user_profile.name }}<br>
 
 You are logged in as {{ user.name }}
-</body>
-</html>
+{% endblock %}

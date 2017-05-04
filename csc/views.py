@@ -21,13 +21,16 @@ class CscViews:
         else:
             return None
 
-    @view_config(route_name='create_user', renderer='templates/create_user.jinja2')
+    @view_config(route_name='create_user')
     @orm.db_session()
     def create_user(self):
         user = self._get_user()
         if not user or user.classtype != 'Administrator':
             raise HTTPForbidden()
-        return {}
+        return render_to_response('templates/create_user.jinja2',
+                                  {'name': 'Create user',
+                                   'user': user},
+                                  request=self.request)
 
     @view_config(route_name='home')
     @orm.db_session()
