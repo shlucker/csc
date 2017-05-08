@@ -1,0 +1,317 @@
+== School ==
+name                                                              |city             |state   |school_id
+Avila University                                                  |Springfield      |Missouri|1        
+Baptist Bible College and Graduate School                         |Springfield      |Missouri|2        
+Brown Mackie College St Louis                                     |Fenton           |Missouri|3        
+Bryan University Springfield                                      |Springfield      |Missouri|4        
+Calvary Bible College and Theological Seminary                    |Kansas City      |Missouri|5        
+Central Bible College                                             |Springfield      |Missouri|6        
+Central Christian College of the Bible                            |Moberly          |Missouri|7        
+Central Methodist University College of Liberal Arts & Sciences   |Fayette          |Missouri|8        
+Chamberlain College of Nursing Missouri                           |St. Louis        |Missouri|9        
+College of the Ozarks                                             |Point Lookout    |Missouri|10       
+Colorado Technical University Kansas City                         |North Kansas City|Missouri|11       
+Columbia College                                                  |Columbia         |Missouri|12       
+Conception Seminary College                                       |Conception       |Missouri|13       
+Cottey College                                                    |Nevada           |Missouri|14       
+Cox College                                                       |Springfield      |Missouri|15       
+Crowder College                                                   |Neosho           |Missouri|16       
+Culver Stockton College                                           |Canton           |Missouri|17       
+DeVry University Missouri                                         |Kansas City      |Missouri|18       
+Drury University                                                  |Springfield      |Missouri|19       
+East Central College                                              |Union            |Missouri|20       
+Evangel University                                                |Springfield      |Missouri|21       
+Everest College Springfield                                       |Springfield      |Missouri|22       
+Fontbonne University                                              |Saint Louis      |Missouri|23       
+Grantham University                                               |Kansas City      |Missouri|24       
+Hannibal LaGrange University                                      |Hannibal         |Missouri|25       
+Harris Stowe State University                                     |Saint Louis      |Missouri|26       
+Hickey College                                                    |Saint Louis      |Missouri|27       
+ITT Technical Institute Arnold                                    |Arnold           |Missouri|28       
+ITT Technical Institute Earth City                                |Earth City       |Missouri|29       
+ITT Technical Institute Kansas City                               |Kansas City      |Missouri|30       
+ITT Technical Institute Springfield                               |Springfield      |Missouri|31       
+Jefferson College                                                 |Hillsboro        |Missouri|32       
+Kansas City Art Institute                                         |Kansas City      |Missouri|33       
+Kenrick Glennon Seminary                                          |Saint Louis      |Missouri|34       
+L'Ecole Culinaire                                                 |Saint Louis      |Missouri|35       
+Lincoln University                                                |Jefferson City   |Missouri|36       
+Lindenwood University                                             |Saint Charles    |Missouri|37       
+Linn State Technical College                                      |Linn             |Missouri|38       
+Maryville University of Saint Louis                               |Saint Louis      |Missouri|39       
+Messenger College                                                 |Joplin           |Missouri|40       
+Metro Business College Arnold                                     |Arnold           |Missouri|41       
+Metro Business College Cape Girardeau                             |Cape Girardeau   |Missouri|42       
+Metro Business College Jefferson City                             |Jefferson City   |Missouri|43       
+Metro Business College Rolla                                      |Rolla            |Missouri|44       
+Metropolitan Community College Blue River                         |Independence     |Missouri|45       
+Metropolitan Community College Business & Technology              |Kansas City      |Missouri|46       
+Metropolitan Community College Longview                           |Lees Summit      |Missouri|47       
+Metropolitan Community College Maple Woods                        |Kansas City      |Missouri|48       
+Metropolitan Community College Penn Valley                        |Kansas City      |Missouri|49       
+Midwestern Baptist Theological Seminary                           |Kansas City      |Missouri|50       
+Mineral Area College                                              |Park Hills       |Missouri|51       
+Missouri Baptist University                                       |Saint Louis      |Missouri|52       
+Missouri College                                                  |Brentwood        |Missouri|53       
+Missouri Southern State University                                |Joplin           |Missouri|54       
+Missouri State University Springfield                             |Springfield      |Missouri|55       
+Missouri State University West Plains                             |West Plains      |Missouri|56       
+Missouri Tech                                                     |Saint Charles    |Missouri|57       
+Missouri University of Science and Technology                     |Rolla            |Missouri|58       
+Missouri Valley College                                           |Marshall         |Missouri|59       
+Missouri Western State University                                 |Saint Joseph     |Missouri|60       
+Moberly Area Community College                                    |Moberly          |Missouri|61       
+National American University Independence                         |Independence     |Missouri|62       
+National American University Lee's Summit                         |Lee Summit       |Missouri|63       
+National American University Zona Rosa                            |Kansas City      |Missouri|64       
+North Central Missouri College                                    |Trenton          |Missouri|65       
+Northwest Missouri State University                               |Maryville        |Missouri|66       
+Ozark Christian College                                           |Joplin           |Missouri|67       
+Ozarks Technical Community College                                |Springfield      |Missouri|68       
+Park University                                                   |Parkville        |Missouri|69       
+Pinnacle Career Institute North Kansas City                       |Kansas City      |Missouri|70       
+Pinnacle Career Institute South Kansas City                       |Kansas City      |Missouri|71       
+Ranken Technical College                                          |Saint Louis      |Missouri|72       
+Research College of Nursing                                       |Kansas City      |Missouri|73       
+Rockhurst University                                              |Kansas City      |Missouri|74       
+Saint Louis Christian College                                     |Florissant       |Missouri|75       
+Saint Louis Community College                                     |Saint Louis      |Missouri|76       
+Saint Louis University Main Campus                                |Saint Louis      |Missouri|77       
+Sanford Brown College Fenton                                      |Fenton           |Missouri|78       
+Sanford Brown College Hazelwood                                   |Hazelwood        |Missouri|79       
+Sanford Brown College St Peters                                   |Saint Peters     |Missouri|80       
+Southeast Missouri Hospital College of Nursing and Health Sciences|Cape Girardeau   |Missouri|81       
+Southeast Missouri State University                               |Cape Girardeau   |Missouri|82       
+Southwest Baptist University                                      |Bolivar          |Missouri|83       
+St Charles Community College                                      |Cottleville      |Missouri|84       
+St Louis College of Health Careers Fenton                         |Fenton           |Missouri|85       
+St Louis College of Health Careers St Louis                       |Saint Louis      |Missouri|86       
+St Louis College of Pharmacy                                      |Saint Louis      |Missouri|87       
+State Fair Community College                                      |Sedalia          |Missouri|88       
+Stephens College                                                  |Columbia         |Missouri|89       
+Stevens Institute of Business & Arts                              |Saint Louis      |Missouri|90       
+Texas County Technical College                                    |Houston          |Missouri|91       
+Three Rivers Community College                                    |Poplar Bluff     |Missouri|92       
+Truman State University                                           |Kirksville       |Missouri|93       
+University of Central Missouri                                    |Warrensburg      |Missouri|94       
+University of Missouri Columbia                                   |Columbia         |Missouri|95       
+University of Missouri Kansas City                                |Kansas City      |Missouri|96       
+University of Missouri St Louis                                   |Saint Louis      |Missouri|97       
+University of Phoenix Kansas City Campus                          |Kansas City      |Missouri|98       
+University of Phoenix Springfield Campus                          |Springfield      |Missouri|99       
+University of Phoenix St Louis Campus                             |Saint Louis      |Missouri|100      
+Vatterott College Berkeley                                        |Berkeley         |Missouri|101      
+Vatterott College Joplin                                          |Joplin           |Missouri|102      
+Vatterott College Kansas City                                     |Kansas City      |Missouri|103      
+Vatterott College Saint Joseph                                    |Saint Joseph     |Missouri|104      
+Vatterott College Springfield                                     |Springfield      |Missouri|105      
+Vatterott College St Charles                                      |St Charles       |Missouri|106      
+Vatterott College Sunset Hills                                    |Sunset Hills     |Missouri|107      
+Washington University in St Louis                                 |Saint Louis      |Missouri|108      
+Webster University                                                |Saint Louis      |Missouri|109      
+Wentworth Military Academy & Junior College                       |Lexington        |Missouri|110      
+Westminster College                                               |Fulton           |Missouri|111      
+William Jewell College                                            |Liberty          |Missouri|112      
+William Woods University                                          |Fulton           |Missouri|113      
+
+== Administrator ==
+name          |email                   |password|city           |state   |user_id
+Stefano Menci |stefano.menci@gmail.com |stefano |Olivette       |Missouri|1      
+Brandon Torres|brandon.torres@gmail.com|brandon |University City|Missouri|2      
+
+== Member ==
+name               |email                        |password |major        |city       |state     |school|user_id
+Vance Lemoine      |vance.lemoine@gmail.com      |vance    |Engineering  |Springfield|Missouri  |64    |3      
+Valencia Tripodi   |valencia.tripodi@gmail.com   |valencia |Engineering  |Springfield|Florida   |110   |4      
+Estelle Oram       |estelle.oram@gmail.com       |estelle  |Business     |Springfield|California|35    |5      
+Cornelius Bomberger|cornelius.bomberger@gmail.com|cornelius|Business     |Pensacola  |Missouri  |11    |6      
+Karyl Horvat       |karyl.horvat@gmail.com       |karyl    |Communication|Springfield|California|96    |7      
+Delfina Wescott    |delfina.wescott@gmail.com    |delfina  |Engineering  |Pensacola  |Missouri  |12    |8      
+Albina Hudak       |albina.hudak@gmail.com       |albina   |Communication|Las Vegas  |California|101   |9      
+Alicia Sayles      |alicia.sayles@gmail.com      |alicia   |Engineering  |Las Vegas  |Missouri  |49    |10     
+Sade Berney        |sade.berney@gmail.com        |sade     |Communication|Las Vegas  |Florida   |63    |11     
+Royal Perales      |royal.perales@gmail.com      |royal    |Business     |Las Vegas  |Florida   |103   |12     
+Moshe Waage        |moshe.waage@gmail.com        |moshe    |Communication|Las Vegas  |Missouri  |24    |13     
+Devon Mcgurk       |devon.mcgurk@gmail.com       |devon    |Business     |Pensacola  |Missouri  |42    |14     
+Kaila Blow         |kaila.blow@gmail.com         |kaila    |Communication|Pensacola  |Florida   |3     |15     
+Kermit Valladares  |kermit.valladares@gmail.com  |kermit   |Engineering  |Springfield|Florida   |81    |16     
+Tristan Crigler    |tristan.crigler@gmail.com    |tristan  |Communication|Pensacola  |California|19    |17     
+Del Innis          |del.innis@gmail.com          |del      |Engineering  |Springfield|Missouri  |13    |18     
+Amy Astin          |amy.astin@gmail.com          |amy      |Engineering  |Springfield|California|76    |19     
+Elois Nevarez      |elois.nevarez@gmail.com      |elois    |Business     |Springfield|Missouri  |41    |20     
+Kit Romain         |kit.romain@gmail.com         |kit      |Business     |Springfield|Florida   |77    |21     
+Palma Boldt        |palma.boldt@gmail.com        |palma    |Engineering  |Pensacola  |Florida   |17    |22     
+Lauralee Shewmake  |lauralee.shewmake@gmail.com  |lauralee |Business     |Pensacola  |Florida   |11    |23     
+Zaida Lisle        |zaida.lisle@gmail.com        |zaida    |Communication|Springfield|Missouri  |77    |24     
+Kerrie Lease       |kerrie.lease@gmail.com       |kerrie   |Communication|Springfield|Missouri  |30    |25     
+Vito Striplin      |vito.striplin@gmail.com      |vito     |Engineering  |Las Vegas  |Missouri  |37    |26     
+Xuan Michelson     |xuan.michelson@gmail.com     |xuan     |Business     |Las Vegas  |Florida   |9     |27     
+Bettyann Julien    |bettyann.julien@gmail.com    |bettyann |Engineering  |Springfield|California|106   |28     
+Niki Beecher       |niki.beecher@gmail.com       |niki     |Communication|Pensacola  |California|29    |29     
+Saturnina Gandhi   |saturnina.gandhi@gmail.com   |saturnina|Communication|Pensacola  |Missouri  |88    |30     
+Hubert Stott       |hubert.stott@gmail.com       |hubert   |Communication|Pensacola  |California|71    |31     
+Odis Pattison      |odis.pattison@gmail.com      |odis     |Engineering  |Springfield|Florida   |69    |32     
+Carmelia Brock     |carmelia.brock@gmail.com     |carmelia |Business     |Las Vegas  |Missouri  |8     |33     
+Lacey Corman       |lacey.corman@gmail.com       |lacey    |Business     |Springfield|California|106   |34     
+Denyse Peavler     |denyse.peavler@gmail.com     |denyse   |Communication|Pensacola  |Florida   |56    |35     
+Regine Rivenburg   |regine.rivenburg@gmail.com   |regine   |Communication|Springfield|California|48    |36     
+Arleen Samons      |arleen.samons@gmail.com      |arleen   |Engineering  |Pensacola  |Florida   |101   |37     
+Mindy Stearman     |mindy.stearman@gmail.com     |mindy    |Business     |Las Vegas  |California|30    |38     
+Henrietta Wolken   |henrietta.wolken@gmail.com   |henrietta|Communication|Las Vegas  |Florida   |97    |39     
+Jenae Hamm         |jenae.hamm@gmail.com         |jenae    |Business     |Las Vegas  |California|77    |40     
+Pete Pendergraft   |pete.pendergraft@gmail.com   |pete     |Communication|Pensacola  |Florida   |42    |41     
+Tad Anderton       |tad.anderton@gmail.com       |tad      |Business     |Springfield|Missouri  |48    |42     
+Vince Sunderman    |vince.sunderman@gmail.com    |vince    |Business     |Pensacola  |Florida   |41    |43     
+Virgie Hipple      |virgie.hipple@gmail.com      |virgie   |Communication|Springfield|California|97    |44     
+Ashley Gitlin      |ashley.gitlin@gmail.com      |ashley   |Communication|Pensacola  |Missouri  |113   |45     
+Julia Denner       |julia.denner@gmail.com       |julia    |Communication|Springfield|Missouri  |59    |46     
+Elana Cuffee       |elana.cuffee@gmail.com       |elana    |Communication|Las Vegas  |Florida   |81    |47     
+Rozanne Garden     |rozanne.garden@gmail.com     |rozanne  |Engineering  |Las Vegas  |California|45    |48     
+Salley Quiroz      |salley.quiroz@gmail.com      |salley   |Business     |Pensacola  |Missouri  |84    |49     
+Ozell Costas       |ozell.costas@gmail.com       |ozell    |Communication|Las Vegas  |Missouri  |3     |50     
+Vivienne Hardee    |vivienne.hardee@gmail.com    |vivienne |Engineering  |Springfield|Missouri  |68    |51     
+Shawnee Driskill   |shawnee.driskill@gmail.com   |shawnee  |Engineering  |Las Vegas  |Florida   |72    |52     
+
+== Club ==
+name                                                        |school|president|vicepresident|treasurer|secretary|members       |club_id
+Alpha Epsilon—Honors Society                                |7     |6        |14           |24       |11       |34 23 27 27 22|1      
+Alpha Omega Epsilon Sorority                                |29    |5        |11           |11       |4        |4 18 15 44 51 |2      
+Alpha Pi Mu – Honors Society                                |23    |36       |3            |12       |41       |34 35 5 47 23 |3      
+American Institute of Aeronautics & Astronautics (AIAA)     |12    |36       |30           |43       |51       |45 5 4 5 46   |4      
+American Institute of Chemical Engineers                    |47    |29       |14           |35       |46       |11 28 5 44 8  |5      
+American Society of Civil Engineers (ASCE)                  |4     |32       |28           |28       |26       |15 6 7 48 9   |6      
+American Society of Mechanical Engineers                    |35    |38       |9            |45       |29       |52 49 47 45 28|7      
+ASME Student Professional Development Conference            |49    |7        |17           |4        |11       |14 21 24 51 41|8      
+Association for Computing Machinery                         |75    |17       |33           |29       |20       |34 37 37 30 39|9      
+Bioengineering                                              |57    |31       |21           |29       |23       |9 20 45 46 50 |10     
+Biomedical Competitive Advancement Team (BioCATs)           |34    |25       |52           |30       |12       |42 21 45 21 7 |11     
+Biomedical Engineering Society                              |109   |47       |6            |36       |51       |20 10 13 15 29|12     
+Chemical                                                    |22    |22       |7            |30       |4        |7 30 37 34 43 |13     
+Chi Epsilon – Honors Society                                |93    |29       |34           |50       |48       |21 44 31 12 44|14     
+Civil & Environmental                                       |17    |6        |13           |43       |46       |22 34 50 50 11|15     
+Computer Science                                            |89    |43       |40           |36       |7        |20 38 19 16 32|16     
+Computer Science Graduate Student Council                   |71    |22       |47           |23       |40       |45 8 21 18 45 |17     
+Concrete Bowling Team                                       |30    |7        |32           |18       |17       |28 31 16 17 36|18     
+Concrete Canoe Team                                         |27    |39       |31           |34       |43       |7 42 26 39 48 |19     
+Contact Faculty Advisers                                    |19    |52       |39           |49       |32       |30 40 17 17 51|20     
+ECE Graduate Student Association                            |36    |4        |34           |23       |27       |24 51 32 37 11|21     
+Electrical & Computer                                       |43    |45       |28           |14       |9        |34 17 36 50 35|22     
+Engineer’s Club / St. Pat’s Board                           |5     |         |             |         |         |27 35 47 15 48|23     
+Engineering Ambassadors                                     |104   |         |             |         |         |33 14 46 18 35|24     
+Engineering Student Council                                 |22    |         |             |         |         |30 47 12 40 22|25     
+Engineering World Health                                    |5     |         |             |         |         |49 5 19 27 33 |26     
+Engineers Without Borders                                   |4     |         |             |         |         |9 7 6 47 21   |27     
+Eta Kappa Nu – Honors Society                               |99    |         |             |         |         |42 9 37 14 30 |28     
+E-Week (Engineers’ Week)                                    |45    |         |             |         |         |26 37 36 50 27|29     
+Formula Car Racing Team (FSAE)                              |27    |         |             |         |         |47 15 9 48 35 |30     
+Graduates’ Club of Biological Engineering (GCBE)            |44    |         |             |         |         |50 9 47 22 40 |31     
+IEEE CIS Society                                            |56    |         |             |         |         |52 43 52 23 23|32     
+Industrial & Manufacturing Systems                          |75    |         |             |         |         |14 34 52 13 41|33     
+Institute of Biological Engineering                         |15    |         |             |         |         |13 52 49 25 35|34     
+Institute of Electrical and Electronics Engineering (IEEE)  |91    |         |             |         |         |48 12 51 16 50|35     
+Institute of Industrial Engineers                           |46    |         |             |         |         |42 45 23 40 28|36     
+Mechanical & Aerospace                                      |61    |         |             |         |         |22 14 31 11 18|37     
+Mechanical Contractors Association of America               |112   |         |             |         |         |51 20 12 33 20|38     
+Mizzou 3D Printing Club                                     |111   |         |             |         |         |50 11 14 48 45|39     
+Mizzou ASHRAE                                               |51    |         |             |         |         |49 7 4 43 20  |40     
+Mizzou Baja Racing (BSAE)                                   |81    |         |             |         |         |10 36 47 29 36|41     
+Mizzou Eco-Racing                                           |94    |         |             |         |         |7 44 42 41 40 |42     
+Mizzou Electric Car Club                                    |97    |         |             |         |         |27 9 14 13 36 |43     
+Mizzou Student Chapter                                      |50    |         |             |         |         |34 51 46 32 51|44     
+Mizzou Unmanned Systems Team (MUST)                         |26    |         |             |         |         |41 37 29 15 42|45     
+Mizzou Women Mentoring Women                                |111   |         |             |         |         |3 23 7 29 48  |46     
+National Language Processing Journal Club                   |83    |         |             |         |         |37 5 34 16 6  |47     
+National Society of Black Engineers                         |111   |         |             |         |         |9 7 12 30 52  |48     
+Omega Chi Epsilon – Honors Society                          |81    |         |             |         |         |25 45 27 20 33|49     
+Pi Tau Sigma – Honors Society                               |49    |         |             |         |         |29 39 30 5 21 |50     
+Sigma Alpha Sorority                                        |13    |         |             |         |         |25 22 47 43 15|51     
+Sigma Phi Delta                                             |62    |         |             |         |         |52 34 12 12 39|52     
+Society of Hispanic Professional Engineers                  |6     |         |             |         |         |37 16 15 4 14 |53     
+Society of Manufacturing Engineers                          |71    |         |             |         |         |8 18 21 20 28 |54     
+Society of Manufacturing Engineers                          |53    |         |             |         |         |44 52 38 31 12|55     
+Society of Women Engineers                                  |32    |         |             |         |         |50 34 22 39 8 |56     
+Steel Bridge Team                                           |62    |         |             |         |         |18 45 42 45 43|57     
+Students for the Exploration and Development of Space (SEDS)|83    |         |             |         |         |              |58     
+Tau Beta Pi – Engineering Honors Society                    |26    |         |             |         |         |              |59     
+Timber Bridge Team                                          |103   |         |             |         |         |              |60     
+Torq’N Tigers Tractor Pulling TeamGeneral Interest          |92    |         |             |         |         |              |61     
+Upsilon Pi Epsilon – Honors Society                         |65    |         |             |         |         |              |62     
+Water & Environmental Technologists (WET)                   |19    |         |             |         |         |              |63     
+
+== Company ==
+name         |email                  |password|city       |state     |user_id
+GM           |gm@gmail.com           |GM      |Las Vegas  |Missouri  |53     
+Universe     |universe@gmail.com     |Universe|Las Vegas  |Missouri  |54     
+Tesla        |tesla@gmail.com        |Tesla   |Las Vegas  |Florida   |55     
+ASME National|asme.national@gmail.com|asme    |Las Vegas  |California|56     
+AIAA National|aiaa.national@gmail.com|aiaa    |Springfield|Florida   |57     
+
+== CompetitionHost ==
+name         |email                  |password|city     |state   |user_id
+ASME National|asme.national@gmail.com|asme    |Las Vegas|Florida |58     
+AIAA National|aiaa.national@gmail.com|aiaa    |Las Vegas|Missouri|59     
+
+== Competition ==
+name         |description                               |date      |website       |clubs   |competition_host|members                                        |competition_id
+100 m hurdles|run 100 meters jumping over stupid hurdles|8/21/1965 |www.google.com|39 18 23|59              |5 30 44 41 32 11 8 37 34 43 37 35 11           |1             
+vault        |jump with the help of a long pole         |12/31/1999|              |18 57 40|58              |35 35 49 9 48 39 32 14 15 7 37 30 50 39 39 43 4|2             
+
+== Notification ==
+from_competition|from_job_offer|to_users     |to_clubs|date    |notification_id|from_user |from_club|from_following school|from_question_board|from_quick_job
+1               |              |31 26 18 9 8 |57 36 7 |1/1/2001|1              |          |         |                     |                   |              
+1               |              |45 42 44 18 4|51 51 7 |2/2/2002|2              |          |         |                     |                   |              
+2               |              |5 6 8 47 31  |37 24 17|3/3/2003|3              |          |         |                     |                   |              
+2               |              |33 8 35 31 48|19 2 9  |4/4/2004|4              |          |         |                     |                   |              
+
+== User Page Buttons ==
+Logo Link to home|Search Bar|Link to a forum page|Notification (earth symbol)                                                                           |Messages|Job opportunities|Quick jobs|Tech News Feed                       |Profile Picture|Edit profile|Embedded Messenger
+                 |          |                    |                                                                                                      |        |                 |          |Filter whos you wanna see club titles|Edit Pic       |            |Options           
+                 |          |                    |                                                                                                      |        |                 |          |                                     |               |            |                  
+                 |          |                    |                                                                                                      |        |                 |          |                                     |               |            |                  
+                 |          |                    |                                                                                                      |        |                 |          |                                     |               |            |                  
+                 |          |                    |                                                                                                      |        |                 |          |                                     |               |            |                  
+                 |          |                    |                                                                                                      |        |                 |          |                                     |               |            |                  
+                 |          |                    |                                                                                                      |        |                 |          |                                     |               |            |                  
+                 |          |                    |                                                                                                      |        |                 |          |                                     |               |            |                  
+                 |          |                    |                                                                                                      |        |                 |          |                                     |               |            |                  
+                 |          |                    |Every time you post something, I want you to have the option to post it on page only, or on tech feed |        |                 |          |                                     |               |            |                  
+
+== Home ==
+Logo |Search|Home|My Clubs|My Jobs|Messages|Notifications|Brandon Torres|Profile Photo|USA SEARCH                 |Tech feed 
+     |      |    |        |       |        |             |              |             |All States                 |          
+     |      |    |        |       |        |             |              |             |Schools                    |          
+     |      |    |        |       |        |             |              |             |Clubs                      |          
+     |      |    |        |       |        |             |              |             |(Click Map it full Screens)|          
+
+== Company_from_User_POV ==
+Company Name       |See job posts|Follow              |Company picture            |        |                 |          |              
+About us           |             |                    |                           |        |                 |          |              
+Tech Degrees needed|             |                    |                           |        |                 |          |              
+Message            |             |                    |                           |        |                 |          |              
+Company Website    |             |                    |                           |        |                 |          |              
+                   |             |                    |                           |        |                 |          |              
+                   |             |                    |                           |        |                 |          |              
+                   |             |                    |                           |        |                 |          |              
+                   |             |                    |                           |        |                 |          |              
+                   |             |                    |                           |        |                 |          |              
+Logo Link to home  |Search Bar   |Link to a forum page|Notification (earth symbol)|Messages|Job opportunities|Quick jobs|Tech News Feed
+
+== Competition_from_User_POV ==
+National Club Name   | Picture  |                    |                           |        |                 |          |              
+Events               |          |                    |                           |        |                 |          |              
+National Club Website|          |                    |                           |        |                 |          |              
+Message              |          |                    |                           |        |                 |          |              
+                     |          |                    |                           |        |                 |          |              
+                     |          |                    |                           |        |                 |          |              
+                     |          |                    |                           |        |                 |          |              
+                     |          |                    |                           |        |                 |          |              
+                     |          |                    |                           |        |                 |          |              
+Logo Link to home    |Search Bar|Link to a forum page|Notification (earth symbol)|Messages|Job opportunities|Quick jobs|Tech News Feed
+
+== Post ==
+title                   |text                                                 |date    |notification|post_id
+Registration has started|The registration for the event has started. Hurry up!|3/3/2017|1           |1      
+Registration is closed  |The registration is closed. So sad, too bad!         |3/4/2017|2           |2      
+Get ready               |It's time to get ready for the big event             |3/1/2017|3           |3      
+Again: get ready        |Again: it's time to get ready for the big event      |3/5/2017|4           |4      
+
