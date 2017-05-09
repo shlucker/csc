@@ -7,110 +7,135 @@ except FileNotFoundError:
     pass
 
 from pony import orm
-import xlrd
 
 import csc.models as models
 from csc.security import hash_password
 
 
+class TestTable:
+    def __init__(self, fname):
+        self.tables = {}
+        sh_name = ''
+        headers = None
+        headers_are_coming = False
+        for row in open(fname, 'r'):
+            row = row[:-1]
+            if row.startswith('==') and row.endswith('=='):
+                sh_name = row[3:-3]
+                self.tables[sh_name] = []
+                headers_are_coming = True
+            elif headers_are_coming:
+                headers = [cell.rstrip() for cell in row.split('|')]
+                headers_are_coming = False
+            elif row:
+                self.tables[sh_name].append(
+                    {header: cell.rstrip() for (header, cell) in zip(headers, row.split('|'))})
+
+    def __getitem__(self, table_name):
+        return self.tables[table_name]
+
+    def n_rows(self, table_name):
+        return len(self.tables[table_name])
+
+    def n_columns(self, table_name):
+        return len(self.tables[table_name].items()[0])
+
+
 @orm.db_session
 def import_from_excel():
-    book = xlrd.open_workbook('test.xlsx')
+    test_table = TestTable('test.txt')
 
     print('Creating schools')
-    sheet = book.sheet_by_name('School')
-    for r in range(1, sheet.nrows):
-        name = sheet.cell(r, 0).value
-        city = sheet.cell(r, 1).value
-        state = sheet.cell(r, 2).value
+    for r in range(test_table.n_rows('School')):
+        name = test_table['School'][r]['name']
+        city = test_table['School'][r]['city']
+        state = test_table['School'][r]['state']
         models.School(name=name, city=city, state=state)
 
     print('Creating administrators')
-    sheet = book.sheet_by_name('Administrator')
-    for r in range(1, sheet.nrows):
-        name = sheet.cell(r, 0).value
-        email = sheet.cell(r, 1).value
-        password = hash_password(sheet.cell(r, 2).value)
-        city = sheet.cell(r, 3).value
-        state = sheet.cell(r, 4).value
+    for r in range(test_table.n_rows('Administrator')):
+        name = test_table['Administrator'][r]['name']
+        email = test_table['Administrator'][r]['email']
+        password = hash_password(test_table['Administrator'][r]['password'])
+        city = test_table['Administrator'][r]['city']
+        state = test_table['Administrator'][r]['state']
         models.Administrator(name=name, email=email, password=password, state=state, city=city)
 
     print('Creating members')
-    sheet = book.sheet_by_name('Member')
-    for r in range(1, sheet.nrows):
-        name = sheet.cell(r, 0).value
-        email = sheet.cell(r, 1).value
-        password = hash_password(sheet.cell(r, 2).value)
-        major = sheet.cell(r, 3).value
-        city = sheet.cell(r, 4).value
-        state = sheet.cell(r, 5).value
-        school = models.School[int(sheet.cell(r, 6).value)]
+    for r in range(test_table.n_rows('Member')):
+        name = test_table['Member'][r]['name']
+        email = test_table['Member'][r]['email']
+        password = hash_password(test_table['Member'][r]['password'])
+        major = test_table['Member'][r]['major']
+        city = test_table['Member'][r]['city']
+        state = test_table['Member'][r]['state']
+        school = models.School[int(test_table['Member'][r]['school'])]
         models.Member(name=name, major=major, state=state, city=city, email=email, password=password, school=school)
 
     print('Creating clubs')
-    sheet = book.sheet_by_name('Club')
-    for r in range(1, sheet.nrows):
-        name = sheet.cell(r, 0).value
-        school = models.School[int(sheet.cell(r, 1).value)]
-        president = models.Member[int(sheet.cell(r, 2).value)] if sheet.cell(r, 2).value else None
-        vicepresident = models.Member[int(sheet.cell(r, 3).value)] if sheet.cell(r, 3).value else None
-        treasurer = models.Member[int(sheet.cell(r, 4).value)] if sheet.cell(r, 4).value else None
-        secretary = models.Member[int(sheet.cell(r, 5).value)] if sheet.cell(r, 5).value else None
-        members = [models.Member[i] for i in sheet.cell(r, 6).value.split()]
+    for r in range(test_table.n_rows('Club')):
+        name = test_table['Club'][r]['name']
+        school = models.School[int(test_table['Club'][r]['school'])]
+        president = models.Member[int(test_table['Club'][r]['president'])] if test_table['Club'][r][
+            'president'] else None
+        vicepresident = models.Member[int(test_table['Club'][r]['vicepresident'])] if test_table['Club'][r][
+            'vicepresident'] else None
+        treasurer = models.Member[int(test_table['Club'][r]['treasurer'])] if test_table['Club'][r][
+            'treasurer'] else None
+        secretary = models.Member[int(test_table['Club'][r]['secretary'])] if test_table['Club'][r][
+            'secretary'] else None
+        members = [models.Member[i] for i in test_table['Club'][r]['members'].split()]
         models.Club(name=name, school=school, president=president, vicepresident=vicepresident, treasurer=treasurer,
                     secretary=secretary, members=members)
 
     print('Creating companies')
-    sheet = book.sheet_by_name('Company')
-    for r in range(1, sheet.nrows):
-        name = sheet.cell(r, 0).value
-        email = sheet.cell(r, 1).value
-        password = hash_password(sheet.cell(r, 2).value)
-        city = sheet.cell(r, 3).value
-        state = sheet.cell(r, 4).value
+    for r in range(test_table.n_rows('Company')):
+        name = test_table['Company'][r]['name']
+        email = test_table['Company'][r]['email']
+        password = hash_password(test_table['Company'][r]['password'])
+        city = test_table['Company'][r]['city']
+        state = test_table['Company'][r]['state']
         models.Company(name=name, email=email, password=password, city=city, state=state)
 
     print('Creating competition hosts')
-    sheet = book.sheet_by_name('CompetitionHost')
-    for r in range(1, sheet.nrows):
-        name = sheet.cell(r, 0).value
-        email = sheet.cell(r, 1).value
-        password = hash_password(sheet.cell(r, 2).value)
-        city = sheet.cell(r, 3).value
-        state = sheet.cell(r, 4).value
+    for r in range(test_table.n_rows('CompetitionHost')):
+        name = test_table['CompetitionHost'][r]['name']
+        email = test_table['CompetitionHost'][r]['email']
+        password = hash_password(test_table['CompetitionHost'][r]['password'])
+        city = test_table['CompetitionHost'][r]['city']
+        state = test_table['CompetitionHost'][r]['state']
         models.CompetitionHost(name=name, email=email, password=password, city=city, state=state)
 
     print('Creating competitions')
-    sheet = book.sheet_by_name('Competition')
-    for r in range(1, sheet.nrows):
-        name = sheet.cell(r, 0).value
-        description = sheet.cell(r, 1).value
-        date = sheet.cell(r, 2).value
-        website = sheet.cell(r, 3).value
-        clubs = [models.Club[i] for i in sheet.cell(r, 4).value.split()]
-        competition_host = models.CompetitionHost[int(sheet.cell(r, 5).value)]
-        members = [models.Member[i] for i in sheet.cell(r, 6).value.split()]
+    for r in range(test_table.n_rows('Competition')):
+        name = test_table['Competition'][r]['name']
+        description = test_table['Competition'][r]['description']
+        date = test_table['Competition'][r]['date']
+        website = test_table['Competition'][r]['website']
+        clubs = [models.Club[i] for i in test_table['Competition'][r]['clubs'].split()]
+        competition_host = models.CompetitionHost[int(test_table['Competition'][r]['competition_host'])]
+        members = [models.Member[i] for i in test_table['Competition'][r]['members'].split()]
         models.Competition(name=name, description=description, date=date, website=website, clubs=clubs,
                            competition_host=competition_host, members=members)
 
     print('Creating notifications')
-    sheet = book.sheet_by_name('Notification')
-    for r in range(1, sheet.nrows):
-        from_competition = models.Competition[int(sheet.cell(r, 0).value)] if sheet.cell(r, 0).value else None
-        from_job_offer = models.JobOffer[int(sheet.cell(r, 1).value)] if sheet.cell(r, 1).value else None
-        to_users = [models.Member[i] for i in sheet.cell(r, 2).value.split()]
-        to_clubs = [models.Club[i] for i in sheet.cell(r, 3).value.split()]
-        date = sheet.cell(r, 4).value
+    for r in range(test_table.n_rows('Notification')):
+        from_competition = models.Competition[int(test_table['Notification'][r]['from_competition'])] if \
+            test_table['Notification'][r]['from_competition'] else None
+        from_job_offer = models.JobOffer[int(test_table['Notification'][r]['from_job_offer'])] if \
+            test_table['Notification'][r]['from_job_offer'] else None
+        to_users = [models.Member[i] for i in test_table['Notification'][r]['to_users'].split()]
+        to_clubs = [models.Club[i] for i in test_table['Notification'][r]['to_clubs'].split()]
+        date = test_table['Notification'][r]['date']
         models.Notification(from_competition=from_competition, from_job_offer=from_job_offer, to_users=to_users,
-                    to_clubs=to_clubs, date=date)
+                            to_clubs=to_clubs, date=date)
 
     print('Creating posts')
-    sheet = book.sheet_by_name('Post')
-    for r in range(1, sheet.nrows):
-        title = sheet.cell(r, 0).value
-        text = sheet.cell(r, 1).value
-        date = sheet.cell(r, 2).value
-        notification = models.Notification[int(sheet.cell(r, 3).value)]
+    for r in range(test_table.n_rows('Post')):
+        title = test_table['Post'][r]['title']
+        text = test_table['Post'][r]['text']
+        date = test_table['Post'][r]['date']
+        notification = models.Notification[int(test_table['Post'][r]['notification'])]
         models.Post(title=title, text=text, date=date, notification=notification)
 
 
