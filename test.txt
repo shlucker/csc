@@ -246,7 +246,7 @@ Tesla        |tesla@gmail.com        |Tesla   |Las Vegas  |Florida   |55
 ASME National|asme.national@gmail.com|asme    |Las Vegas  |California|56
 AIAA National|aiaa.national@gmail.com|aiaa    |Springfield|Florida   |57
 
-==Message_Box==
+== Message_Box ==
 Message_given     |message_id
 Hi Loser          |1
 Need a job?       |2
@@ -260,7 +260,7 @@ dont mess up      |9
 Needy people      |10
 please no         |11
 
-== CompetitionWebsite==
+== CompetitionWebsite ==
 name          |website               |competition_photo |website_id
 ASME          |www.asme.org          |ASME_photo_1.jpg  |1
 AIAA          |www.aiaa.org          |AIAA_photo_2.jpg  |2
@@ -325,15 +325,15 @@ Logo Link to home  |Search Bar   |Link to a forum page|Notification (earth symbo
 
 == Competition_from_User_POV ==
 xNational Club Name   | xPicture  |                    |                           |        |                 |          |
-xEvents               |          |                    |                           |        |                 |          |
-xNational Club Websit|          |                    |                           |        |                 |          |
-xMessage             |          |                    |                           |        |                 |          |
-                     |          |                    |                           |        |                 |          |
-                     |          |                    |                           |        |                 |          |
-                     |          |                    |                           |        |                 |          |
-                     |          |                    |                           |        |                 |          |
-                     |          |                    |                           |        |                 |          |
-Logo Link to home    |Search Bar|Link to a forum page|Notification (earth symbol)|Messages|Job opportunities|Quick jobs|Tech News Feed
+xEvents               |           |                    |                           |        |                 |          |
+xNational Club Websit |           |                    |                           |        |                 |          |
+xMessage              |           |                    |                           |        |                 |          |
+                      |           |                    |                           |        |                 |          |
+                      |           |                    |                           |        |                 |          |
+                      |           |                    |                           |        |                 |          |
+                      |           |                    |                           |        |                 |          |
+                      |           |                    |                           |        |                 |          |
+Logo Link to home     |Search Bar |Link to a forum page|Notification (earth symbol)|Messages|Job opportunities|Quick jobs|Tech News Feed
 
 == Post ==
 title                   |text                                                 |date    |notification|post_id
@@ -375,14 +375,14 @@ message_giver_club_id|from_message_box|club_id|user_id|competition_id
 
 == Company_Message ==
 message_giver_company_id|from_message_box|club_id|user_id|school_id
-53                      |11              |3      |       |         
-54                      |9               |       |4      |         
-57                      |3               |       |3      |         
-57                      |2               |       |5      |         
-55                      |6               |4      |       |         
-56                      |7               |       |       |4        
-56                      |7               |       |       |        
- 
+53                      |11              |3      |       |
+54                      |9               |       |4      |
+57                      |3               |       |3      |
+57                      |2               |       |5      |
+55                      |6               |4      |       |
+56                      |7               |       |       |4
+56                      |7               |       |       |
+
 == Competiton_Host_Message ==
 message_giver_competition host_id|from_message_box|club_id|user_id|school_id
 58                               |10              |3      |       |
@@ -394,8 +394,6 @@ message_giver_competition host_id|from_message_box|club_id|user_id|school_id
 
 == User_click_on_Competition_Page ==
 user_searcher_id |competition_id|display_website|display_events|display_photo
-3                |1             |1              |1             |1             
+3                |1             |1              |1             |1
 4                |2             |2              |2             |2
 5                |2             |2              |2             |2
-
-
