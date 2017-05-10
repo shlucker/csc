@@ -106,12 +106,24 @@ def import_from_excel():
         state = test_table['CompetitionHost'][r]['state']
         models.CompetitionHost(name=name, email=email, password=password, city=city, state=state)
 
+    print('Creating images')
+    for r in range(test_table.n_rows('Image')):
+        file_name = test_table['Image'][r]['file_name']
+        models.Image(file_name=file_name)
+
+    print('Creating websites')
+    for r in range(test_table.n_rows('Website')):
+        name = test_table['Website'][r]['name']
+        url = test_table['Website'][r]['url']
+        image = models.Image[int(test_table['Website'][r]['image'])]
+        models.Website(name=name, url=url, image=image)
+
     print('Creating competitions')
     for r in range(test_table.n_rows('Competition')):
         name = test_table['Competition'][r]['name']
         description = test_table['Competition'][r]['description']
         date = test_table['Competition'][r]['date']
-        website = test_table['Competition'][r]['website']
+        website = models.Website[int(test_table['Competition'][r]['website'])]
         clubs = [models.Club[i] for i in test_table['Competition'][r]['clubs'].split()]
         competition_host = models.CompetitionHost[int(test_table['Competition'][r]['competition_host'])]
         members = [models.Member[i] for i in test_table['Competition'][r]['members'].split()]

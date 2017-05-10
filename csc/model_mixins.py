@@ -56,3 +56,11 @@ class ResumeMixin:
 
 class AdministratorMixin:
     pass
+
+
+class ImageMixin:
+    pass
+
+
+class WebsiteMixin:
+    pass

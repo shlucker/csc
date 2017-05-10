@@ -247,23 +247,28 @@ ASME National|asme.national@gmail.com|asme    |Las Vegas  |California|56
 AIAA National|aiaa.national@gmail.com|aiaa    |Springfield|Florida   |57
 
 == Message_Box ==
-Message_given     |message_id
-Hi Loser          |1
-Need a job?       |2
-Are you hungry?   |3
-What's up mom     |4
-Need drone?       |5
-Got milk?         |6
-sweet jesus       |7
-i love spaghetti  |8
-dont mess up      |9
-Needy people      |10
-please no         |11
+Message_given   |message_id
+Hi Loser        |1
+Need a job?     |2
+Are you hungry? |3
+What's up mom   |4
+Need drone?     |5
+Got milk?       |6
+sweet jesus     |7
+i love spaghetti|8
+dont mess up    |9
+Needy people    |10
+please no       |11
 
-== CompetitionWebsite ==
-name          |website               |competition_photo |website_id
-ASME          |www.asme.org          |ASME_photo_1.jpg  |1
-AIAA          |www.aiaa.org          |AIAA_photo_2.jpg  |2
+== Image ==
+file_name       |image_id
+ASME_photo_1.jpg|1
+AIAA_photo_2.jpg|2
+
+== Website ==
+name|url         |image|website_id
+ASME|www.asme.org|1    |1
+AIAA|www.aiaa.org|2    |2
 
 == CompetitionHost ==
 name         |email                  |password|city     |state   |user_id
@@ -271,9 +276,9 @@ ASME National|asme.national@gmail.com|asme    |Las Vegas|Florida |58
 AIAA National|aiaa.national@gmail.com|aiaa    |Las Vegas|Missouri|59
 
 == Competition ==
-name_event         |description                               |date      |website_id       |clubs   |competition_host|members                                                 |competition_id
-ASME robotics      |Build robots with students                |8/21/1965 |1                |39 18 23|59              |5 30 44 41 32 11 8 37 34 43 37 35 11                    |1
-AIAA Rockets       |Build rockets with students               |12/31/1999|2                |18 57 40|58              |35 35 49 9 48 39 32 14 15 7 37 30 50 39 39 43 4         |2
+name         |description                |date      |website|clubs   |competition_host|members                                        |competition_id
+ASME robotics|Build robots with students |8/21/1965 |1      |39 18 23|59              |5 30 44 41 32 11 8 37 34 43 37 35 11           |1
+AIAA Rockets |Build rockets with students|12/31/1999|2      |18 57 40|58              |35 35 49 9 48 39 32 14 15 7 37 30 50 39 39 43 4|2
 
 == Notification ==
 from_competition|from_job_offer|to_users     |to_clubs|date    |notification_id|from_user |from_club|from_following school|from_question_board|from_quick_job

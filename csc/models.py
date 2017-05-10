@@ -62,11 +62,11 @@ class Competition(db.Entity, csc.model_mixins.CompetitionMixin):
     name = Required(str)
     description = Required(str)
     date = Required(date)
-    website = Optional(str)
+    website = Optional('Website')
     clubs = Set(Club)
-    from_notifications = Set('Notification')
     competition_host = Required('CompetitionHost')
     members = Set('Member')
+    from_notifications = Set('Notification')
 
 
 class Achievement(db.Entity, csc.model_mixins.AchievementMixin):
@@ -124,11 +124,11 @@ class Video(db.Entity, csc.model_mixins.VideoMixin):
 
 
 class Photo(db.Entity, csc.model_mixins.PhotoMixin):
-    _table_ = 'Image'
     id = PrimaryKey(int, auto=True)
     user = Optional(User)
     posts = Set(Post)
     club = Optional(Club)
+    image = Required('Image')
 
 
 class Resume(db.Entity, csc.model_mixins.ResumeMixin):
@@ -139,6 +139,21 @@ class Resume(db.Entity, csc.model_mixins.ResumeMixin):
 
 class Administrator(User, csc.model_mixins.AdministratorMixin):
     pass
+
+
+class Image(db.Entity, csc.model_mixins.ImageMixin):
+    id = PrimaryKey(int, auto=True)
+    file_name = Required(unicode)
+    website = Optional('Website')
+    photo = Optional(Photo)
+
+
+class Website(db.Entity, csc.model_mixins.WebsiteMixin):
+    id = PrimaryKey(int, auto=True)
+    name = Required(str)
+    url = Required(str)
+    image = Optional(Image)
+    competition = Optional(Competition)
 
 
 db.bind("sqlite", "database.sqlite", create_db=True)
