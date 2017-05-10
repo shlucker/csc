@@ -397,3 +397,23 @@ user_searcher_id |competition_id|display_website|display_events|display_photo
 3                |1             |1              |1             |1
 4                |2             |2              |2             |2
 5                |2             |2              |2             |2
+
+== Tech_feed ==
+Club_id  |competition_id|display_website|display_events|display_photo
+[1 1 100]|[1 1 100]     |
+
+
+== Club_post ==
+club_id          |message post  |Tech feed      |Only Followers
+3                |1             |1              |
+4                |2             |               |1
+
+== Competition_post ==
+competitionHost_id |message post  |Tech feed      |Only Followers
+3                  |1             |1              |
+4                  |2             |               |1
+
+== company_post ==
+company_id       |message post  |Tech feed      |Only Followers
+3                |1             |1              |
+4                |2             |               |1
