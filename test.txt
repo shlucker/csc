@@ -373,6 +373,11 @@ message_giver_club_id|from_message_box|club_id|user_id|competition_id
 5                    |1               |4      |       |
 4                    |3               |       |       |58
 
+== Club_post ==
+club_id  |post_to_all  |post_on_profile
+3        |4            |
+4        |             |3
+
 == Company_Message ==
 message_giver_company_id|from_message_box|club_id|user_id|school_id
 53                      |11              |3      |       |
@@ -383,6 +388,12 @@ message_giver_company_id|from_message_box|club_id|user_id|school_id
 56                      |7               |       |       |4
 56                      |7               |       |       |
 
+== company_post ==
+company_id  |post_to_all  |post_on_profile
+3           |4            |
+4           |             |3
+
+
 == Competiton_Host_Message ==
 message_giver_competition host_id|from_message_box|club_id|user_id|school_id
 58                               |10              |3      |       |
@@ -392,28 +403,20 @@ message_giver_competition host_id|from_message_box|club_id|user_id|school_id
 59                               |1               |4      |       |
 59                               |2               |       |       |6
 
+== Competition_post ==
+competitionhost_id  |post_to_all  |post_on_profile
+3                   |4            |
+4                   |             |3
+
 == User_click_on_Competition_Page ==
 user_searcher_id |competition_id|display_website|display_events|display_photo
 3                |1             |1              |1             |1
 4                |2             |2              |2             |2
 5                |2             |2              |2             |2
 
-== Tech_feed ==
-Club_id  |competition_id|display_website|display_events|display_photo
-[1 1 100]|[1 1 100]     |
 
 
-== Club_post ==
-club_id          |message post  |Tech feed      |Only Followers
-3                |1             |1              |
-4                |2             |               |1
 
-== Competition_post ==
-competitionHost_id |message post  |Tech feed      |Only Followers
-3                  |1             |1              |
-4                  |2             |               |1
 
-== company_post ==
-company_id       |message post  |Tech feed      |Only Followers
-3                |1             |1              |
-4                |2             |               |1
+
+
