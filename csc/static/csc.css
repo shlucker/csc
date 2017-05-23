@@ -3,3 +3,7 @@ ul#top_menu li {
     list-style-type: none;
     padding-right: 0.5em;
 }
+
+.logo {
+    width: 5em;
+}

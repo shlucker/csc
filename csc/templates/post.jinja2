@@ -1,0 +1,9 @@
+<div class="post">
+    {% if 'image' in post.sender %}
+        <img class="logo" src="static/{{ post.sender.image }}-tn.png"/>
+    {% endif %}
+    <p class="post_from">Sender: {{ post.sender.name }}</p>
+    <p class="post_date">Date:{{ post.date }}</p>
+    <p class="post_title">Title: {{ post.title }}</p>
+    <p class="post_text">Texxt: {{ post.text }}</p>
+</div>

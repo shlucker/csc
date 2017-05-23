@@ -46,8 +46,8 @@ class Competition(MongoDbEntity):
     collection_name = 'competitions'
 
 
-class Notification(MongoDbEntity):
-    collection_name = 'notifications'
+class Post(MongoDbEntity):
+    collection_name = 'posts'
 
     @property
     def sender(self):
@@ -85,9 +85,9 @@ class User(MongoDbEntity):
         return User(db.users.find_one({'email': email}))
 
     @property
-    def to_notifications(self):
-        '''return the notifications addressed to self and to all the clubs etc. of self'''
+    def to_posts(self):
+        '''return the posts addressed to self and to all the clubs etc. of self'''
         recipient_ids = ['user {}'.format(self.json['_id'])]
         recipient_ids.extend(['club {}'.format(club_id) for club_id in self.json['club_ids']])
-        notifications = db.notifications.find({'recipient_ids': {'$in': recipient_ids}}).sort('date', -1)
-        return [Notification(n) for n in notifications]
+        posts = db.posts.find({'recipient_ids': {'$in': recipient_ids}}).sort('date', -1)
+        return [Post(n) for n in posts]

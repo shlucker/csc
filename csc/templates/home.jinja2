@@ -13,15 +13,10 @@
     {% endfor %}
     </ul>
 {% endif %}
-{% if user.to_notifications %}
-    <h2>Notifications to you</h2>
-    {% for n in user.to_notifications %}
-    <div class="notification">
-        <p class="post_from">Sender: {{ n.sender.name }}</p>
-        <p class="post_date">Date:{{ n.date }}</p>
-        <p class="post_title">Title: {{ n.title }}</p>
-        <p class="post_text">Texxt: {{ n.text }}</p>
-    </div>
+{% if user.to_posts %}
+    <h2>Posts to you</h2>
+    {% for post in user.to_posts %}
+        {% include 'post.jinja2' %}
     {% endfor %}
 {% endif %}
 {% endblock %}

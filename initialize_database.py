@@ -20,7 +20,8 @@ db.schools.insert_many([
     {'_id': 4,
      'name': 'Bryan University Springfield',
      'city': 'Springfield',
-     'state': 'Missouri'},
+     'state': 'Missouri',
+     'image': 'BryanUniversity'},
     {'_id': 5,
      'name': 'Calvary Bible College and Theological Seminary',
      'city': 'Kansas City',
@@ -975,7 +976,8 @@ db.clubs.insert_many([
      'school_id': 35},
     {'_id': 8,
      'name': 'ASME Student Professional Development Conference',
-     'school_id': 49},
+     'school_id': 49,
+     'image': 'ASME'},
     {'_id': 9,
      'name': 'Association for Computing Machinery',
      'school_id': 75,
@@ -1167,7 +1169,8 @@ db.companies.insert_many([
     {'_id': 4,
      'name': 'ASME National',
      'email': 'asme.national@gmail.com',
-     'city': 'Las Vegas', 'state': 'California'},
+     'city': 'Las Vegas', 'state': 'California',
+     'image': 'ASME'},
     {'_id': 5,
      'name': 'AIAA National',
      'email': 'aiaa.national@gmail.com',
@@ -1181,9 +1184,9 @@ db.competitions.insert_many([
      'description': 'Build robots with students',
      'date': datetime.datetime(1965, 8, 21),
      'website': 'www.asme.org',
-     'image': 'ASME_photo_1.jpg',
      'club_ids': [1, 2, 3, 4, 5],
-     'competition_host_id': 1},
+     'competition_host_id': 1,
+     'image': 'ASME'},
     {'_id': 2,
      'name': 'AIAA Rockets',
      'description': 'Build rockets with students',
@@ -1200,7 +1203,8 @@ db.competition_hosts.insert_many([
      'name': 'ASME National',
      'email': 'asme.national@gmail.com',
      'city': 'Las Vegas',
-     'state': 'Florida'},
+     'state': 'Florida',
+     'image': 'ASME'},
     {'_id': 2,
      'name': 'AIAA National',
      'email': 'aiaa.national@gmail.com',
@@ -1208,28 +1212,38 @@ db.competition_hosts.insert_many([
      'state': 'Missouri'}
 ])
 
-db.notifications.drop()
-db.notifications.insert_many([
-    {'sender_id': 'competition 1',
+db.posts.drop()
+db.posts.insert_many([
+    {'_id': 1,
+     'sender_id': 'competition 1',
      'recipient_ids': ['user 1', 'user 2', 'user 3', 'user 4', 'user 5', 'club 1', 'club 2', 'club 3', 'club 4'],
      'title': 'Registration has started',
      'text': 'The registration for the event has started. Hurry up!',
      'date': datetime.datetime(2017, 3, 3)},
-    {'sender_id': 'competition 1',
+    {'_id': 2,
+     'sender_id': 'competition 1',
      'recipient_ids': ['user 1', 'user 2', 'user 3', 'user 4', 'user 5', 'club 1', 'club 2', 'club 3', 'club 4'],
      'title': 'Registration is closed',
      'text': 'The registration is closed. So sad, too bad!',
      'date': datetime.datetime(2017, 3, 4)},
-    {'sender_id': 'competition 1',
+    {'_id': 3,
+     'sender_id': 'competition 1',
      'recipient_ids': ['user 1'],
      'title': 'Get ready',
      'text': 'It\'s time to get ready for the big event',
      'date': datetime.datetime(2017, 3, 1)},
-    {'sender_id': 'competition 1',
+    {'_id': 4,
+     'sender_id': 'competition 1',
      'recipient_ids': ['club 1'],
      'title': 'Again: get ready',
      'text': 'Again: it\'s time to get ready for the big event',
-     'date': datetime.datetime(2017, 3, 5)}
+     'date': datetime.datetime(2017, 3, 5)},
+    {'_id': 5,
+     'sender_id': 'club 8',
+     'recipient_ids': ['club 1'],
+     'title': 'From ASME club number 8',
+     'text': 'From club 8 to club 1',
+     'date': datetime.datetime(2017, 3, 13)}
 ])
 
 print('== Get member by name ==')
@@ -1263,8 +1277,8 @@ for member in db.users.find({'competition_ids': {'$gt': []}}):
     for competition in db.competitions.find({'_id': {'$in': member['competition_ids']}}):
         print(' ', competition['name'])
 
-print('== Notifications to user ==')
+print('== posts to user ==')
 for user in db.users.find():
     print('User: {}'.format(user['name']))
-    for notification in User(user).to_notifications:
-        print('  ', notification.title)
+    for post in User(user).to_posts:
+        print('  ', post.title)
