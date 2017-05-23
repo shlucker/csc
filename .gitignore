@@ -13,3 +13,4 @@ nosetests.xml
 env*/
 tmp/
 .idea/
+~$*.pptx

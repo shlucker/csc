@@ -1,160 +1,93 @@
-import csc.model_mixins
+from pymongo import MongoClient
+import re
 
-from datetime import date
-from pony.orm import *
-
-
-db = Database()
+client = MongoClient()
+db = client['csc']
 
 
-class School(db.Entity, csc.model_mixins.SchoolMixin):
-    id = PrimaryKey(int, auto=True)
-    name = Required(str)
-    clubs = Set('Club')
-    city = Required(str)
-    state = Required(str)
-    members = Set('Member')
+def underscorize(txt):
+    return re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', txt).lower()
 
 
-class Club(db.Entity, csc.model_mixins.ClubMixin):
-    id = PrimaryKey(int, auto=True)
-    name = Required(str)
-    school = Required(School)
-    major = Optional(str)
-    competitions = Set('Competition')
-    achievements = Set('Achievement')
-    to_notifications = Set('Notification')
-    members = Set('Member', reverse='clubs')
-    photo = Optional('Photo')
-    president = Optional('Member', reverse='clubs_president')
-    vicepresident = Optional('Member', reverse='clubs_vicepresident')
-    treasurer = Optional('Member', reverse='clubs_treasurer')
-    secretary = Optional('Member', reverse='clubs_secretary')
+class MongoDbEntity:
+    def __init__(self, json):
+        self.json = json
+
+    def __getattr__(self, item):
+        return self.json[item]
+
+    def __getitem__(self, name):
+        return self.json[name]
+
+    def __contains__(self, a):
+        return a in self.json
+
+    @classmethod
+    def get_by_id(cls, id):
+        if isinstance(id, str):
+            collection_name, id = id.split()
+            if collection_name == 'user':           return User(db.users.find_one(int(id)))
+            if collection_name == 'competition':    return Competition(db.competitions.find_one(int(id)))
+            if collection_name == 'club':           return Club(db.clubs.find_one(int(id)))
+            raise Exception('Unexpected collection name: {}'.format(collection_name))
+        else:
+            return cls(db[cls.collection_name].find_one({'_id': id}))
 
 
-class User(db.Entity, csc.model_mixins.UserMixin):
-    id = PrimaryKey(int, auto=True)
-    email = Required(str)
-    password = Required(unicode)
-    name = Required(str)
-    major = Optional(str)
-    notes = Optional(str)
-    achievements = Set('Achievement')
-    to_notifications = Set('Notification')
-    city = Required(str)
-    state = Required(str)
-    photo = Optional('Photo')
+class Club(MongoDbEntity):
+    collection_name = 'clubs'
+
+    @property
+    def school(self):
+        return School(db.schools.find_one({'_id': self.school_id}))
 
 
-class JobOffer(db.Entity, csc.model_mixins.JobOfferMixin):
-    id = PrimaryKey(int, auto=True)
-    name = Required(str)
-    description = Required(str)
-    date = Required(date)
-    location = Required(str)
-    from_notifications = Set('Notification')
-    company = Required('Company')
-    members = Set('Member')
+class Competition(MongoDbEntity):
+    collection_name = 'competitions'
 
 
-class Competition(db.Entity, csc.model_mixins.CompetitionMixin):
-    id = PrimaryKey(int, auto=True)
-    name = Required(str)
-    description = Required(str)
-    date = Required(date)
-    website = Optional('Website')
-    clubs = Set(Club)
-    competition_host = Required('CompetitionHost')
-    members = Set('Member')
-    from_notifications = Set('Notification')
+class Notification(MongoDbEntity):
+    collection_name = 'notifications'
+
+    @property
+    def sender(self):
+        return self.get_by_id(self.json['sender_id'])
+
+    @property
+    def recipients(self):
+        return [self.get_by_id(recipient_id) for recipient_id in self.json['recipient_ids']]
 
 
-class Achievement(db.Entity, csc.model_mixins.AchievementMixin):
-    id = PrimaryKey(int, auto=True)
-    title = Required(str)
-    description = Required(str)
-    date = Required(date)
-    club = Optional(Club)
-    users = Set(User)
+class School(MongoDbEntity):
+    collection_name = 'schools'
+
+    def members(self, projection=None):
+        return db.users.find({'school_ids': self.json['_id']}, projection)
 
 
-class Notification(db.Entity, csc.model_mixins.NotificationMixin):
-    id = PrimaryKey(int, auto=True)
-    from_competition = Optional(Competition)
-    from_job_offer = Optional(JobOffer)
-    to_users = Set(User)
-    to_clubs = Set(Club)
-    post = Optional('Post')
-    date = Required(date)
+class User(MongoDbEntity):
+    collection_name = 'users'
 
+    @property
+    def clubs(self):
+        return sorted([Club.get_by_id(club_id) for club_id in self.club_ids], key=lambda club: club.name)
 
-class Post(db.Entity, csc.model_mixins.PostMixin):
-    id = PrimaryKey(int, auto=True)
-    notification = Required(Notification)
-    title = Required(str)
-    text = Required(str)
-    date = Required(date)
-    video = Optional('Video')
-    photos = Set('Photo')
+    @property
+    def school(self):
+        return School(db.schools.find_one({'_id': self.school_ids[0]}))
 
+    @property
+    def schools(self):
+        return sorted([School.get_by_id(school_id) for school_id in self.school_ids], key=lambda school: school.name)
 
-class CompetitionHost(User, csc.model_mixins.CompetitionHostMixin):
-    competitions = Set(Competition)
+    @staticmethod
+    def get_by_email(email):
+        return User(db.users.find_one({'email': email}))
 
-
-class Member(User, csc.model_mixins.MemberMixin):
-    clubs = Set(Club, reverse='members')
-    school = Required(School)
-    competitions = Set(Competition)
-    job_offers = Set(JobOffer)
-    clubs_president = Set(Club, reverse='president')
-    clubs_vicepresident = Set(Club, reverse='vicepresident')
-    clubs_treasurer = Set(Club, reverse='treasurer')
-    clubs_secretary = Set(Club, reverse='secretary')
-    resume = Optional('Resume')
-
-
-class Company(User, csc.model_mixins.CompanyMixin):
-    job_offers = Set(JobOffer)
-
-
-class Video(db.Entity, csc.model_mixins.VideoMixin):
-    id = PrimaryKey(int, auto=True)
-    post = Required(Post)
-
-
-class Photo(db.Entity, csc.model_mixins.PhotoMixin):
-    id = PrimaryKey(int, auto=True)
-    user = Optional(User)
-    posts = Set(Post)
-    club = Optional(Club)
-    image = Required('Image')
-
-
-class Resume(db.Entity, csc.model_mixins.ResumeMixin):
-    id = PrimaryKey(int, auto=True)
-    member = Required(Member)
-    text = Required(str)
-
-
-class Administrator(User, csc.model_mixins.AdministratorMixin):
-    pass
-
-
-class Image(db.Entity, csc.model_mixins.ImageMixin):
-    id = PrimaryKey(int, auto=True)
-    file_name = Required(unicode)
-    website = Optional('Website')
-    photo = Optional(Photo)
-
-
-class Website(db.Entity, csc.model_mixins.WebsiteMixin):
-    id = PrimaryKey(int, auto=True)
-    name = Required(str)
-    url = Required(str)
-    image = Optional(Image)
-    competition = Optional(Competition)
-
-
-db.bind("sqlite", "database.sqlite", create_db=True)
-db.generate_mapping(create_tables=True)
+    @property
+    def to_notifications(self):
+        '''return the notifications addressed to self and to all the clubs etc. of self'''
+        recipient_ids = ['user {}'.format(self.json['_id'])]
+        recipient_ids.extend(['club {}'.format(club_id) for club_id in self.json['club_ids']])
+        notifications = db.notifications.find({'recipient_ids': {'$in': recipient_ids}}).sort('date', -1)
+        return [Notification(n) for n in notifications]

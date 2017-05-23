@@ -1,9 +1,8 @@
 import bcrypt
 
-import csc.models as models
-
 
 def hash_password(pw):
+    # return pw
     pwhash = bcrypt.hashpw(pw.encode('utf8'), bcrypt.gensalt())
     return pwhash.decode('utf8')
 

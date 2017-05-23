@@ -2,47 +2,25 @@
 
 {% block content %}
 <h1>Welcome to CSC</h1>
-{% if user and user.classtype == 'Member' %}
+{% if user  %}
     <p>Your school is: {{ user.school.name }}</p>
 {% endif %}
 {% if user and user.clubs %}
     <p>Your clubs are:</p>
     <ul>
-    {% for club in user_clubs %}
+    {% for club in user.clubs %}
         <li>{{ club.name }} - {{ club.school.name }}</li>
     {% endfor %}
     </ul>
 {% endif %}
-{% if notifications %}
+{% if user.to_notifications %}
     <h2>Notifications to you</h2>
-    {% for n in notifications %}
+    {% for n in user.to_notifications %}
     <div class="notification">
-        {% if n.from_competition %}
-            <p class="post_from">From competition: {{ n.from_competition.name }}</p>
-        {% endif %}
-        {% if n.from_job_offer %}
-            <p class="post_from">From job offer: {{ n.from_job_offer.name }}</p>
-        {% endif %}
-        <p class="post_date">On: {{ n.date }}</p>
-        <p class="post_title">Title: {{ n.post.title }}</p>
-        <p class="post_text">Info: {{ n.post.text }}</p>
-    </div>
-    {% endfor %}
-{% endif %}
-{% if notifications_from_clubs %}
-    <h2>Notifications from your clubs</h2>
-    {% for n, c in notifications_from_clubs %}
-    <div class="notification">
-        <p>Club: {{ c.name }}</p>
-        {% if n.from_competition %}
-            <p class="post_from">From competition: {{ n.from_competition.name }}</p>
-        {% endif %}
-        {% if n.from_job_offer %}
-            <p class="post_from">From job offer: {{ n.from_job_offer.name }}</p>
-        {% endif %}
-        <p class="post_date">On: {{ n.date }}</p>
-        <p class="post_title">Title: {{ n.post.title }}</p>
-        <p class="post_text">Info: {{ n.post.text }}</p>
+        <p class="post_from">Sender: {{ n.sender.name }}</p>
+        <p class="post_date">Date:{{ n.date }}</p>
+        <p class="post_title">Title: {{ n.title }}</p>
+        <p class="post_text">Texxt: {{ n.text }}</p>
     </div>
     {% endfor %}
 {% endif %}

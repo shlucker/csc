@@ -9,9 +9,9 @@
     <ul id="top_menu">
         <li><a href="{{ request.route_url('home') }}">Home</a></li>
         {% if user %}
-            <li><a href="{{ request.route_url('user_profile', user_id=user.id) }}">{{ user.name }}</a></li>
+            <li><a href="{{ request.route_url('user_profile', user_id=user._id) }}">{{ user.name }}</a></li>
             <li><a href="{{ request.route_url('logout') }}">Logout</a></li>
-            {% if user.classtype == 'Administrator' %}
+            {% if 'admin' in user %}
                 <li><a href="{{ request.route_url('create_user') }}">Create user</a></li>
             {% endif %}
         {% else %}
