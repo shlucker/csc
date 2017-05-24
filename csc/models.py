@@ -36,7 +36,7 @@ class MongoDbEntity:
     @property
     def thumbnail(self):
         if 'image' in self.json:
-            return 'static/{}-tn.png'.format(self.json['image'])
+            return '/static/{}-tn.png'.format(self.json['image'])
 
 
 class Club(MongoDbEntity):
