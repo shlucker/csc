@@ -1,9 +1,11 @@
 <div class="post">
-    {% if 'image' in post.sender %}
-        <img class="logo" src="static/{{ post.sender.image }}-tn.png"/>
+    <img class="logo" src="{{ post.sender.thumbnail }}"/>
+    <p><b>{{ post.sender.collection_name }}:</b> <a href="{{ post.sender.collection_name }}/{{ post.sender._id }}">{{ post.sender.name }}</a></p>
+    {% if post.sender.school | default(0) %}
+        <img class="logo" src="{{ post.sender.school.thumbnail }}"/>
+        <p><b>School:</b> <a href="school/{{ post.sender.school._id }}">{{ post.sender.school.name }}</a></p>
     {% endif %}
-    <p class="post_from">Sender: {{ post.sender.name }}</p>
-    <p class="post_date">Date:{{ post.date }}</p>
-    <p class="post_title">Title: {{ post.title }}</p>
-    <p class="post_text">Texxt: {{ post.text }}</p>
+    <p><b>Date:</b> {{ post.date }}</p>
+    <p><b>Title:</b> {{ post.title }}</p>
+    <p><b>Text:</b> {{ post.text }}</p>
 </div>

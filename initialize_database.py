@@ -976,7 +976,7 @@ db.clubs.insert_many([
      'school_id': 35},
     {'_id': 8,
      'name': 'ASME Student Professional Development Conference',
-     'school_id': 49,
+     'school_id': 4,
      'image': 'ASME'},
     {'_id': 9,
      'name': 'Association for Computing Machinery',

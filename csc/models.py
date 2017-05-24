@@ -14,7 +14,7 @@ class MongoDbEntity:
         self.json = json
 
     def __getattr__(self, item):
-        return self.json[item]
+        return self.json[item] if item in self.json else None
 
     def __getitem__(self, name):
         return self.json[name]
@@ -29,13 +29,18 @@ class MongoDbEntity:
             if collection_name == 'user':           return User(db.users.find_one(int(id)))
             if collection_name == 'competition':    return Competition(db.competitions.find_one(int(id)))
             if collection_name == 'club':           return Club(db.clubs.find_one(int(id)))
-            raise Exception('Unexpected collection name: {}'.format(collection_name))
+            raise Exception('Unexpected collection name: {}s'.format(collection_name))
         else:
-            return cls(db[cls.collection_name].find_one({'_id': id}))
+            return cls(db[cls.collection_name + 's'].find_one({'_id': id}))
+
+    @property
+    def thumbnail(self):
+        if 'image' in self.json:
+            return 'static/{}-tn.png'.format(self.json['image'])
 
 
 class Club(MongoDbEntity):
-    collection_name = 'clubs'
+    collection_name = 'club'
 
     @property
     def school(self):
@@ -43,11 +48,11 @@ class Club(MongoDbEntity):
 
 
 class Competition(MongoDbEntity):
-    collection_name = 'competitions'
+    collection_name = 'competition'
 
 
 class Post(MongoDbEntity):
-    collection_name = 'posts'
+    collection_name = 'post'
 
     @property
     def sender(self):
@@ -59,14 +64,14 @@ class Post(MongoDbEntity):
 
 
 class School(MongoDbEntity):
-    collection_name = 'schools'
+    collection_name = 'school'
 
     def members(self, projection=None):
         return db.users.find({'school_ids': self.json['_id']}, projection)
 
 
 class User(MongoDbEntity):
-    collection_name = 'users'
+    collection_name = 'user'
 
     @property
     def clubs(self):
