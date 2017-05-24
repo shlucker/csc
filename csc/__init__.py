@@ -21,11 +21,18 @@ def main(global_config, **settings):
 
     config.add_static_view('static', 'static', cache_max_age=3600)
 
-    config.add_route('create_user', '/create_user')
     config.add_route('home', '/')
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')
-    config.add_route('user', '/user/{user_id}')
+
+    config.add_route('club', '/club/{id}')
+    config.add_route('company', '/company/{id}')
+    config.add_route('competition', '/competition/{id}')
+    config.add_route('competition_host', '/competition_host/{id}')
+    config.add_route('school', '/school/{id}')
+    config.add_route('user', '/user/{id}')
+
+    config.add_route('create_user', '/create_user')
 
     config.scan('.views')
 

@@ -47,8 +47,16 @@ class Club(MongoDbEntity):
         return School(db.schools.find_one({'_id': self.school_id}))
 
 
+class Company(MongoDbEntity):
+    collection_name = 'company'
+
+
 class Competition(MongoDbEntity):
     collection_name = 'competition'
+
+
+class CompetitionHost(MongoDbEntity):
+    collection_name = 'competition_host'
 
 
 class Post(MongoDbEntity):

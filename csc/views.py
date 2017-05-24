@@ -3,7 +3,7 @@ from pyramid.renderers import render_to_response
 from pyramid.security import remember, forget
 from pyramid.view import view_config
 
-from csc.models import db, User
+from csc.models import db, User, Club, School, CompetitionHost, Company, Competition
 from .security import check_password
 
 
@@ -17,16 +17,6 @@ class CscViews:
             return User(db.users.find_one({'email': self.user_id}))
         else:
             return None
-
-    @view_config(route_name='create_user')
-    def create_user(self):
-        user = self._get_user()
-        if not user or not 'admin' in user:
-            raise HTTPForbidden()
-        return render_to_response('templates/create_user.jinja2',
-                                  {'name': 'Create user',
-                                   'user': user},
-                                  request=self.request)
 
     @view_config(route_name='home')
     def home(self):
@@ -70,10 +60,85 @@ class CscViews:
         url = request.route_url('home')
         return HTTPFound(location=url, headers=headers)
 
+    @view_config(route_name='club')
+    def club(self):
+        user = self._get_user()
+        club_id = self.request.matchdict['id']
+
+        if not user:
+            return HTTPFound(self.request.route_url('login'))
+
+        club = Club.get_by_id(int(club_id))
+        return render_to_response('templates/club.jinja2',
+                                  {'name': 'User profile',
+                                   'user': user,
+                                   'club': club},
+                                  request=self.request)
+
+    @view_config(route_name='company')
+    def company(self):
+        user = self._get_user()
+        company_id = self.request.matchdict['id']
+
+        if not user:
+            return HTTPFound(self.request.route_url('login'))
+
+        company = Company.get_by_id(int(company_id))
+        return render_to_response('templates/company.jinja2',
+                                  {'name': 'User profile',
+                                   'user': user,
+                                   'company': company},
+                                  request=self.request)
+
+    @view_config(route_name='competition')
+    def competition(self):
+        user = self._get_user()
+        competition_id = self.request.matchdict['id']
+
+        if not user:
+            return HTTPFound(self.request.route_url('login'))
+
+        competition = Competition.get_by_id(int(competition_id))
+        return render_to_response('templates/competition.jinja2',
+                                  {'name': 'User profile',
+                                   'user': user,
+                                   'competition': competition},
+                                  request=self.request)
+
+    @view_config(route_name='competition_host')
+    def competition_host(self):
+        user = self._get_user()
+        competition_host_id = self.request.matchdict['id']
+
+        if not user:
+            return HTTPFound(self.request.route_url('login'))
+
+        competition_host = CompetitionHost.get_by_id(int(competition_host_id))
+        return render_to_response('templates/competition_host.jinja2',
+                                  {'name': 'User profile',
+                                   'user': user,
+                                   'competition_host': competition_host},
+                                  request=self.request)
+
+    @view_config(route_name='school')
+    def school(self):
+        user = self._get_user()
+        school_id = self.request.matchdict['id']
+
+        if not user:
+            return HTTPFound(self.request.route_url('login'))
+
+        school = School.get_by_id(int(school_id))
+        return render_to_response('templates/school.jinja2',
+                                  {'name': 'User profile',
+                                   'user': user,
+                                   'school': school},
+                                  request=self.request)
+
     @view_config(route_name='user')
     def user(self):
         user = self._get_user()
-        user_profile_id = self.request.matchdict['user_id']
+        user_profile_id = self.request.matchdict['id']
 
         if not user:
             return HTTPFound(self.request.route_url('login'))
@@ -85,4 +150,14 @@ class CscViews:
                                   {'name': 'User profile',
                                    'user': user,
                                    'user_profile': user_profile},
+                                  request=self.request)
+
+    @view_config(route_name='create_user')
+    def create_user(self):
+        user = self._get_user()
+        if not user or not 'admin' in user:
+            raise HTTPForbidden()
+        return render_to_response('templates/create_user.jinja2',
+                                  {'name': 'Create user',
+                                   'user': user},
                                   request=self.request)

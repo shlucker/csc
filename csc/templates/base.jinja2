@@ -9,7 +9,7 @@
     <ul id="top_menu">
         <li><a href="{{ request.route_url('home') }}">Home</a></li>
         {% if user %}
-            <li><a href="{{ request.route_url('user', user_id=user._id) }}">{{ user.name }}</a></li>
+            <li><a href="{{ request.route_url('user', id=user._id) }}">{{ user.name }}</a></li>
             <li><a href="{{ request.route_url('logout') }}">Logout</a></li>
             {% if 'admin' in user %}
                 <li><a href="{{ request.route_url('create_user') }}">Create user</a></li>
