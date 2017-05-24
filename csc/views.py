@@ -70,8 +70,8 @@ class CscViews:
         url = request.route_url('home')
         return HTTPFound(location=url, headers=headers)
 
-    @view_config(route_name='user_profile')
-    def user_profile(self):
+    @view_config(route_name='user')
+    def user(self):
         user = self._get_user()
         user_profile_id = self.request.matchdict['user_id']
 
@@ -81,7 +81,7 @@ class CscViews:
             raise HTTPForbidden()
 
         user_profile = User.get_by_id(int(user_profile_id))
-        return render_to_response('templates/user_profile.jinja2',
+        return render_to_response('templates/user.jinja2',
                                   {'name': 'User profile',
                                    'user': user,
                                    'user_profile': user_profile},

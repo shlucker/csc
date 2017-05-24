@@ -25,7 +25,7 @@ def main(global_config, **settings):
     config.add_route('home', '/')
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')
-    config.add_route('user_profile', '/user_profile/{user_id}')
+    config.add_route('user', '/user/{user_id}')
 
     config.scan('.views')
 
