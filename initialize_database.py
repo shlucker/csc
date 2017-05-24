@@ -1165,16 +1165,7 @@ db.companies.insert_many([
     {'_id': 3,
      'name': 'Tesla',
      'email': 'tesla@gmail.com',
-     'city': 'Las Vegas', 'state': 'Florida'},
-    {'_id': 4,
-     'name': 'ASME National',
-     'email': 'asme.national@gmail.com',
-     'city': 'Las Vegas', 'state': 'California',
-     'image': 'ASME'},
-    {'_id': 5,
-     'name': 'AIAA National',
-     'email': 'aiaa.national@gmail.com',
-     'city': 'Springfield', 'state': 'Florida'}
+     'city': 'Las Vegas', 'state': 'Florida'}
 ])
 
 db.competitions.drop()
