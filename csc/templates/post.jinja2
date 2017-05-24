@@ -1,9 +1,9 @@
 <div class="post">
     <img class="logo" src="{{ post.sender.thumbnail }}"/>
-    <p><b>{{ post.sender.collection_name }}:</b> <a href="{{ post.sender.collection_name }}/{{ post.sender._id }}">{{ post.sender.name }}</a></p>
+    <p><b>{{ post.sender.collection_name }}:</b> <a href="{{ request.route_url(post.sender.collection_name, id=post.sender._id) }}">{{ post.sender.name }}</a></p>
     {% if post.sender.school | default(0) %}
         <img class="logo" src="{{ post.sender.school.thumbnail }}"/>
-        <p><b>School:</b> <a href="school/{{ post.sender.school._id }}">{{ post.sender.school.name }}</a></p>
+        <p><b>School:</b> <a href="{{ request.route_url('school', id=post.sender.school._id) }}">{{ post.sender.school.name }}</a></p>
     {% endif %}
     <p><b>Date:</b> {{ post.date }}</p>
     <p><b>Title:</b> {{ post.title }}</p>
