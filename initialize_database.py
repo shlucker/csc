@@ -1,6 +1,6 @@
 import datetime
 
-from csc.models import db, User
+from csc.models import db, User, School
 from csc.security import hash_password
 
 db.schools.drop()
@@ -19,9 +19,14 @@ db.schools.insert_many([
      'state': 'Missouri'},
     {'_id': 4,
      'name': 'Bryan University Springfield',
+     'street': '4255 S Nature Center Way',
      'city': 'Springfield',
      'state': 'Missouri',
-     'image': 'BryanUniversity'},
+     'zip': 65804,
+     'tel': '417-862-5700',
+     'image': 'BryanUniversity',
+     'website': 'bryanu.edu',
+     'description': 'Bryan University has been providing focused, relevant career training programs to students since 1982, when it was founded in order to meet the growing demands of students. As a career education institution, Bryan University’s goal quickly became to teach students courses that directly related to their field of study, providing relevant information, skills and knowledge. Our mission is to improve the lives of our students, our team and our employers. We accomplish our mission by providing quality education in an environment that enables our team to thrive and our students to realize their potential, creating a positive impact within our communities.'},
     {'_id': 5,
      'name': 'Calvary Bible College and Theological Seminary',
      'city': 'Kansas City',
@@ -385,7 +390,9 @@ db.schools.insert_many([
     {'_id': 95,
      'name': 'University of Missouri Columbia',
      'city': 'Columbia',
-     'state': 'Missouri'},
+     'state': 'Missouri',
+     'zip': 65211,
+     'tel': '573-882-2121'},
     {'_id': 96,
      'name': 'University of Missouri Kansas City',
      'city': 'Kansas City',
@@ -1241,6 +1248,15 @@ print('== Get member by name ==')
 u1 = db.users.find_one({'name': 'Sade Berney'})
 print('{} - {} - {} - {}'.format(u1['name'], u1['major'], u1['city'], u1['state']))
 
+print('== Get clubs by school ==')
+for school in db.schools.find():
+    if School(school).clubs:
+        print('School: {}'.format(school['name']))
+        for club in School(school).clubs:
+            print('  ', club.name)
+    else:
+        print('School without clubs: {}'.format(school['name']))
+
 print('== Get members by school ==')
 for school in db.schools.find({}, {'name': 1}):
     #  School(school).members({'name': 1, '_id': 0})
@@ -1268,7 +1284,7 @@ for member in db.users.find({'competition_ids': {'$gt': []}}):
     for competition in db.competitions.find({'_id': {'$in': member['competition_ids']}}):
         print(' ', competition['name'])
 
-print('== posts to user ==')
+print('== Posts to user ==')
 for user in db.users.find():
     print('User: {}'.format(user['name']))
     for post in User(user).to_posts:

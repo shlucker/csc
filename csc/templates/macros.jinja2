@@ -1,0 +1,5 @@
+{%- macro embed_map(address) -%}
+    <iframe width='350' height='250' frameborder='0' scrolling='no' marginheight='0' marginwidth='0'
+            src='https://maps.google.com/maps?&amp;q="{{ address|urlencode }}"&amp;output=embed'>
+    </iframe>
+{%- endmacro -%}

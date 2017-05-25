@@ -1,5 +1,19 @@
 {% extends "base.jinja2" %}
 
+{% from 'macros.jinja2' import embed_map %}
+
 {% block content %}
-This page shows the school profile for {{ school.name }}
+    <h1>{{ school.name }}</h1>
+    <img src="{{ school.image('cover') }}" width="50%" />
+    <p>{{ embed_map(school.address) }}</p>
+    <p>{{ school.address }}</p>
+    {% if school.tel|default(0) %}<p>{{ school.tel }}</p>{% endif %}
+    {% if school.website|default(0) %}<p><a href="http://{{ school.website }}">{{ school.website }}</a></p>{% endif %}
+    <p>{{ school.description }}</p>
+    <h2>Clubs</h2>
+    <ul>
+    {% for club in school.clubs %}
+        <li>{{ club.name }}</li>
+    {% endfor %}
+    </ul>
 {% endblock %}

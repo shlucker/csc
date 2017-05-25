@@ -33,10 +33,45 @@ class MongoDbEntity:
         else:
             return cls(db[cls.collection_name + 's'].find_one({'_id': id}))
 
-    @property
-    def thumbnail(self):
+    def image(self, image_type):
+        """
+        image_type can be:
+        - thumbnail for a square logo
+        - logo for a wide logo and text
+        - cover for a photo
+        """
         if 'image' in self.json:
-            return '/static/{}-tn.png'.format(self.json['image'])
+            if image_type == 'thumbnail':
+                return '/static/{}-tn.png'.format(self.json['image'])
+            if image_type == 'logo':
+                return '/static/{}-logo.png'.format(self.json['image'])
+            if image_type == 'cover':
+                return '/static/{}-cover.jpg'.format(self.json['image'])
+
+    @property
+    def address(self):
+        fields = [self.json['street'],
+                  self.json['city'],
+                  str(self.json['zip']),
+                  self.json['state']]
+        fields = [field for field in fields if field]
+        return ', '.join(fields)
+
+    @property
+    def schools(self):
+        if 'school_ids' in self.json:
+            return sorted([School.get_by_id(school_id) for school_id in self.school_ids],
+                          key=lambda school: school.name)
+        return []
+
+    @property
+    def to_posts(self):
+        '''return the posts addressed to self and to all the clubs etc. of self'''
+        recipient_ids = ['user {}'.format(self.json['_id'])]
+        if 'club_ids' in self.json:
+            recipient_ids.extend(['club {}'.format(club_id) for club_id in self.json['club_ids']])
+        posts = db.posts.find({'recipient_ids': {'$in': recipient_ids}}).sort('date', -1)
+        return [Post(n) for n in posts]
 
 
 class Club(MongoDbEntity):
@@ -75,7 +110,12 @@ class School(MongoDbEntity):
     collection_name = 'school'
 
     def members(self, projection=None):
-        return db.users.find({'school_ids': self.json['_id']}, projection)
+        return sorted(User(db.users.find({'school_ids': self.json['_id']}, projection)), key=lambda user: user.name)
+
+    @property
+    def clubs(self):
+        return sorted([Club(club) for club in db.clubs.find({'school_id': self.json['_id']})],
+                      key=lambda club: club.name)
 
 
 class User(MongoDbEntity):
