@@ -13,7 +13,7 @@
     <h2>Clubs</h2>
     <ul>
     {% for club in school.clubs %}
-        <li>{{ club.name }}</li>
+        <li><a href="{{ request.route_url('club', id=club._id) }}">{{ club.name }}</a></li>
     {% endfor %}
     </ul>
 {% endblock %}

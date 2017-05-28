@@ -63,12 +63,12 @@ class CscViews:
     @view_config(route_name='club')
     def club(self):
         user = self._get_user()
-        club_id = self.request.matchdict['id']
+        club_id = int(self.request.matchdict['id'])
 
         if not user:
             return HTTPFound(self.request.route_url('login'))
 
-        club = Club.get_by_id(int(club_id))
+        club = Club.get_by_id(club_id)
         return render_to_response('templates/club.jinja2',
                                   {'name': 'User profile',
                                    'user': user,
@@ -78,12 +78,12 @@ class CscViews:
     @view_config(route_name='company')
     def company(self):
         user = self._get_user()
-        company_id = self.request.matchdict['id']
+        company_id = int(self.request.matchdict['id'])
 
         if not user:
             return HTTPFound(self.request.route_url('login'))
 
-        company = Company.get_by_id(int(company_id))
+        company = Company.get_by_id(company_id)
         return render_to_response('templates/company.jinja2',
                                   {'name': 'User profile',
                                    'user': user,
@@ -93,12 +93,12 @@ class CscViews:
     @view_config(route_name='competition')
     def competition(self):
         user = self._get_user()
-        competition_id = self.request.matchdict['id']
+        competition_id = int(self.request.matchdict['id'])
 
         if not user:
             return HTTPFound(self.request.route_url('login'))
 
-        competition = Competition.get_by_id(int(competition_id))
+        competition = Competition.get_by_id(competition_id)
         return render_to_response('templates/competition.jinja2',
                                   {'name': 'User profile',
                                    'user': user,
@@ -108,12 +108,12 @@ class CscViews:
     @view_config(route_name='competition_host')
     def competition_host(self):
         user = self._get_user()
-        competition_host_id = self.request.matchdict['id']
+        competition_host_id = int(self.request.matchdict['id'])
 
         if not user:
             return HTTPFound(self.request.route_url('login'))
 
-        competition_host = CompetitionHost.get_by_id(int(competition_host_id))
+        competition_host = CompetitionHost.get_by_id(competition_host_id)
         return render_to_response('templates/competition_host.jinja2',
                                   {'name': 'User profile',
                                    'user': user,
@@ -123,12 +123,12 @@ class CscViews:
     @view_config(route_name='school')
     def school(self):
         user = self._get_user()
-        school_id = self.request.matchdict['id']
+        school_id = int(self.request.matchdict['id'])
 
         if not user:
             return HTTPFound(self.request.route_url('login'))
 
-        school = School.get_by_id(int(school_id))
+        school = School.get_by_id(school_id)
         return render_to_response('templates/school.jinja2',
                                   {'name': 'User profile',
                                    'user': user,
@@ -138,14 +138,14 @@ class CscViews:
     @view_config(route_name='user')
     def user(self):
         user = self._get_user()
-        user_profile_id = self.request.matchdict['id']
+        user_profile_id = int(self.request.matchdict['id'])
 
         if not user:
             return HTTPFound(self.request.route_url('login'))
-        if not 'admin' in user and user._id != int(user_profile_id):
+        if not 'admin' in user and user._id != user_profile_id:
             raise HTTPForbidden()
 
-        user_profile = User.get_by_id(int(user_profile_id))
+        user_profile = User.get_by_id(user_profile_id)
         return render_to_response('templates/user.jinja2',
                                   {'name': 'User profile',
                                    'user': user,
