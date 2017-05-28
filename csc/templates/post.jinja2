@@ -1,6 +1,6 @@
 <div class="post">
     <img class="logo" src="{{ post.sender.image('thumbnail') }}" />
-    <p><b>{{ post.sender.collection_name }}:</b> <a href="{{ request.route_url(post.sender.collection_name, id=post.sender._id) }}">{{ post.sender.name }}</a></p>
+    <p><b>{{ post.sender.__class__.__name__ }}:</b> <a href="{{ request.route_url(post.sender.__class__.__name__, id=post.sender._id) }}">{{ post.sender.name }}</a></p>
     {% if post.sender.school | default(0) %}
         <img class="logo" src="{{ post.sender.school.image('thumbnail') }}" />
         <p><b>School:</b> <a href="{{ request.route_url('school', id=post.sender.school._id) }}">{{ post.sender.school.name }}</a></p>

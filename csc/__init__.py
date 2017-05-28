@@ -25,12 +25,18 @@ def main(global_config, **settings):
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')
 
-    config.add_route('club', '/club/{id}')
+    config.add_route('club', '/club/{id}')  # this is used everywhere but...
+    config.add_route('Club', '/club/{id}')  # ... but in the views where the route is found using the name of the class
     config.add_route('company', '/company/{id}')
+    config.add_route('Company', '/company/{id}')
     config.add_route('competition', '/competition/{id}')
+    config.add_route('Competition', '/competition/{id}')
     config.add_route('competition_host', '/competition_host/{id}')
+    config.add_route('CompetitionHost', '/competition_host/{id}')
     config.add_route('school', '/school/{id}')
+    config.add_route('School', '/school/{id}')
     config.add_route('user', '/user/{id}')
+    config.add_route('User', '/user/{id}')
 
     config.add_route('create_user', '/create_user')
 
