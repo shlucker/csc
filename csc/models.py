@@ -1,6 +1,7 @@
-import sys
-from pymongo import MongoClient
 import re
+from collections import defaultdict
+
+from pymongo import MongoClient
 
 db = MongoClient()['csc']
 
@@ -44,7 +45,7 @@ class MongoDbEntity:
         If the ids are not lists, then the collection is collection_names[cls]
         One query per collection is executed
         """
-        ids_by_class = {}
+        ids_by_class = defaultdict(list)
         for id in ids:
             if isinstance(id, list):
                 collection_name, id = id
@@ -52,10 +53,7 @@ class MongoDbEntity:
             else:
                 obj_class = cls
 
-            try:
-                ids_by_class[obj_class].append(id)
-            except KeyError:
-                ids_by_class[obj_class] = [id]
+            ids_by_class[obj_class].append(id)
 
         objects = []
         for obj_class in ids_by_class:
