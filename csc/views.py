@@ -14,9 +14,9 @@ class CscViews:
 
     def _get_user(self):
         if self.user_id:
-            return User(db.users.find_one({'email': self.user_id}))
-        else:
-            return None
+            user = User.find_one({'email': self.user_id})
+            if user:
+                return User(user)
 
     @view_config(route_name='home')
     def home(self):
@@ -63,7 +63,7 @@ class CscViews:
     @view_config(route_name='club')
     def club(self):
         user = self._get_user()
-        club_id = int(self.request.matchdict['id'])
+        club_id = self.request.matchdict['id']
 
         if not user:
             return HTTPFound(self.request.route_url('login'))
@@ -78,7 +78,7 @@ class CscViews:
     @view_config(route_name='company')
     def company(self):
         user = self._get_user()
-        company_id = int(self.request.matchdict['id'])
+        company_id = self.request.matchdict['id']
 
         if not user:
             return HTTPFound(self.request.route_url('login'))
@@ -93,7 +93,7 @@ class CscViews:
     @view_config(route_name='competition')
     def competition(self):
         user = self._get_user()
-        competition_id = int(self.request.matchdict['id'])
+        competition_id = self.request.matchdict['id']
 
         if not user:
             return HTTPFound(self.request.route_url('login'))
@@ -108,7 +108,7 @@ class CscViews:
     @view_config(route_name='competition_host')
     def competition_host(self):
         user = self._get_user()
-        competition_host_id = int(self.request.matchdict['id'])
+        competition_host_id = self.request.matchdict['id']
 
         if not user:
             return HTTPFound(self.request.route_url('login'))
@@ -123,7 +123,7 @@ class CscViews:
     @view_config(route_name='school')
     def school(self):
         user = self._get_user()
-        school_id = int(self.request.matchdict['id'])
+        school_id = self.request.matchdict['id']
 
         if not user:
             return HTTPFound(self.request.route_url('login'))
@@ -138,7 +138,7 @@ class CscViews:
     @view_config(route_name='user')
     def user(self):
         user = self._get_user()
-        user_profile_id = int(self.request.matchdict['id'])
+        user_profile_id = self.request.matchdict['id']
 
         if not user:
             return HTTPFound(self.request.route_url('login'))
