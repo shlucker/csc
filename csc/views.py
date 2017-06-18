@@ -18,48 +18,6 @@ class CscViews:
             if user:
                 return User(user)
 
-    @view_config(route_name='home')
-    def home(self):
-        user = self._get_user()
-
-        return render_to_response('templates/home.jinja2',
-                                  {'name': 'Home',
-                                   'user': user},
-                                  request=self.request)
-
-    @view_config(route_name='login', renderer='templates/login.jinja2')
-    def login(self):
-        request = self.request
-        login_url = request.route_url('login')
-        referrer = request.url
-        if referrer == login_url:
-            referrer = '/'  # never use login form itself as came_from
-        came_from = request.params.get('came_from', referrer)
-        message = ''
-        email = request.params.get('email', '')
-        password = request.params.get('password', '')
-        if 'form.submitted' in request.POST:
-            user = User.get_by_email(email) if email else None
-            if user and check_password(password, user['password']):
-                headers = remember(request, email)
-                return HTTPFound(location=came_from, headers=headers)
-            message = 'Failed login'
-
-        return dict(
-            name='Login',
-            message=message,
-            url=request.application_url + '/login',
-            came_from=came_from,
-            email=email,
-        )
-
-    @view_config(route_name='logout')
-    def logout(self):
-        request = self.request
-        headers = forget(request)
-        url = request.route_url('home')
-        return HTTPFound(location=url, headers=headers)
-
     @view_config(route_name='club')
     def club(self):
         user = self._get_user()
@@ -120,6 +78,58 @@ class CscViews:
                                    'competition_host': competition_host},
                                   request=self.request)
 
+    @view_config(route_name='create_user')
+    def create_user(self):
+        user = self._get_user()
+        if not user or not 'admin' in user:
+            raise HTTPForbidden()
+        return render_to_response('templates/create_user.jinja2',
+                                  {'name': 'Create user',
+                                   'user': user},
+                                  request=self.request)
+
+    @view_config(route_name='home')
+    def home(self):
+        user = self._get_user()
+
+        return render_to_response('templates/home.jinja2',
+                                  {'name': 'Home',
+                                   'user': user},
+                                  request=self.request)
+
+    @view_config(route_name='login', renderer='templates/login.jinja2')
+    def login(self):
+        request = self.request
+        login_url = request.route_url('login')
+        referrer = request.url
+        if referrer == login_url:
+            referrer = '/'  # never use login form itself as came_from
+        came_from = request.params.get('came_from', referrer)
+        message = ''
+        email = request.params.get('email', '')
+        password = request.params.get('password', '')
+        if 'form.submitted' in request.POST:
+            user = User.get_by_email(email) if email else None
+            if user and check_password(password, user['password']):
+                headers = remember(request, email)
+                return HTTPFound(location=came_from, headers=headers)
+            message = 'Failed login'
+
+        return dict(
+            name='Login',
+            message=message,
+            url=request.application_url + '/login',
+            came_from=came_from,
+            email=email,
+        )
+
+    @view_config(route_name='logout')
+    def logout(self):
+        request = self.request
+        headers = forget(request)
+        url = request.route_url('home')
+        return HTTPFound(location=url, headers=headers)
+
     @view_config(route_name='school')
     def school(self):
         user = self._get_user()
@@ -150,14 +160,4 @@ class CscViews:
                                   {'name': 'User profile',
                                    'user': user,
                                    'user_profile': user_profile},
-                                  request=self.request)
-
-    @view_config(route_name='create_user')
-    def create_user(self):
-        user = self._get_user()
-        if not user or not 'admin' in user:
-            raise HTTPForbidden()
-        return render_to_response('templates/create_user.jinja2',
-                                  {'name': 'Create user',
-                                   'user': user},
                                   request=self.request)
