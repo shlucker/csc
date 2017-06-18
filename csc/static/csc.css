@@ -7,3 +7,7 @@ ul#top_menu li {
 .logo {
     width: 5em;
 }
+
+#search_result {
+    display: none;
+}

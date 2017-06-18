@@ -10,7 +10,7 @@ def underscorize(txt):
     return re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', txt).lower()
 
 
-class MongoDbEntity:
+class  MongoDbEntity:
     def __init__(self, json):
         self.json = json
 
@@ -192,3 +192,12 @@ class User(MongoDbEntity):
         user = User.find_one({'email': email})
         if user:
             return User(user)
+
+    @property
+    def search_box(self):
+        try:
+            return self.json['search_box']
+        except KeyError as e:
+            return {'search_value': '',
+                    'search_url': 'search/',
+                    'search_title': 'Search by School, Person, Club, Company, Competition, State, City'}
