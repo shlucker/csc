@@ -39,6 +39,7 @@ def main(global_config, **settings):
     config.add_route('User', '/user/{id}')
 
     config.add_route('create_user', '/create_user')
+    config.add_route('search', '/search/{txt}')
 
     config.scan('.views')
 

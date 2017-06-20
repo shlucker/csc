@@ -3,11 +3,23 @@
 <head>
     <title>CSC {{ name }}</title>
     <link rel="stylesheet" href="{{ request.static_url('csc:static/csc.css') }}"/>
+    <link rel="shortcut icon" href="{{ request.static_url('csc:static/favicon.ico') }}">
+    {%- block js %}
+        <script src="{{ request.static_url('csc:static/jquery.js') }}"></script>
+        <script src="{{ request.static_url('csc:static/csc.js') }}"></script>
+    {%- endblock %}
 </head>
 <body>
 {%- block header -%}
     <ul id="top_menu">
-        <li><a href="{{ request.route_url('home') }}">Home</a></li>
+        <li><a href="{{ request.route_url('home') }}">UCTechWeb</a></li>
+        <li>
+            <input id="search_box" name="search_value"
+                   value="{{ user.search_box.search_value }}"
+                   data-search_url="{{ user.search_box.search_url }}"
+                   title='{{ user.search_box.search_title }}'
+                   autofocus>
+        </li>
         {% if user %}
             <li><a href="{{ request.route_url('user', id=user._id) }}">{{ user.name }}</a></li>
             <li><a href="{{ request.route_url('logout') }}">Logout</a></li>
@@ -20,6 +32,9 @@
     </ul>
     <br>
     <hr>
+    <div id="search_result">
+        <ul></ul>
+    </div>
 {%- endblock -%}
 {%- block content -%}
     Missing "content" block in jinja template!

@@ -1,16 +1,16 @@
 import re
-from collections import defaultdict
 
 from pymongo import MongoClient
 
-db = MongoClient()['csc']
+client = MongoClient()
+db = client['csc']
 
 
 def underscorize(txt):
     return re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', txt).lower()
 
 
-class MongoDbEntity:
+class  MongoDbEntity:
     def __init__(self, json):
         self.json = json
 
@@ -25,52 +25,74 @@ class MongoDbEntity:
 
     @classmethod
     def get_by_id(cls, id):
-        """
-        id can be an id or a list ["coll_name", id]
-        If it is not a list, then the collection is collection_names[cls]
-        """
-        if isinstance(id, list):
-            collection_name, id = id
-            obj_class = collection_names[collection_name]
-        else:
-            obj_class = cls
-
-        return obj_class(db[collection_names[obj_class]].find_one(id))
+        doc = db.stuff.find_one({'_id': id})
+        doc_class = globals()[doc['_tp']]
+        return doc_class(doc)
 
     @classmethod
     def get_by_ids(cls, ids):
-        """
-        ids is a list of ids
-        Each id can be an id or a list ["coll_name", id]
-        If the ids are not lists, then the collection is collection_names[cls]
-        One query per collection is executed
-        """
-        ids_by_class = defaultdict(list)
-        for id in ids:
-            if isinstance(id, list):
-                collection_name, id = id
-                obj_class = collection_names[collection_name]
-            else:
-                obj_class = cls
-
-            ids_by_class[obj_class].append(id)
-
-        objects = []
-        for obj_class in ids_by_class:
-            json_docs = db[collection_names[obj_class]].find({'_id': {'$in': ids_by_class[obj_class]}})
-            objects.extend([obj_class(json_doc) for json_doc in json_docs])
-
-        return objects
+        cursor = db.stuff.find({'_id': {'$in': ids}})
+        while True:
+            doc = cursor.next()
+            doc_class = globals()[doc['_tp']]
+            yield doc_class(doc)
 
     @classmethod
-    def get_by_ids_on_field(cls, field_name, id):
+    def get_by_id_on_field(cls, field_name, id):
         """
-        Example: to find all the users with a 5 in the list of clubs:
-            User.get_by_ids_on_field('club_ids', 5)
+        id can be an id "club 1" or a list of ids ["club 1", "club 3"]
+        Example: to find all the users with 'club 3' in the list of clubs:
+            User.get_by_id_on_field('club_ids', 'club 3')
         """
-        collection_name = collection_names[cls]
-        json_docs = db[collection_name].find({id: {'$in': field_name}})
-        return [cls(json_doc for json_doc in json_docs)]
+        cursor = cls.find({field_name: {'$in': id}})
+        while True:
+            yield cls(next(cursor))
+
+    @classmethod
+    def find_one(cls, filter=None, projection=None):
+        """
+        If cls is derived from MongoDbEntity then {'_tp': cls.__name__} is added to the filter dictionary
+        If cls is MongoDbEntity then '_tp' is not used in the search (searching by '_id' doesn't require the '_tp')
+        projection contains the list of fields to return; if None then all the fields are returned
+        """
+        f = {'_tp': cls.__name__} if cls is not MongoDbEntity else {}
+        if filter:
+            f.update(filter)
+
+        if projection:
+            p = {}
+            if not '_id' in projection:
+                p['_id'] = 0
+            p.update({k: 1 for k in projection})
+        else:
+            p = None
+
+        doc = db.stuff.find_one(f, p)
+        if doc:
+            return cls(doc)
+
+    @classmethod
+    def find(cls, filter=None, projection=None):
+        """
+        If cls is derived from MongoDbEntity then {'_tp': cls.__name__} is added to the filter dictionary
+        If cls is MongoDbEntity then '_tp' is not used in the search (searching by '_id' doesn't require the '_tp')
+        projection contains the list of fields to return; if None then all the fields are returned
+        """
+        f = {'_tp': cls.__name__} if cls is not MongoDbEntity else {}
+        if filter:
+            f.update(filter)
+
+        if projection:
+            p = {}
+            if not '_id' in projection:
+                p['_id'] = 0
+            p.update({k: 1 for k in projection})
+        else:
+            p = None
+
+        cursor = db.stuff.find(f, p)
+        while True:
+            yield cls(cursor.next())
 
     def image(self, image_type):
         """
@@ -105,16 +127,15 @@ class MongoDbEntity:
     @property
     def to_posts(self):
         """return the posts addressed to self and to all the clubs etc. of self"""
-        recipient_ids = [('users', self.json['_id'])]
-        recipient_ids.extend([('clubs', club_id) for club_id in self.json['club_ids']])
-        posts = db.posts.find({'recipient_ids': {'$in': recipient_ids}}).sort('date', -1)
-        return [Post(n) for n in posts]
+        recipient_ids = [self.json['_id']]
+        recipient_ids.extend(club_id for club_id in self.json['club_ids'])
+        return Post.get_by_id_on_field('recipient_ids', recipient_ids)
 
 
 class Club(MongoDbEntity):
     @property
     def school(self):
-        return School(db.schools.find_one({'_id': self.school_id}))
+        return School(School.find_one({'_id': self.school_id}))
 
 
 class Company(MongoDbEntity):
@@ -122,7 +143,8 @@ class Company(MongoDbEntity):
 
 
 class Competition(MongoDbEntity):
-    pass
+    def members(self, projection=None):
+        return User.find({'competition_ids': self.json['_id']}, projection)
 
 
 class CompetitionHost(MongoDbEntity):
@@ -141,12 +163,15 @@ class Post(MongoDbEntity):
 
 class School(MongoDbEntity):
     def members(self, projection=None):
-        return sorted(User(db.users.find({'school_ids': self.json['_id']}, projection)), key=lambda user: user.name)
+        return User.find({'school_ids': self.json['_id']}, projection)
 
     @property
     def clubs(self):
-        return sorted([Club(club) for club in db.clubs.find({'school_id': self.json['_id']})],
-                      key=lambda club: club.name)
+        return Club.find({'school_id': self.json['_id']})
+
+    @property
+    def students(self):
+        return User.find({'school_ids': self.json['_id']})
 
 
 class User(MongoDbEntity):
@@ -155,21 +180,24 @@ class User(MongoDbEntity):
         return sorted(self.get_by_ids(self.club_ids), key=lambda club: club.name)
 
     @property
+    def competitions(self):
+        return sorted(Competition.get_by_ids(self.competition_ids), key=lambda competition: competition.name)
+
+    @property
     def school(self):
         return School.get_by_id(self.school_ids[0])
 
     @staticmethod
     def get_by_email(email):
-        return User(db.users.find_one({'email': email}))
+        user = User.find_one({'email': email})
+        if user:
+            return User(user)
 
-
-collection_names = {
-    Club: 'clubs',
-    Company: 'companies',
-    Competition: 'competitions',
-    CompetitionHost: 'competition_hosts',
-    Post: 'posts',
-    School: 'schools',
-    User: 'users',
-}
-collection_names.update(dict((reversed(item) for item in collection_names.items())))
+    @property
+    def search_box(self):
+        try:
+            return self.json['search_box']
+        except KeyError as e:
+            return {'search_value': '',
+                    'search_url': 'search/',
+                    'search_title': 'Search by School, Person, Club, Company, Competition, State, City'}
