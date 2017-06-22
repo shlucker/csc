@@ -15,14 +15,14 @@
 {%- block header -%}
     <ul id="top_menu">
         <li><a href="{{ request.route_url('home') }}">UCTechWeb</a></li>
-        <li>
-            <input id="search_box" name="search_value"
-                   value="{{ user.search_box.search_value }}"
-                   data-search_url="{{ user.search_box.search_url }}"
-                   title='{{ user.search_box.search_title }}'
-                   autofocus>
-        </li>
         {% if user %}
+            <li>
+                <input id="search_box" name="search_value"
+                       value="{{ user.search_box.search_value if user.search_box else '' }}"
+                       data-search_url="{{ user.search_box.search_url if user.search_box else '' }}"
+                       title='{{ user.search_box.search_title if user.search_box else '' }}'
+                       autofocus>
+            </li>
             <li><a href="{{ request.route_url('user', id=user._id) }}">{{ user.name }}</a></li>
             <li><a href="{{ request.route_url('logout') }}">Logout</a></li>
             {% if 'admin' in user %}
