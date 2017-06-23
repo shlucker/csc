@@ -35,6 +35,7 @@ def main(global_config, **settings):
     config.add_route('CompetitionHost', '/competition_host/{id}')
     config.add_route('school', '/school/{id}')
     config.add_route('School', '/school/{id}')
+    config.add_route('test', '/test')
     config.add_route('user', '/user/{id}')
     config.add_route('User', '/user/{id}')
 

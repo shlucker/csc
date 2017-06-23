@@ -153,6 +153,12 @@ class CscViews:
 
         return Response('<li>Hi {}!</li>\n<li>Sorry, can\'t search for "{}" yet</li>'.format(user.name, txt))
 
+    @view_config(route_name='test')
+    def test(self):
+        return render_to_response('templates/test.jinja2',
+                                  {},
+                                  request=self.request)
+
     @view_config(route_name='user')
     def user(self):
         user = self._get_user()
