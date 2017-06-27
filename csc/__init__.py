@@ -36,6 +36,9 @@ def main(global_config, **settings):
     config.add_route('school', '/school/{id}')
     config.add_route('School', '/school/{id}')
     config.add_route('test', '/test')
+    config.add_route('test1', '/test1')
+    config.add_route('test2', '/test2')
+    config.add_route('test3', '/test3')
     config.add_route('user', '/user/{id}')
     config.add_route('User', '/user/{id}')
 

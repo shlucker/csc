@@ -159,6 +159,24 @@ class CscViews:
                                   {},
                                   request=self.request)
 
+    @view_config(route_name='test1')
+    def test(self):
+        return render_to_response('templates/test1.jinja2',
+                                  {},
+                                  request=self.request)
+
+    @view_config(route_name='test2')
+    def test(self):
+        return render_to_response('templates/test2.jinja2',
+                                  {},
+                                  request=self.request)
+
+    @view_config(route_name='test3')
+    def test(self):
+        return render_to_response('templates/test3.jinja2',
+                                  {},
+                                  request=self.request)
+
     @view_config(route_name='user')
     def user(self):
         user = self._get_user()
