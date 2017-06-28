@@ -109,7 +109,7 @@ class CscViews:
         message = ''
         email = request.params.get('email', '')
         password = request.params.get('password', '')
-        if 'form.submitted' in request.POST:
+        if request.POST:
             user = User.get_by_email(email) if email else None
             if user and check_password(password, user['password']):
                 headers = remember(request, email)
