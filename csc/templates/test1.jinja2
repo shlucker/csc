@@ -1,119 +1,195 @@
-{% extends "base.jinja2" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CSC {{ name }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{ request.static_url('csc:static/csc.js') }}"></script>
+    <link rel="stylesheet" href="{{ request.static_url('csc:static/csc.css') }}"/>
+    <link rel="shortcut icon" href="{{ request.static_url('csc:static/favicon.ico') }}">
+</head>
+<body>
+{% if user %}
+    {% include 'nav_authenticated.jinja2' %}
+{% else %}
+    {% include 'nav_unauthenticated.jinja2' %}
+{% endif %}
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
-{% block content %}
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                        aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{ request.route_url('home') }}">UCTechWeb</a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
+            <a class="navbar-brand" href="{{ request.route_url('home') }}">UCTech</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{{ request.route_url('home') }}">Home</a></li>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="">Home</a></li>
-                    <li><a href="">About</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Job Opportunities</a></li>
+                    <li><a href="#">Q-Jobs</a></li>
+                    <li><a href="#">Forum</a></li>
+                    <li><a href="#">My TechWebs</a></li>
+                    <li class="active"><a href="test1">My Messages</a></li>
+
                     <li class="dropdown">
-                        <a href="http://UCTechWeb/register" class="dropdown-toggle" data-toggle="dropdown">Register
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-lr animated flipInX" role="menu">
-                            <div class="col-lg-12">
-                                <div class="text-center"><h3><b>Register</b></h3></div>
-                                <form id="ajax-register-form" action="http://UCTechWeb/register/process" method="post"
-                                      role="form" autocomplete="off">
-                                    <div class="form-group">
-                                        <input type="text" name="username" id="username" tabindex="1"
-                                               class="form-control" placeholder="Username" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="email" name="email" id="email" tabindex="1" class="form-control"
-                                               placeholder="Email Address" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" name="password" id="password" tabindex="2"
-                                               class="form-control" placeholder="Password">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" name="confirm-password" id="confirm-password"
-                                               tabindex="2" class="form-control" placeholder="Confirm Password">
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-xs-6 col-xs-offset-3">
-                                                <input type="submit" name="register-submit" id="register-submit"
-                                                       tabindex="4" class="form-control btn btn-info"
-                                                       value="Register Now">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" class="hide" name="token" id="token"
-                                           value="7c6f19960d63f53fcd05c3e0cbc434c0">
-                                </form>
-                            </div>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="http://UCTechWeb/login" class="dropdown-toggle" data-toggle="dropdown">Log In <span
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">My Clubs <span
                                 class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
-                            <div class="col-lg-12">
-                                <div class="text-center"><h3><b>Log In</b></h3></div>
-                                <form id="ajax-login-form" action="http://UCTechWeb/login/process" method="post"
-                                      role="form" autocomplete="off">
-                                    <div class="form-group">
-                                        <label for="username">Username</label>
-                                        <input type="text" name="username" id="username" tabindex="1"
-                                               class="form-control" placeholder="Username" value="" autocomplete="off">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input type="password" name="password" id="password" tabindex="2"
-                                               class="form-control" placeholder="Password" autocomplete="off">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-xs-7">
-                                                <input type="checkbox" tabindex="3" name="remember" id="remember">
-                                                <label for="remember"> Remember Me</label>
-                                            </div>
-                                            <div class="col-xs-5 pull-right">
-                                                <input type="submit" name="login-submit" id="login-submit" tabindex="4"
-                                                       class="form-control btn btn-success" value="Log In">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="text-center">
-                                                    <a href="http://UCTechWeb/recover" tabindex="5"
-                                                       class="forgot-password">Forgot Password?</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" class="hide" name="token" id="token"
-                                           value="a465a2791ae0bae853cf4bf485dbe1b6">
-                                </form>
-                            </div>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">ASME </a></li>
+                            <li><a href="#">AIAA</a></li>
+                            <li><a href="#">3DP </a></li>
                         </ul>
+                    <li class="active-right"><a href="{{ request.route_url('logout') }}">Logout</a></li>
                     </li>
+                    <form class="navbar-form navbar-right">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+
+                            </div>
+                        </div>
+                    </form>
                 </ul>
+        </div>
+    </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row chats-row">
+                <div class="col-md-12">
+                    <a href="#" class="list-group-item open-request">
+                        <p>Name: Brandon Torres</p>
+                        <p>Email: brandon.torres@gmail.com</p>
+                        <p>Club: ASME</p>
+                        <p>School: Harvard University</p>
+                        <button class="btn btn-default">Accept</button>
+                    </a>
+                    <a href="#" class="list-group-item chat-request">Robert Johnson - MIT Robotics</a>
+                </div>
+                <div class="col-md-12">
+                    <a href="#" class="list-group-item">Stefano Menci - University of Missouri ASME</a>
+                    <a href="#" class="list-group-item list-group-item-success">Nellie Messler - Indiana University
+                        3DP</a>
+                    <a href="#" class="list-group-item active">Mike Jones - University of Missouri ASME</a>
+                </div>
             </div>
         </div>
-    </nav>
+        <div class="col-md-9 current-chat">
+            <div class="row chat-toolbar-row">
+                <div class="col-sm-12">
+                    <div class="btn-group chat-toolbar" role="group" aria-label="...">
+                        <button id="chat-invite" class="btn btn-default ticket-option" type="button">
+                            <i class="glyphicon glyphicon-plus"></i> Invite
+                            <button id="chat-leave" class="btn btn-default ticket-option" type="button">
+                                <i class="glyphicon glyphicon-remove-sign"></i> Leave Chat
+                            </button>
+                        </button>
+                        <button id="chat-customer" class="btn btn-default ticket-option" type="button">
+                            <i class="glyphicon glyphicon-paperclip"></i> Attachment
+                        </button>
+                        <button id="chat-create-ticket" class="btn btn-default ticket-option" type="button">
+                            <i class="glyphicon glyphicon-envelope"></i> Send Email
+                        </button>
+                        </button>
+                        <button id="chat-open-ticket" class="btn btn-default ticket-option" type="button">
+                            <i class="glyphicon glyphicon-list-alt"></i> Send Resume'
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row current-chat-area">
+                <div class="col-md-12">
+                    <ul class="media-list">
+                        <li class="media">
+                            <div class="media-body">
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object img-circle "
+                                             src="Stefano Pic.JPG"/>
+                                    </a>
+                                    <div class="media-body">
+                                        Hey what are you doing tonight? Im trying to get things figured out here.
+                                        <br>
+                                        <small class="text-muted">Stefano Menci | 29th June at 5:00pm</small>
+                                        <hr>
+                                    </div>
+                                </div>
 
-    <div class="container">
-    <div class="row">
-
+                            </div>
+                        </li>
+                        <li class="media">
+                            <div class="media-body">
+                                <div class="media">
+                                    <a class="pull-right" href="#">
+                                        <img class="media-object img-circle "
+                                             src="Brandon Pic.JPG"/>
+                                    </a>
+                                    <div class="media-body align-right">
+                                        We are going to work on the Website
+                                        <br>
+                                        <small class="text-muted">Brandon Torres | 29th June at 5:01pm</small>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="media">
+                            <div class="media-body">
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object img-circle "
+                                             src="Stefano Pic.JPG"/>
+                                    </a>
+                                    <div class="media-body">
+                                       Okay Great. Come over, I'll buy lunch
+                                        <br>
+                                        <small class="text-muted">Stefano Menci | 29th June at 5:01pm</small>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="media">
+                            <div class="media-body">
+                                <div class="media">
+                                    <a class="pull-right" href="#">
+                                        <img class="media-object img-circle "
+                                             src="Brandon Pic.JPG"/>
+                                    </a>
+                                    <div class="media-body">
+                                     Okay, I'll head out soon
+                                        <br>
+                                        <small class="text-muted">Brandon Torres | 29th June at 5:02pm</small>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row current-chat-footer">
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Send</button>
+                  </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-{% endblock %}
+</div>
+</body>
+</html>
