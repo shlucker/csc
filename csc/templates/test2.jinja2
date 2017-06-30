@@ -1,119 +1,389 @@
-{% extends "base.jinja2" %}
-
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CSC {{ name }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{ request.static_url('csc:static/csc.js') }}"></script>
+    <link rel="stylesheet" href="{{ request.static_url('csc:static/csc.css') }}"/>
+    <link rel="shortcut icon" href="{{ request.static_url('csc:static/favicon.ico') }}">
+    <title>UCTechWeb</title>
+</head>
+<div>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                        aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+
                 <a class="navbar-brand" href="{{ request.route_url('home') }}">UCTechWeb</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="">Home</a></li>
-                    <li><a href="">About</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="http://UCTechWeb/register" class="dropdown-toggle" data-toggle="dropdown">Register
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-lr animated flipInX" role="menu">
-                            <div class="col-lg-12">
-                                <div class="text-center"><h3><b>Register</b></h3></div>
-                                <form id="ajax-register-form" action="http://UCTechWeb/register/process" method="post"
-                                      role="form" autocomplete="off">
-                                    <div class="form-group">
-                                        <input type="text" name="username" id="username" tabindex="1"
-                                               class="form-control" placeholder="Username" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="email" name="email" id="email" tabindex="1" class="form-control"
-                                               placeholder="Email Address" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" name="password" id="password" tabindex="2"
-                                               class="form-control" placeholder="Password">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" name="confirm-password" id="confirm-password"
-                                               tabindex="2" class="form-control" placeholder="Confirm Password">
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-xs-6 col-xs-offset-3">
-                                                <input type="submit" name="register-submit" id="register-submit"
-                                                       tabindex="4" class="form-control btn btn-info"
-                                                       value="Register Now">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" class="hide" name="token" id="token"
-                                           value="7c6f19960d63f53fcd05c3e0cbc434c0">
-                                </form>
+                    <li class="active"><a href="{{ request.route_url('home') }}">Home</a></li>
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">Job Opportunities</a></li>
+                        <li><a href="#">Q-Jobs</a></li>
+                        <li><a href="#">Forum</a></li>
+                        <li><a href="#">My TechWebs</a></li>
+                        <li class="active"><a href="test1">My Messages</a></li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">My Clubs <span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">ASME </a></li>
+                                <li><a href="#">AIAA</a></li>
+                                <li><a href="#">3DP </a></li>
+                            </ul>
+                        <li class="active-right"><a href="{{ request.route_url('logout') }}">Logout</a></li>
+                        </li>
+                        <form class="navbar-form navbar-right">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+
+                                </div>
                             </div>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="http://UCTechWeb/login" class="dropdown-toggle" data-toggle="dropdown">Log In <span
-                                class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
-                            <div class="col-lg-12">
-                                <div class="text-center"><h3><b>Log In</b></h3></div>
-                                <form id="ajax-login-form" action="http://UCTechWeb/login/process" method="post"
-                                      role="form" autocomplete="off">
-                                    <div class="form-group">
-                                        <label for="username">Username</label>
-                                        <input type="text" name="username" id="username" tabindex="1"
-                                               class="form-control" placeholder="Username" value="" autocomplete="off">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input type="password" name="password" id="password" tabindex="2"
-                                               class="form-control" placeholder="Password" autocomplete="off">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-xs-7">
-                                                <input type="checkbox" tabindex="3" name="remember" id="remember">
-                                                <label for="remember"> Remember Me</label>
-                                            </div>
-                                            <div class="col-xs-5 pull-right">
-                                                <input type="submit" name="login-submit" id="login-submit" tabindex="4"
-                                                       class="form-control btn btn-success" value="Log In">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="text-center">
-                                                    <a href="http://UCTechWeb/recover" tabindex="5"
-                                                       class="forgot-password">Forgot Password?</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" class="hide" name="token" id="token"
-                                           value="a465a2791ae0bae853cf4bf485dbe1b6">
-                                </form>
-                            </div>
-                        </ul>
-                    </li>
-                </ul>
+                        </form>
+                    </ul>
             </div>
         </div>
-    </nav>
+</div>
+</div>
+</nav>
+<div class="container-fluid">
+    <div class="container" styleheight="400">
+        <div class="panel-footer" id="TechPic">
+            <ol class="breadcrumb pull-left">
+                <li><a href="" data-toggle="tooltip" data-placement="bot" title="Goes to editor page"> Edit Profile </a>
+                </li>
+            </ol>
+            <a href=""> <img src="/static/Brandon_Pic.JPG"
+                             class="img-thumbnail hidden-xs" height="280" width="200" style="margin top:130;"> </a>
+        </div>
+    </div>
+
+    <br>
 
     <div class="container">
-    <div class="row">
 
     </div>
-{% endblock %}
+</div>
+
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 hidden-sm hidden-xs">
+            <div class="panel-footer" style="height:330;">
+
+                <br>
+                <ul class="w3-ul">
+                    <li class="w3-hover-red">Home</li>
+                    <li class="w3-hover-red">Profile</li>
+                    <li class="w3-hover-red">Activities</li>
+
+                </ul>
+
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="panel-footer" text align="center" style="height:1000px;max-width:1000px;">
+                <h2 class="text-info"><b> TechWeb Newsfeed </b></h2>
+                <div class="tabbable-panel">
+                    <div class="tabbable-line">
+                        <ul class="nav nav-tabs ">
+                            <li class="active">
+                                <a href="#tab_default_1" data-toggle="tab">
+                                    All</a>
+                            </li>
+
+                            <li>
+                                <a href="#tab_default_2" data-toggle="tab">
+                                    Clubs </a>
+                            </li>
+
+                            <li>
+                                <a href="#tab_default_3" data-toggle="tab">
+                                    Competitions </a>
+                            </li>
+
+                            <li>
+                                <a href="#tab_default_4" data-toggle="tab">
+                                    Companies </a>
+                            </li>
+
+                            <li>
+                                <a href="#tab_default_5" data-toggle="tab">
+                                    Users </a>
+                            </li>
+
+                            <li>
+                                <a href="#tab_default_6" data-toggle="tab">
+                                    Filter </a>
+                            </li>
+                            <li>
+                                <!-- Trigger the modal with a button -->
+                                <button type="button" class="btn btn-info btn-sm-pull-right" style="float:right;" data-toggle="modal"
+                                        data-target="#myModal">Add Post
+                                </button>
+                                <!-- Modal -->
+                                <div id="myModal" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn" data-dismiss="modal">×</button>
+                                                <h4 class="modal-title">Title of File</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Description of what you are posting</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btnbtn-default" data-dismiss="modal">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_default_1" active>
+                                <h3>All Newsfeed will be displayed</h3>
+                                <p>Enter your images / paragraphhs here </p>
+                            </div>
+
+                            <div class="tab-pane" id="tab_default_2">
+                                <h3>Club Newsfeed only</h3>
+                                <p>Enter your images / paragraphhs here </p>
+                            </div>
+
+                            <div class="tab-pane" id="tab_default_3">
+                                <h3>Competition Hosts news feed only</h3>
+                                <p>Enter your images / paragraphhs here </p>
+                            </div>
+
+                            <div class="tab-pane" id="tab_default_4">
+                                <h3>Company News feed only</h3>
+                                <p>Enter your images / paragraphhs here </p>
+                            </div>
+
+                            <div class="tab-pane" id="tab_default_5">
+                                <h3>Users News feed only</h3>
+                                <p>Enter your images / paragraphhs here </p>
+                            </div>
+                            <div class="tab-pane" id="tab_default_6">
+                                <h3>Will be making a table to choose more specific options</h3>
+                                <p>Enter your images / paragraphhs here </p>
+                            </div>
+
+                            <div class="tab-pane" id="tab_default_7">
+                                <h3>Figure out NewsFeed Code</h3>
+                                <p>Photos and Videos  </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel-footer">
+                        <h3 style="font-family:AR BONNIE;text-align:center;"> My Clubs </h3>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <img
+                                        src="/static/ASME_Students.jpg"
+                                        class="img-circle" alt="Cinque Terre" width="139" height="139">
+                                <a href="Test 3"><p>American Society of Mechanical Engineers</p></a>
+                                <h5>ASME</h5>
+                                <p class="text-muted">President</p>
+
+                            </div>
+                            <div class="col-lg-4">
+                                <img
+                                        src="/static/3DP_Students.jpg"
+                                        class="img-circle" alt="Cinque Terre" width="139" height="139">
+                                <a href="/test4"><p>3D Printing</p></a>
+                                <h5>3DP</h5>
+                                <p class="text-muted">Vice President</p>
+
+                            </div>
+                            <div class="col-lg-4">
+                                <img
+                                        src="/static/AIAA_Students.jpg"
+                                        class="img-circle" alt="Cinque Terre" width="139" height="139">
+                                <a href="/test5"><p>American Institute of Aeronautics and Astronautics</p></a>
+                                <h5>AIAA</h5>
+                                <p class="text-muted">Member</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="panel-footer">
+                        <h3 style="font-family:AR BONNIE;text-align:center;height:140;"> Search TechMap. </h3>
+                        <div style='overflow:hidden;height:150px;width:350px;'>
+                            <div id='gmap_canvas' style='height:190px;width:350px;'></div>
+                            <div>
+                                <small><a href="http://embedgooglemaps.com"> embed google maps </a></small>
+                            </div>
+                            <div>
+                                <small><a href="http://www.autohuren.world/locaties/ibiza/">auto huren ibiza</a></small>
+                            </div>
+                            <style>#gmap_canvas img {
+                                max-width: none !important;
+                                background: none !important
+                            }</style>
+                        </div>
+                        <script type='text/javascript'>function init_map() {
+                            var myOptions = {
+                                zoom: 10,
+                                center: new google.maps.LatLng(51.58250734077006, 0.2883488777343901),
+                                mapTypeId: google.maps.MapTypeId.ROADMAP
+                            };
+                            map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+                            marker = new google.maps.Marker({
+                                map: map,
+                                position: new google.maps.LatLng(51.58250734077006, 0.2883488777343901)
+                            });
+                            infowindow = new google.maps.InfoWindow({content: '<strong>Jean Yu</strong><br>London, United Kingdom<br>'});
+                            google.maps.event.addListener(marker, 'click', function () {
+                                infowindow.open(map, marker);
+                            });
+                            infowindow.open(map, marker);
+                        }
+                        google.maps.event.addDomListener(window, 'load', init_map);</script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <ul class="list-unstyled">
+                            <li><h4 class="text-primary">STUFF</h4>
+                            <li>
+                            <li><a href="#" id="">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <ul class="list-unstyled">
+                           <li><h4 class="text-primary">STUFF</h4>
+                            <li>
+                            <li><a href="#" id="">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                        </ul>
+                        <ul class="list-unstyled">
+                          <li><h4 class="text-primary">STUFF</h4>
+                            <li>
+                            <li><a href="#" id="">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <ul class="list-unstyled">
+                           <li><h4 class="text-primary">STUFF</h4>
+                            <li>
+                            <li><a href="#" id="">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <ul class="list-unstyled">
+                           <li><h4 class="text-primary">STUFF</h4>
+                            <li>
+                            <li><a href="#" id="">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <ul class="list-unstyled">
+                            <li><h4 class="text-danger">Join</h4>
+                            <li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br><br><br>
+</div>
+
+
+</html>
+
+<style>
+    body {
+        background-color: lightgray;
+    }
+
+    #Techinfo {
+        color: gray;
+        font-size: 12px;
+    }
+
+    #Techpic {
+        background-color;
+        white;
+        backgroundimage:(Static / ASME_Students . jpg;
+    ) background-repeat: no-repeat;
+        background-attachment: center;
+        background-position: right;
+        background-size: 100%, 100%;

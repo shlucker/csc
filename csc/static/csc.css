@@ -12,3 +12,6 @@ ul#top_menu li {
     display: none;
 }
 
+body {
+    padding-top: 65px;
+}

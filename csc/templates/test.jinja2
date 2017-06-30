@@ -1,7 +1,7 @@
 {% extends "base.jinja2" %}
 
 {% block content %}
-   <?php
+    <?php
 if($logged_id){
     include 'menu_authenticated.php';
 }
@@ -9,4 +9,9 @@ else{
     include 'menu_unauthenticated.php';
 }
 ?>
+    {% if user %}
+        {% include 'nav_authenticated.jinja2' %}
+    {% else %}
+        {% include 'nav_unauthenticated.jinja2' %}
+    {% endif %}
 {% endblock %}
