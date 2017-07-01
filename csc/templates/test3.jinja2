@@ -1,121 +1,295 @@
-{% extends "base.jinja2" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CSC {{ name }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{ request.static_url('csc:static/csc.js') }}"></script>
+    <link rel="stylesheet" href="{{ request.static_url('csc:static/csc.css') }}"/>
+    <link rel="shortcut icon" href="{{ request.static_url('csc:static/favicon.ico') }}">
+    <meta charset="utf-8">
+    <Style>
 
-{% block content %}
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                        aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{ request.route_url('home') }}">UCTechWeb</a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="{{ request.route_url('home') }}">Home</a></li>
-                    <li><a href="{{ request.route_url('about') }}">About</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="{{ request.route_url('register') }}" class="dropdown-toggle" data-toggle="dropdown">Register
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-lr animated flipInX" role="menu">
-                            <div class="col-lg-12">
-                                <div class="text-center"><h3><b>Register</b></h3></div>
-                                <form id="ajax-register-form" action="{{ request.route_url('register') }}" method="post"
-                                      role="form" autocomplete="off">
-                                    <div class="form-group">
-                                        <input type="text" name="username" id="username" tabindex="1"
-                                               class="form-control" placeholder="Username" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="email" name="email" id="email" tabindex="1" class="form-control"
-                                               placeholder="Email Address" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" name="password" id="password" tabindex="2"
-                                               class="form-control" placeholder="Password">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" name="confirm-password" id="confirm-password"
-                                               tabindex="2" class="form-control" placeholder="Confirm Password">
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-xs-6 col-xs-offset-3">
-                                                <input type="submit" name="register-submit" id="register-submit"
-                                                       tabindex="4" class="form-control btn btn-info"
-                                                       value="Register Now">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" class="hide" name="token" id="token"
-                                           value="7c6f19960d63f53fcd05c3e0cbc434c0">
-                                </form>
-                            </div>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="{{ request.route_url('login') }}" class="dropdown-toggle" data-toggle="dropdown">Log In
-                            <span
-                                    class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
-                            <div class="col-lg-12">
-                                <div class="text-center"><h3><b>Log In</b></h3></div>
-                                <form id="ajax-login-form" action="{{ request.route_url('login') }}" method="post"
-                                      role="form" autocomplete="off">
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input type="text" name="email" id="email" tabindex="1"
-                                               class="form-control" placeholder="Username" value="" autocomplete="off">
-                                    </div>
+        .person {
+            border: 10px solid transparent;
+            margin-bottom: 25px;
+        }
 
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input type="password" name="password" id="password" tabindex="2"
-                                               class="form-control" placeholder="Password" autocomplete="off">
-                                    </div>
+        .person:hover {
+            border-color: #f1f1f1;
+        }
 
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-xs-7">
-                                                <input type="checkbox" tabindex="3" name="remember" id="remember">
-                                                <label for="remember"> Remember Me</label>
-                                            </div>
-                                            <div class="col-xs-5 pull-right">
-                                                <input type="submit" name="login-submit" id="login-submit" tabindex="4"
-                                                       class="form-control btn btn-success" value="Log In">
-                                            </div>
-                                        </div>
-                                    </div>
+        .bg-1 {
+            background-color: #696969; /* Green */
+            color: #ffffff;
+        }
 
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="text-center">
-                                                    <a href="{{ request.route_url('recover') }}" tabindex="5"
-                                                       class="forgot-password">Forgot Password?</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" class="hide" name="token" id="token"
-                                           value="a465a2791ae0bae853cf4bf485dbe1b6">
-                                </form>
-                            </div>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+    </Style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top navbar-collapse" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="{{ request.route_url('home') }}">UCTechWeb</a>
         </div>
-    </nav>
+        <ul class="nav navbar-nav">
+            <li class=><a href="{{ request.route_url('home') }}">Home</a></li>
+            <ul class="nav navbar-nav">
+                <li><a href="#">Job Opportunities</a></li>
+                <li><a href="#">Q-Jobs</a></li>
+                <li><a href="#">Forum</a></li>
+                <li><a href="#">My TechWebs</a></li>
+                <li class=><a href="test1">My Messages</a></li>
 
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">My Clubs <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">ASME </a></li>
+                        <li><a href="#">AIAA</a></li>
+                        <li><a href="#">3DP </a></li>
+                    </ul></li>
+                <li class=><a href="test3">My Profile</a></li>
+                <li class="pull-right"><a href="{{ request.route_url('logout') }}">Logout</a></li>
+                </li>
+                <form class="navbar-form navbar-right">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+
+                        </div>
+                    </div>
+                </form>
+            </ul>
+        </ul>
+    </div>
+    </div>
+    </div>
+</nav>
+
+<div class="container-fluid bg-1 row center">
+    <div class="col-md-4"><h3 align="center">May 2017</h3></div>
+    <div class="col-md-4"><h3 align="center">Brandon Torres</h3></div>
+    <div class="col-md-4"><h3 align="center">Mechanical Engineering</h3></div>
     <div class="container">
-        <div class="row">
+        <img src="/static/Brandon_Pic.jpg" class="img-responsive img-square center-block" alt="Drone" width="300"
+             height="350"></div>
+    <div class="text-center">
 
+        <button type="button" class="btn btn-primary">Photos</button>
+        <button type="button" class="btn btn-primary">Videos</button>
+        <button type="button" class="btn btn-primary">Message</button>
+        <button type="button" class="btn btn-primary">Email</button>
+        <div class="container">
+            <div id="band" class="container text-center">
+                <h3>University of Missouri Columbia</h3>
+                <p><em>About me</em></p>
+                <p>I am currently a student at the University of Missouri Columbia majoring in Mechanical & Aerospace
+                    Engineering. To date I have gained hands on experience in many areas of aerospace engineering
+                    including competing in an Intercollegiate Rocket Engineering Competition for AIAA (American
+                    Institute of Aeronautics and Astronautics) MU and an Unmanned Aerial Vehicle Competition for ASME
+                    (American Society of Mechanical Engineers). As of now I hold an officer position in 4 academic clubs
+                    and 1 national Vice Chair of Communications of the Student District Operating board of District 2
+                    for ASME. At the University of Missouri I am trying not only to obtain great education but to make a
+                    difference for the future of the Engineering program. One way I have reached that goal was recently
+                    I co-founded the first MU chapter academic club SEDS. (Students for the Exploration and Development
+                    of Space). The club is designed to promote space exploration and develop a better understanding of
+                    space. Other than engineering competitions I try to reach out to the younger generation students in
+                    our local community to help promote the importance of studying STEM base subjects. Hosting rocket
+                    camps, traveling to schools to teach, and giving tours are just a small amount of the involvement
+                    that I’ve done.</p>
+                <br>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="text-center"><h4>The American Society of Mechanical Engineers</h4></p><br>
+                        <a href="#demo" data-toggle="collapse">
+                            <img src="static/Drone.jpg" class="img-circle person" alt="Drone" width="255" height="255">
+                        </a>
+                        <div id="demo" class="collapse">
+                            <p>Position:Vice President 2014</p>
+                            <p>Member:4 years</p>
+                            <p><a href="/test2">Go to ASME Page</a></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <p class="text-center"><h4>The American Institute of Aeronautics and Astronautics</h4></p><br>
+                        <a href="#demo2" data-toggle="collapse">
+                            <img src="static/Rocket.jpg" class="img-circle person" alt="Rocket" width="255"
+                                 height="255">
+                        </a>
+                        <div id="demo2" class="collapse">
+                            <p>Position:Treasurer</p>
+                            <p>Member:4 years</p>
+                            <a href="#demo">Go to AIAA Page</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <p class="text-center"><h4>3D Printing Club</h4></p>
+                        <br>
+                        <a href="#demo3" data-toggle="collapse">
+                            <img src="/static/3dp.jpg" class="img-circle person" alt="Rocket" width="255"
+                                 height="255">
+                        </a>
+                        <div id="demo3" class="collapse">
+                            <p>Position:Secretary</p>
+                            <p>Member:4 years</p>
+                            <a href="/test2">Go to 3DP Page</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-{% endblock %}
+</div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="embed-responsive embed-responsive-4by3">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/rsOfBM7p8JM"></iframe>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <h3>American Society of Mechanical Engineers</h3><br>
+            <h4><strong>MISSION:</strong> Design a small UAV to carry a cargo through two gates, see below, drop a
+                payload and return to the starting point. This is an initial proof of concept prototype. You must design
+                and build, at a
+                minimum, the propulsion and control system for the UAV yourself. You cannot purchase and
+                modify an existing commercially available vehicle. The device must be able to maneuver around
+                and through obstacles, change height, and pass through a hoop for sizing.</h4><br>
+            <p><strong>My Part:</strong> I was incharge of the design team. I blah blah blah</p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="embed-responsive embed-responsive-4by3">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/oSbm2S1ukgs"></iframe>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <h3>American Institute of Aeronautics and Astronautics</h3><br>
+            <h4><strong>MISSION:</strong> In this competition, students are tasked to build a rocket that can carry a 10
+                lb payload to 25,000 ft AGL for the Advanced category. Students are awarded more points in the
+                competition for the amount of parts designed and manufactured by the students themselves such as
+                avionics, propulsion, structures, recovery, and payloads. </h4><br>
+            <p><strong>My Part:</strong> I was in charge of designing the recovery mechanism for the rocket. </p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="embed-responsive embed-responsive-4by3">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/1A430v-jIDM"></iframe>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <h3>3d Printing Club</h3><br>
+            <h4><strong>MISSION:</strong> 3DPC's goal is to give students the opportunity to dive into the emerging
+                technology of 3D printing through hands-on learning and skills development. Please visit 3dmizzou.com
+                for more information.</h4><br>
+            <p><strong>My Part:</strong> I development a plan to create bobble heads for students to raise money for the
+                club. We were able to raise $1300 in only 6 hours allowing us to purchase high dollar equipment for the
+                club. </p>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <ul class="list-unstyled">
+                            <li><h4 class="text-primary">STUFF</h4>
+                            <li>
+                            <li><a href="#" id="">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <ul class="list-unstyled">
+                            <li><h4 class="text-primary">STUFF</h4>
+                            <li>
+                            <li><a href="#" id="">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                        </ul>
+                        <ul class="list-unstyled">
+                            <li><h4 class="text-primary">STUFF</h4>
+                            <li>
+                            <li><a href="#" id="">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <ul class="list-unstyled">
+                            <li><h4 class="text-primary">STUFF</h4>
+                            <li>
+                            <li><a href="#" id="">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <ul class="list-unstyled">
+                            <li><h4 class="text-primary">STUFF</h4>
+                            <li>
+                            <li><a href="#" id="">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <ul class="list-unstyled">
+                            <li><h4 class="text-danger">Join</h4>
+                            <li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br><br><br>
+</div>
+</body>
+</html>

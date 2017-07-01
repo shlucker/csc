@@ -17,20 +17,22 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span><!DOCTYPE html>
+
+
                 </button>
 
                 <a class="navbar-brand" href="{{ request.route_url('home') }}">UCTechWeb</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="{{ request.route_url('home') }}">Home</a></li>
+                    <li class=><a href="{{ request.route_url('home') }}">Home</a></li>
                     <ul class="nav navbar-nav">
                         <li><a href="#">Job Opportunities</a></li>
                         <li><a href="#">Q-Jobs</a></li>
                         <li><a href="#">Forum</a></li>
-                        <li><a href="#">My TechWebs</a></li>
-                        <li class="active"><a href="test1">My Messages</a></li>
+                        <li><a href="test2">My TechWebs</a></li>
+                        <li class=><a href="test1">My Messages</a></li>
 
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">My Clubs <span
@@ -40,7 +42,9 @@
                                 <li><a href="#">AIAA</a></li>
                                 <li><a href="#">3DP </a></li>
                             </ul>
-                        <li class="active-right"><a href="{{ request.route_url('logout') }}">Logout</a></li>
+                        </li>
+                        <li class=><a href="test3">My Profile</a></li>
+                        <li class="pull-right"><a href="{{ request.route_url('logout') }}">Logout</a></li>
                         </li>
                         <form class="navbar-form navbar-right">
                             <div class="input-group">
@@ -54,8 +58,10 @@
                             </div>
                         </form>
                     </ul>
+                </ul>
             </div>
         </div>
+    </nav>
 </div>
 </div>
 </nav>
@@ -67,7 +73,7 @@
                 </li>
             </ol>
             <a href=""> <img src="/static/Brandon_Pic.JPG"
-                             class="img-thumbnail hidden-xs" height="280" width="200" style="margin top:130;"> </a>
+                             class="img-thumbnail hidden-xs" height="280" width="200" style="margin-top:<130>"</a>
         </div>
     </div>
 
@@ -102,65 +108,43 @@
                     <div class="tabbable-line">
                         <ul class="nav nav-tabs ">
                             <li class="active">
-                                <a href="#tab_default_1" data-toggle="tab">
-                                    All</a>
+                            <li><a href="#tab_default_1" data-toggle="tab">
+                                Filter </a>
                             </li>
-
                             <li>
                                 <a href="#tab_default_2" data-toggle="tab">
-                                    Clubs </a>
-                            </li>
-
-                            <li>
-                                <a href="#tab_default_3" data-toggle="tab">
-                                    Competitions </a>
-                            </li>
-
-                            <li>
-                                <a href="#tab_default_4" data-toggle="tab">
-                                    Companies </a>
-                            </li>
-
-                            <li>
-                                <a href="#tab_default_5" data-toggle="tab">
-                                    Users </a>
-                            </li>
-
-                            <li>
-                                <a href="#tab_default_6" data-toggle="tab">
                                     Filter </a>
                             </li>
-                            <li>
-                                <!-- Trigger the modal with a button -->
-                                <button type="button" class="btn btn-info btn-sm-pull-right" style="float:right;" data-toggle="modal"
-                                        data-target="#myModal">Add Post
-                                </button>
-                                <!-- Modal -->
-                                <div id="myModal" class="modal fade" role="dialog">
-                                    <div class="modal-dialog">
-                                        <!-- Modal content-->
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="btn" data-dismiss="modal">×</button>
-                                                <h4 class="modal-title">Title of File</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Description of what you are posting</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btnbtn-default" data-dismiss="modal">
-                                                    Close
-                                                </button>
-                                            </div>
+                            </li></li>
+                            <button type="button" class="btn btn-info btn-sm-pull-right" style="float:right;"
+                                    data-target="#myModal">Add Post
+                            </button>
+                            <!-- Modal -->
+                            <div id="myModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="btn" data-dismiss="modal">×</button>
+                                            <h4 class="modal-title">Title of File</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Description of what you are posting</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btnbtn-default" data-dismiss="modal">
+                                                Close
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             </li>
 
                         </ul>
 
                         <div class="tab-content">
-                            <div class="tab-pane active" id="tab_default_1" active>
+                            <div class="tab-pane" id="tab_default_1" active>
                                 <h3>All Newsfeed will be displayed</h3>
                                 <p>Enter your images / paragraphhs here </p>
                             </div>
@@ -191,7 +175,7 @@
 
                             <div class="tab-pane" id="tab_default_7">
                                 <h3>Figure out NewsFeed Code</h3>
-                                <p>Photos and Videos  </p>
+                                <p>Photos and Videos </p>
                             </div>
 
                         </div>
@@ -213,74 +197,41 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <img
-                                        src="/static/ASME_Students.jpg"
+                                        src="/static/Drone.jpg"
                                         class="img-circle" alt="Cinque Terre" width="139" height="139">
                                 <a href="Test 3"><p>American Society of Mechanical Engineers</p></a>
                                 <h5>ASME</h5>
-                                <p class="text-muted">President</p>
-
-                            </div>
-                            <div class="col-lg-4">
-                                <img
-                                        src="/static/3DP_Students.jpg"
-                                        class="img-circle" alt="Cinque Terre" width="139" height="139">
-                                <a href="/test4"><p>3D Printing</p></a>
-                                <h5>3DP</h5>
                                 <p class="text-muted">Vice President</p>
 
                             </div>
                             <div class="col-lg-4">
                                 <img
-                                        src="/static/AIAA_Students.jpg"
+                                        src="/static/Rocket.jpg"
                                         class="img-circle" alt="Cinque Terre" width="139" height="139">
                                 <a href="/test5"><p>American Institute of Aeronautics and Astronautics</p></a>
                                 <h5>AIAA</h5>
-                                <p class="text-muted">Member</p>
+                                <p class="text-muted">Treasurer</p>
+                            </div>
+                            <div class="col-lg-4">
+                                <img
+                                        src="/static/3DP.jpg"
+                                        class="img-circle" alt="Cinque Terre" width="139" height="139">
+                                <a href="/test4"><p>3D Printing</p></a>
+                                <h5>3DP</h5>
+                                <p class="text-muted">Secretary</p>
 
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="panel-footer">
-                        <h3 style="font-family:AR BONNIE;text-align:center;height:140;"> Search TechMap. </h3>
-                        <div style='overflow:hidden;height:150px;width:350px;'>
-                            <div id='gmap_canvas' style='height:190px;width:350px;'></div>
-                            <div>
-                                <small><a href="http://embedgooglemaps.com"> embed google maps </a></small>
-                            </div>
-                            <div>
-                                <small><a href="http://www.autohuren.world/locaties/ibiza/">auto huren ibiza</a></small>
-                            </div>
-                            <style>#gmap_canvas img {
-                                max-width: none !important;
-                                background: none !important
-                            }</style>
-                        </div>
-                        <script type='text/javascript'>function init_map() {
-                            var myOptions = {
-                                zoom: 10,
-                                center: new google.maps.LatLng(51.58250734077006, 0.2883488777343901),
-                                mapTypeId: google.maps.MapTypeId.ROADMAP
-                            };
-                            map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
-                            marker = new google.maps.Marker({
-                                map: map,
-                                position: new google.maps.LatLng(51.58250734077006, 0.2883488777343901)
-                            });
-                            infowindow = new google.maps.InfoWindow({content: '<strong>Jean Yu</strong><br>London, United Kingdom<br>'});
-                            google.maps.event.addListener(marker, 'click', function () {
-                                infowindow.open(map, marker);
-                            });
-                            infowindow.open(map, marker);
-                        }
-                        google.maps.event.addDomListener(window, 'load', init_map);</script>
 
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
+</div>
 </div>
 <br>
 <div class="container">
@@ -304,7 +255,7 @@
 
                     <div class="col-lg-2">
                         <ul class="list-unstyled">
-                           <li><h4 class="text-primary">STUFF</h4>
+                            <li><h4 class="text-primary">STUFF</h4>
                             <li>
                             <li><a href="#" id="">thing</a></li>
                             <li><a href="#" id="Techinfo">thing</a></li>
@@ -314,20 +265,7 @@
                             <li><a href="#" id="Techinfo">thing</a></li>
                         </ul>
                         <ul class="list-unstyled">
-                          <li><h4 class="text-primary">STUFF</h4>
-                            <li>
-                            <li><a href="#" id="">thing</a></li>
-                            <li><a href="#" id="Techinfo">thing</a></li>
-                            <li><a href="#" id="Techinfo">thing</a></li>
-                            <li><a href="#" id="Techinfo">thing</a></li>
-                            <li><a href="#" id="Techinfo">thing</a></li>
-                            <li><a href="#" id="Techinfo">thing</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-2">
-                        <ul class="list-unstyled">
-                           <li><h4 class="text-primary">STUFF</h4>
+                            <li><h4 class="text-primary">STUFF</h4>
                             <li>
                             <li><a href="#" id="">thing</a></li>
                             <li><a href="#" id="Techinfo">thing</a></li>
@@ -340,7 +278,20 @@
 
                     <div class="col-lg-2">
                         <ul class="list-unstyled">
-                           <li><h4 class="text-primary">STUFF</h4>
+                            <li><h4 class="text-primary">STUFF</h4>
+                            <li>
+                            <li><a href="#" id="">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                            <li><a href="#" id="Techinfo">thing</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <ul class="list-unstyled">
+                            <li><h4 class="text-primary">STUFF</h4>
                             <li>
                             <li><a href="#" id="">thing</a></li>
                             <li><a href="#" id="Techinfo">thing</a></li>
