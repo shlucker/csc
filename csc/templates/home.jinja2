@@ -1,22 +1,22 @@
 {% extends "base.jinja2" %}
 
 {% block content %}
-<h1>Welcome to UCTechWeb</h1>
-{% if user  %}
-    <p>Your school is: {{ user.school.name }}</p>
-{% endif %}
-{% if user and user.clubs %}
-    <p>Your clubs are:</p>
-    <ul>
-    {% for club in user.clubs %}
-        <li>{{ club.name }} - {{ club.school.name }}</li>
-    {% endfor %}
-    </ul>
-{% endif %}
-{% if user.to_posts %}
-    <h2>Posts to you</h2>
-    {% for post in user.to_posts %}
-        {% include 'post.jinja2' %}
-    {% endfor %}
-{% endif %}
+    <h1>Welcome to UCTechWeb</h1>
+    {% if user %}
+        <p>Your school is: {{ user.school.name }}</p>
+    {% endif %}
+    {% if user and user.clubs %}
+        <p>Your clubs are:</p>
+        <ul>
+            {% for club in user.clubs %}
+                <li>{{ club.name }} - {{ club.school.name }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% if user.to_posts %}
+        <h2>Posts to you</h2>
+        {% for post in user.to_posts %}
+            {% include 'post.jinja2' %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}
