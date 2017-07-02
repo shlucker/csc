@@ -1,23 +1,23 @@
+import re
+
 from pyramid.httpexceptions import HTTPFound, HTTPForbidden
 from pyramid.renderers import render_to_response
+from pyramid.response import Response
 from pyramid.security import remember, forget
 from pyramid.view import view_config
-from pyramid.response import Response
 
-from csc.models import db, User, Club, School, CompetitionHost, Company, Competition
+from csc.models import User, Club, School, CompetitionHost, Company, Competition
 from .security import check_password
 
 
 class CscViews:
     def __init__(self, request):
         self.request = request
-        self.user_id = request.authenticated_userid
+        self.username = request.authenticated_userid
 
     def _get_user(self):
-        if self.user_id:
-            user = User.find_one({'email': self.user_id})
-            if user:
-                return User(user)
+        if self.username:
+            return User.get_by_username(self.username)
 
     @view_config(route_name='club')
     def club(self):
@@ -103,26 +103,24 @@ class CscViews:
         request = self.request
         login_url = request.route_url('login')
         referrer = request.url
-        if referrer == login_url:
+        if referrer.startswith(login_url):
             referrer = '/'  # never use login form itself as came_from
         came_from = request.params.get('came_from', referrer)
         message = ''
-        email = request.params.get('email', '')
+        username = request.params.get('username', '')
         password = request.params.get('password', '')
         if request.POST:
-            user = User.get_by_email(email) if email else None
+            user = User.get_by_username(username) if username else None
             if user and check_password(password, user['password']):
-                headers = remember(request, email)
+                headers = remember(request, username)
                 return HTTPFound(location=came_from, headers=headers)
             message = 'Failed login'
 
-        return dict(
-            name='Login',
-            message=message,
-            url=request.application_url + '/login',
-            came_from=came_from,
-            email=email,
-        )
+        return {'name': 'Login',
+                'message': message,
+                'url': login_url,
+                'came_from': came_from,
+                'username': username}
 
     @view_config(route_name='logout')
     def logout(self):
@@ -130,6 +128,50 @@ class CscViews:
         headers = forget(request)
         url = request.route_url('home')
         return HTTPFound(location=url, headers=headers)
+
+    @view_config(route_name='register', renderer='templates/register.jinja2')
+    def register(self):
+        request = self.request
+
+        username = request.params.get('username', '')
+        email = request.params.get('email', '')
+        password = request.params.get('password', '')
+        confirm_password = request.params.get('confirm-password', '')
+
+        errors = {}
+
+        if request.POST:
+            if not username:
+                errors['username'] = 'Missing username'
+            else:
+                if User.get_by_username(username):
+                    errors['username'] = 'Username not available'
+
+            if not email:
+                errors['email'] = 'Missing email'
+            elif not re.match(r'\w+@\w+\.\w+', email):
+                errors['email'] = 'Wrong email format'
+            else:
+                if User.get_by_email(email):
+                    errors['email'] = 'Email already used by another user'
+
+            if not password:
+                errors['password'] = 'Missing password'
+
+            if password and not confirm_password:
+                errors['confirm-password'] = 'Missing password'
+
+            if password and confirm_password and password != confirm_password:
+                errors['confirm-password'] = 'Passwords do not match'
+
+            if not errors:
+                User.create(username=username, email=email, password=password)
+                return HTTPFound(self.request.route_url('login', _query=(('username', username),)))
+
+        return {'username': username,
+                'email': email,
+                'password': password,
+                'errors': errors}
 
     @view_config(route_name='school')
     def school(self):

@@ -1,6 +1,9 @@
+import random
 import re
 
-from pymongo import MongoClient
+from pymongo import MongoClient, errors
+
+from csc import security
 
 client = MongoClient()
 db = client['csc']
@@ -10,7 +13,7 @@ def underscorize(txt):
     return re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', txt).lower()
 
 
-class  MongoDbEntity:
+class MongoDbEntity:
     def __init__(self, json):
         self.json = json
 
@@ -84,7 +87,7 @@ class  MongoDbEntity:
 
         if projection:
             p = {}
-            if not '_id' in projection:
+            if '_id' not in projection:
                 p['_id'] = 0
             p.update({k: 1 for k in projection})
         else:
@@ -127,9 +130,12 @@ class  MongoDbEntity:
     @property
     def to_posts(self):
         """return the posts addressed to self and to all the clubs etc. of self"""
-        recipient_ids = [self.json['_id']]
-        recipient_ids.extend(club_id for club_id in self.json['club_ids'])
-        return Post.get_by_id_on_field('recipient_ids', recipient_ids)
+        try:
+            recipient_ids = [self.json['_id']]
+            recipient_ids.extend(club_id for club_id in self.json['club_ids'])
+            return Post.get_by_id_on_field('recipient_ids', recipient_ids)
+        except:
+            return None
 
 
 class Club(MongoDbEntity):
@@ -177,19 +183,48 @@ class School(MongoDbEntity):
 class User(MongoDbEntity):
     @property
     def clubs(self):
-        return sorted(self.get_by_ids(self.club_ids), key=lambda club: club.name)
+        try:
+            return sorted(self.get_by_ids(self.club_ids), key=lambda club: club.name)
+        except:
+            return None
 
     @property
     def competitions(self):
         return sorted(Competition.get_by_ids(self.competition_ids), key=lambda competition: competition.name)
 
+    @staticmethod
+    def create(username, email, password):
+        """ return the id of the new user """
+        while True:
+            try:
+                res = db.stuff.insert_one({'_id': 'user-{}'.format(random.randint(1, 1000000000)),
+                                           '_tp': 'User',
+                                           'username': username,
+                                           'email': email,
+                                           'password': security.hash_password(password)})
+            except errors.DuplicateKeyError as e:
+                pass
+            else:
+                break
+
+        return res.inserted_id
+
     @property
     def school(self):
-        return School.get_by_id(self.school_ids[0])
+        try:
+            return School.get_by_id(self.school_ids[0])
+        except:
+            return None
 
     @staticmethod
     def get_by_email(email):
         user = User.find_one({'email': email})
+        if user:
+            return User(user)
+
+    @staticmethod
+    def get_by_username(username):
+        user = User.find_one({'username': username})
         if user:
             return User(user)
 

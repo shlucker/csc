@@ -1,0 +1,28 @@
+{% extends "base.jinja2" %}
+
+{% block content %}
+    <h1>Register</h1>
+    <form method="post">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" value="{{ username }}"/>
+        <span>{{ errors['username'] }}</span>
+        <br>
+
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" value="{{ email }}"/>
+        <span>{{ errors['email'] }}</span>
+        <br>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" value="{{ password }}"/>
+        <span>{{ errors['password'] }}</span>
+        <br>
+
+        <label for="confirm-password">Confirm password</label>
+        <input type="password" id="confirm-password" name="confirm-password"/>
+        <span>{{ errors['confirm-password'] }}</span>
+        <br>
+
+        <input type="submit" name="form.submitted" value="Register"/>
+    </form>
+{% endblock %}
