@@ -18,8 +18,6 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span><!DOCTYPE html>
-
-
                 </button>
 
                 <a class="navbar-brand" href="{{ request.route_url('home') }}">UCTechWeb</a>
@@ -73,7 +71,7 @@
                 </li>
             </ol>
             <a href=""> <img src="/static/Brandon_Pic.JPG"
-                             class="img-thumbnail hidden-xs" height="280" width="200" style="margin-top:<130>"</a>
+                             class="img-thumbnail hidden-xs" height="280" width="200" style="margin-top: 130px;"></a>
         </div>
     </div>
 
@@ -89,7 +87,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-3 hidden-sm hidden-xs">
-            <div class="panel-footer" style="height:330;">
+            <div class="panel-footer" style="height:330px;">
 
                 <br>
                 <ul class="w3-ul">
@@ -102,7 +100,7 @@
             </div>
         </div>
         <div class="col-lg-9">
-            <div class="panel-footer" text align="center" style="height:1000px;max-width:1000px;">
+            <div class="panel-footer" align="center" style="height:1000px;max-width:1000px;">
                 <h2 class="text-info"><b> TechWeb Newsfeed </b></h2>
                 <div class="tabbable-panel">
                     <div class="tabbable-line">
@@ -115,36 +113,35 @@
                                 <a href="#tab_default_2" data-toggle="tab">
                                     Filter </a>
                             </li>
-                            </li></li>
-                            <button type="button" class="btn btn-info btn-sm-pull-right" style="float:right;"
-                                    data-target="#myModal">Add Post
-                            </button>
-                            <!-- Modal -->
-                            <div id="myModal" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="btn" data-dismiss="modal">×</button>
-                                            <h4 class="modal-title">Title of File</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Description of what you are posting</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btnbtn-default" data-dismiss="modal">
-                                                Close
-                                            </button>
+                            <li>
+                                <button type="button" class="btn btn-info btn-sm-pull-right" style="float:right;"
+                                        data-target="#myModal">Add Post
+                                </button>
+                                <!-- Modal -->
+                                <div id="myModal" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn" data-dismiss="modal">×</button>
+                                                <h4 class="modal-title">Title of File</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Description of what you are posting</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btnbtn-default" data-dismiss="modal">
+                                                    Close
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             </li>
-
                         </ul>
 
                         <div class="tab-content">
-                            <div class="tab-pane" id="tab_default_1" active>
+                            <div class="tab-pane" id="tab_default_1">
                                 <h3>All Newsfeed will be displayed</h3>
                                 <p>Enter your images / paragraphhs here </p>
                             </div>
@@ -299,6 +296,7 @@
                             <li><a href="#" id="Techinfo">thing</a></li>
                             <li><a href="#" id="Techinfo">thing</a></li>
                             <li><a href="#" id="Techinfo">thing</a></li>
+                        </ul>
                     </div>
 
                     <div class="col-lg-2">
@@ -319,22 +317,3 @@
 
 
 </html>
-
-<style>
-    body {
-        background-color: lightgray;
-    }
-
-    #Techinfo {
-        color: gray;
-        font-size: 12px;
-    }
-
-    #Techpic {
-        background-color;
-        white;
-        backgroundimage:(Static / ASME_Students . jpg;
-    ) background-repeat: no-repeat;
-        background-attachment: center;
-        background-position: right;
-        background-size: 100%, 100%;

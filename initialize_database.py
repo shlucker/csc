@@ -603,6 +603,7 @@ db.stuff.insert_many([
      'admin': 1,
      'email': 'brandon.torres@gmail.com',
      'password': hash_password('brandon'),
+     'about_me': 'I am currently a student at the University of Missouri Columbia majoring in Mechanical & Aerospace Engineering. To date I have gained hands on experience in many areas of aerospace engineering including competing in an Intercollegiate Rocket Engineering Competition for AIAA (American Institute of Aeronautics and Astronautics) MU and an Unmanned Aerial Vehicle Competition for ASME (American Society of Mechanical Engineers). As of now I hold an officer position in 4 academic clubs and 1 national Vice Chair of Communications of the Student District Operating board of District 2 for ASME. At the University of Missouri I am trying not only to obtain great education but to make a difference for the future of the Engineering program. One way I have reached that goal was recently I co-founded the first MU chapter academic club SEDS. (Students for the Exploration and Development of Space). The club is designed to promote space exploration and develop a better understanding of space. Other than engineering competitions I try to reach out to the younger generation students in our local community to help promote the importance of studying STEM base subjects. Hosting rocket camps, traveling to schools to teach, and giving tours are just a small amount of the involvement that I’ve done.',
      'city': 'University City',
      'state': 'Missouri',
      'club_ids': ['club-1', 'club-32', 'club-3'],
