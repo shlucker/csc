@@ -1,6 +1,6 @@
 import re
 
-from pyramid.httpexceptions import HTTPFound, HTTPForbidden
+from pyramid.httpexceptions import HTTPFound, HTTPForbidden, HTTPNotFound
 from pyramid.renderers import render_to_response
 from pyramid.response import Response
 from pyramid.security import remember, forget
@@ -226,6 +226,7 @@ class CscViews:
     @view_config(route_name='user')
     def user(self):
         user = self._get_user()
+
         user_profile_id = self.request.matchdict['id']
 
         if not user:
@@ -234,6 +235,10 @@ class CscViews:
             raise HTTPForbidden()
 
         user_profile = User.get_by_id(user_profile_id)
+
+        if not user_profile:
+            raise HTTPNotFound()
+
         return render_to_response('templates/user.jinja2',
                                   {'name': 'User profile',
                                    'user': user,

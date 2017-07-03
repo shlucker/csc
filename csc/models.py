@@ -29,8 +29,9 @@ class MongoDbEntity:
     @classmethod
     def get_by_id(cls, id):
         doc = db.stuff.find_one({'_id': id})
-        doc_class = globals()[doc['_tp']]
-        return doc_class(doc)
+        if doc:
+            doc_class = globals()[doc['_tp']]
+            return doc_class(doc)
 
     @classmethod
     def get_by_ids(cls, ids):
@@ -183,10 +184,22 @@ class School(MongoDbEntity):
 class User(MongoDbEntity):
     @property
     def clubs(self):
-        try:
-            return sorted(self.get_by_ids(self.club_ids), key=lambda club: club.name)
-        except:
-            return None
+        if self._clubs is None:  # all the attirbutes not present in the json document are returned as None
+            try:
+                self._clubs = sorted(self.get_by_ids(self.club_ids), key=lambda club: club.name)
+            except NotImplementedError:
+                self._clubs = []
+
+        return self._clubs
+
+    def position_in_club(self, club_id):
+        for club in self.clubs:
+            if club._id == club_id:
+                try:
+                    return club.officers[self._id]
+                except (TypeError,  # officers does not exist
+                        KeyError):  # officers doesn't contain self._id
+                    return 'Member'
 
     @property
     def competitions(self):

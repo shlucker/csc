@@ -1,7 +1,183 @@
 {% extends "base.jinja2" %}
 
 {% block content %}
-This page shows the user profile for {{ user_profile.name }}<br>
+    <div class="container-fluid bg-1 row center">
+        <div class="col-md-4"><h3 align="center">Expected Graduation: {{ user_profile.expected_graduation_date }}</h3>
+        </div>
+        <div class="col-md-4"><h3 align="center">{{ user_profile.name }}</h3></div>
+        <div class="col-md-4"><h3 align="center">{{ user_profile.major }}</h3></div>
+        <div class="container">
+            <img src="{{ request.static_url('csc:static/' + user_profile.photo) if user_profile.photo else request.static_url('csc:static/question_mark.jpg') }}"
+                 class="img-responsive img-square center-block" alt="Drone" width="300" height="350"></div>
+        <div class="text-center">
+            <button type="button" class="btn btn-primary">Photos</button>
+            <button type="button" class="btn btn-primary">Videos</button>
+            <button type="button" class="btn btn-primary">Message</button>
+            <button type="button" class="btn btn-primary">Email</button>
+            <button type="button" class="btn btn-primary">Call</button>
+            <div class="container">
+                <div id="band" class="container text-center">
+                    <h3>{{ user_profile.school.name }}</h3>
+                    <p><em>About me</em></p>
+                    <p>{{ user_profile.about_me }}</p>
+                    <br>
+                    <div class="row">
+                        {% for club in user_profile.clubs %}
+                            <div class="col-sm-4">
+                                <p class="text-center"><h4>{{ club.name }}</h4><br>
+                                <a href="#collapsible-{{ club._id }}" data-toggle="collapse">
+                                    <img src="{{ club.image('cover') if club.image('cover') else request.static_url('csc:static/question_mark.jpg') }}"
+                                         class="img-circle person" alt="Drone" width="255" height="255">
+                                </a>
+                                <div id="collapsible-{{ club._id }}" class="collapse">
+                                    <p>{{ user_profile.position_in_club(club._id) }}</p>
+                                    <p>Member: ???</p>
+                                    <p><a href="{{ request.route_url('club', id=club._id) }}">Go to {{ club.name }}
+                                        Page</a></p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-You are logged in as {{ user.name }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="embed-responsive embed-responsive-4by3">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/rsOfBM7p8JM"></iframe>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <h3>American Society of Mechanical Engineers</h3><br>
+                <h4><strong>MISSION:</strong> Design a small UAV to carry a cargo through two gates, see below, drop a
+                    payload and return to the starting point. This is an initial proof of concept prototype. You must
+                    design and build, at a minimum, the propulsion and control system for the UAV yourself. You cannot
+                    purchase and modify an existing commercially available vehicle. The device must be able to maneuver
+                    around and through obstacles, change height, and pass through a hoop for sizing.</h4><br>
+                <p><strong>My Part:</strong> I was incharge of the design team. I blah blah blah</p>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="embed-responsive embed-responsive-4by3">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/oSbm2S1ukgs"></iframe>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <h3>American Institute of Aeronautics and Astronautics</h3><br>
+                <h4><strong>MISSION:</strong> In this competition, students are tasked to build a rocket that can carry
+                    a 10 lb payload to 25,000 ft AGL for the Advanced category. Students are awarded more points in the
+                    competition for the amount of parts designed and manufactured by the students themselves such as
+                    avionics, propulsion, structures, recovery, and payloads. </h4><br>
+                <p><strong>My Part:</strong> I was in charge of designing the recovery mechanism for the rocket. </p>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="embed-responsive embed-responsive-4by3">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/1A430v-jIDM"></iframe>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <h3>3d Printing Club</h3><br>
+                <h4><strong>MISSION:</strong> 3DPC's goal is to give students the opportunity to dive into the emerging
+                    technology of 3D printing through hands-on learning and skills development. Please visit
+                    3dmizzou.com for more information.</h4><br>
+                <p><strong>My Part:</strong> I development a plan to create bobble heads for students to raise money for
+                    the club. We were able to raise $1300 in only 6 hours allowing us to purchase high dollar equipment
+                    for the club.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container fluid text-center">
+        <h3><a href="\static\Fake Resume.pdf">My Resume</a></h3>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <ul class="list-unstyled">
+                                    <li><h4 class="text-primary">STUFF</h4>
+                                    <li>
+                                    <li><a href="#" id="">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="col-lg-2">
+                                <ul class="list-unstyled">
+                                    <li><h4 class="text-primary">STUFF</h4>
+                                    <li>
+                                    <li><a href="#" id="">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                </ul>
+                                <ul class="list-unstyled">
+                                    <li><h4 class="text-primary">STUFF</h4>
+                                    <li>
+                                    <li><a href="#" id="">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="col-lg-2">
+                                <ul class="list-unstyled">
+                                    <li><h4 class="text-primary">STUFF</h4>
+                                    <li>
+                                    <li><a href="#" id="">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="col-lg-2">
+                                <ul class="list-unstyled">
+                                    <li><h4 class="text-primary">STUFF</h4>
+                                    <li>
+                                    <li><a href="#" id="">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                    <li><a href="#" id="Techinfo">thing</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="col-lg-2">
+                                <ul class="list-unstyled">
+                                    <li><h4 class="text-danger">Sign up</h4>
+                                    <li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br><br><br>
+    </div>
 {% endblock %}
