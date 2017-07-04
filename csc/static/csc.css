@@ -16,6 +16,7 @@ body {
     padding-top: 65px;
 }
 
+
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
@@ -39,3 +40,10 @@ body {
     background-color: #696969; /* Green */
     color: #ffffff;
 }
+
+.carousel-caption {
+    top: 0;
+    bottom: auto;
+}
+
+.navbar-nav>li>.dropdown-menu { width: 50px }

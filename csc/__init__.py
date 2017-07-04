@@ -42,6 +42,13 @@ def main(global_config, **settings):
     config.add_route('test1', '/test1')
     config.add_route('test2', '/test2')
     config.add_route('test3', '/test3')
+    config.add_route('test4', '/test4')
+    config.add_route('test5', '/test5')
+    config.add_route('test6', '/test6')
+    config.add_route('test7', '/test7')
+    config.add_route('test8', '/test8')
+    config.add_route('test9', '/test9')
+    config.add_route('test10', '/test10')
     config.add_route('user', '/user/{id}')
     config.add_route('User', '/user/{id}')
 

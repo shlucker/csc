@@ -223,6 +223,55 @@ class CscViews:
                                   {'user': user},
                                   request=self.request)
 
+    @view_config(route_name='test4')
+    def test4(self):
+        user = self._get_user()
+        return render_to_response('templates/test4.jinja2',
+                                  {'user': user},
+                                  request=self.request)
+
+    @view_config(route_name='test5')
+    def test5(self):
+        user = self._get_user()
+        return render_to_response('templates/test5.jinja2',
+                                  {'user': user},
+                                  request=self.request)
+
+    @view_config(route_name='test6')
+    def test6(self):
+        user = self._get_user()
+        return render_to_response('templates/test6.jinja2',
+                                  {'user': user},
+                                  request=self.request)
+
+    @view_config(route_name='test7')
+    def test7(self):
+        user = self._get_user()
+        return render_to_response('templates/test7.jinja2',
+                                  {'user': user},
+                                  request=self.request)
+
+    @view_config(route_name='test8')
+    def test8(self):
+        user = self._get_user()
+        return render_to_response('templates/test8.jinja2',
+                                  {'user': user},
+                                  request=self.request)
+
+    @view_config(route_name='test9')
+    def test9(self):
+        user = self._get_user()
+        return render_to_response('templates/test9.jinja2',
+                                  {'user': user},
+                                  request=self.request)
+
+    @view_config(route_name='test10')
+    def test10(self):
+        user = self._get_user()
+        return render_to_response('templates/test10.jinja2',
+                                  {'user': user},
+                                  request=self.request)
+
     @view_config(route_name='user')
     def user(self):
         user = self._get_user()

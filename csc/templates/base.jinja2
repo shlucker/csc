@@ -5,11 +5,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></script>
     <script src="{{ request.static_url('csc:static/csc.js') }}"></script>
     <link rel="stylesheet" href="{{ request.static_url('csc:static/csc.css') }}"/>
     <link rel="shortcut icon" href="{{ request.static_url('csc:static/favicon.ico') }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
 <body>
 {% if user %}
@@ -18,7 +20,7 @@
     {% include 'nav_unauthenticated.jinja2' %}
 {% endif %}
 
-{% if user %}
+<!--{% if user %}
     <li>
         <input id="search_box" name="search_value"
                value="{{ user.search_box.search_value if user.search_box else '' }}"
@@ -29,11 +31,10 @@
     <li><a href="{{ request.route_url('user', id=user._id) }}">{{ user.name }}</a></li>
     {% if 'admin' in user %}
         <li><a href="{{ request.route_url('create_user') }}">Create user</a></li>
-    {% endif %}
+    {% endif %}-->
 
 {% endif %}
 <br>
-<hr>
 <div id="search_result">
     <ul></ul>
 </div>
