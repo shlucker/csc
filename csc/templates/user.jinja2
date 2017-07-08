@@ -44,60 +44,28 @@
     </div>
 
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="embed-responsive embed-responsive-4by3">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/rsOfBM7p8JM"></iframe>
+        {% for club in user_profile.clubs %}
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="embed-responsive embed-responsive-4by3">
+                        <iframe class="embed-responsive-item" src="{{ club.user_data.embedded_video }}"></iframe>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <h3>{{ club.name }}</h3><br>
+                    <h4><strong>MISSION:</strong>{{ club.user_data.mission }}</h4><br>
+                    <p><strong>My Part:</strong>{{ club.user_data.mypart }}</p>
                 </div>
             </div>
-            <div class="col-sm-8">
-                <h3>American Society of Mechanical Engineers</h3><br>
-                <h4><strong>MISSION:</strong> Design a small UAV to carry a cargo through two gates, see below, drop a
-                    payload and return to the starting point. This is an initial proof of concept prototype. You must
-                    design and build, at a minimum, the propulsion and control system for the UAV yourself. You cannot
-                    purchase and modify an existing commercially available vehicle. The device must be able to maneuver
-                    around and through obstacles, change height, and pass through a hoop for sizing.</h4><br>
-                <p><strong>My Part:</strong> I was incharge of the design team. I blah blah blah</p>
-            </div>
-        </div>
+        {% endfor %}
     </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="embed-responsive embed-responsive-4by3">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/oSbm2S1ukgs"></iframe>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <h3>American Institute of Aeronautics and Astronautics</h3><br>
-                <h4><strong>MISSION:</strong> In this competition, students are tasked to build a rocket that can carry
-                    a 10 lb payload to 25,000 ft AGL for the Advanced category. Students are awarded more points in the
-                    competition for the amount of parts designed and manufactured by the students themselves such as
-                    avionics, propulsion, structures, recovery, and payloads. </h4><br>
-                <p><strong>My Part:</strong> I was in charge of designing the recovery mechanism for the rocket. </p>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="embed-responsive embed-responsive-4by3">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/1A430v-jIDM"></iframe>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <h3>3d Printing Club</h3><br>
-                <h4><strong>MISSION:</strong> 3DPC's goal is to give students the opportunity to dive into the emerging
-                    technology of 3D printing through hands-on learning and skills development. Please visit
-                    3dmizzou.com for more information.</h4><br>
-                <p><strong>My Part:</strong> I development a plan to create bobble heads for students to raise money for
-                    the club. We were able to raise $1300 in only 6 hours allowing us to purchase high dollar equipment
-                    for the club.</p>
-            </div>
-        </div>
-    </div>
+
     <div class="container fluid text-center">
-        <h3><a href="\static\Fake Resume.pdf">My Resume</a></h3>
+        {% if user_profile.resume %}
+            <h3><a href="{{ request.static_url('csc:static/' + user_profile.resume) }}">My Resume</a></h3>
+        {% else %}
+            <h3>Sorry, no resume here :(</h3>
+        {% endif %}
         <br>
         <div class="container">
             <div class="row">

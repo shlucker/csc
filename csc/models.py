@@ -46,7 +46,7 @@ class MongoDbEntity:
         """
         id can be an id "club 1" or a list of ids ["club 1", "club 3"]
         Example: to find all the users with 'club 3' in the list of clubs:
-            User.get_by_id_on_field('club_ids', 'club 3')
+            User.get_by_id_on_field('clubs', 'club 3')
         """
         cursor = cls.find({field_name: {'$in': id}})
         while True:
@@ -133,7 +133,7 @@ class MongoDbEntity:
         """return the posts addressed to self and to all the clubs etc. of self"""
         try:
             recipient_ids = [self.json['_id']]
-            recipient_ids.extend(club_id for club_id in self.json['club_ids'])
+            recipient_ids.extend(club_id['id'] for club_id in self.json['club_ids'])
             return Post.get_by_id_on_field('recipient_ids', recipient_ids)
         except:
             return None
@@ -184,9 +184,19 @@ class School(MongoDbEntity):
 class User(MongoDbEntity):
     @property
     def clubs(self):
+        """
+        The club_ids item of a user contains a dictionary with the clubs the user belongs to
+        :return: a list of Club objects with the dictionary mentioned above added to the user item
+        """
         if self._clubs is None:  # all the attirbutes not present in the json document are returned as None
             try:
-                self._clubs = sorted(self.get_by_ids(self.club_ids), key=lambda club: club.name)
+                club_ids = [club['id'] for club in self.club_ids]
+                self._clubs = sorted(self.get_by_ids(club_ids), key=lambda club: club.name)
+                for club in self._clubs:
+                    for user_data in self.club_ids:
+                        if club._id == user_data['id']:
+                            club.user_data = user_data
+                            break
             except NotImplementedError:
                 self._clubs = []
 
