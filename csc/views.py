@@ -2,11 +2,10 @@ import re
 
 from pyramid.httpexceptions import HTTPFound, HTTPForbidden, HTTPNotFound
 from pyramid.renderers import render_to_response
-from pyramid.response import Response
 from pyramid.security import remember, forget
 from pyramid.view import view_config
 
-from csc.models import User, Club, School, CompetitionHost, Company, Competition
+from csc.models import User, Club, School, CompetitionHost, Company, Competition, Post
 from .security import check_password
 
 
@@ -190,10 +189,19 @@ class CscViews:
 
     @view_config(route_name='search')
     def search(self):
-        user = self._get_user()
         txt = self.request.matchdict['txt']
 
-        return Response('<li>Hi {}!</li>\n<li>Sorry, can\'t search for "{}" yet</li>'.format(user.name, txt))
+        users = list(User.find_text(txt, 0, 5))
+        posts = list(Post.find_text(txt, 0, 5))
+        clubs = list(Club.find_text(txt, 0, 5))
+        schools = list(School.find_text(txt, 0, 5))
+
+        return render_to_response('templates/search_result_small.jinja2',
+                                  {'users': users,
+                                   'posts': posts,
+                                   'clubs': clubs,
+                                   'schools': schools},
+                                  request=self.request)
 
     @view_config(route_name='test')
     def test(self):

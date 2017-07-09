@@ -4,16 +4,20 @@
 
 {% block content %}
     <h1>{{ school.name }}</h1>
-    <img src="{{ school.image('cover') }}" width="50%" />
-    <p>{{ embed_map(school.address) }}</p>
-    <p>{{ school.address }}</p>
+    {% if school.image('cover') %}
+        <img src="{{ school.image('cover') }}" width="50%"/>
+    {% endif %}
+    {% if school.address %}
+        <p>{{ embed_map(school.address) }}</p>
+        <p>{{ school.address }}</p>
+    {% endif %}
     {% if school.tel|default(0) %}<p>{{ school.tel }}</p>{% endif %}
     {% if school.website|default(0) %}<p><a href="http://{{ school.website }}">{{ school.website }}</a></p>{% endif %}
     <p>{{ school.description }}</p>
     <h2>Clubs</h2>
     <ul>
-    {% for club in school.clubs %}
-        <li><a href="{{ request.route_url('club', id=club._id) }}">{{ club.name }}</a></li>
-    {% endfor %}
+        {% for club in school.clubs %}
+            <li><a href="{{ request.route_url('club', id=club._id) }}">{{ club.name }}</a></li>
+        {% endfor %}
     </ul>
 {% endblock %}

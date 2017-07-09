@@ -1,11 +1,12 @@
 import random
 import re
+from collections import defaultdict
 
-from pymongo import MongoClient, errors
+import pymongo
 
 from csc import security
 
-client = MongoClient()
+client = pymongo.MongoClient()
 db = client['csc']
 
 
@@ -28,18 +29,29 @@ class MongoDbEntity:
 
     @classmethod
     def get_by_id(cls, id):
-        doc = db.stuff.find_one({'_id': id})
+        prefix = id[:4]
+        collection = id2collection[prefix]
+        return_class = id2class[id[:4]]
+
+        doc = collection.find_one({'_id': id})
         if doc:
-            doc_class = globals()[doc['_tp']]
-            return doc_class(doc)
+            return return_class(doc)
 
     @classmethod
     def get_by_ids(cls, ids):
-        cursor = db.stuff.find({'_id': {'$in': ids}})
-        while True:
-            doc = cursor.next()
-            doc_class = globals()[doc['_tp']]
-            yield doc_class(doc)
+        id_types = defaultdict(list)
+        for i in ids:
+            id_types[i[:4]].append(i)
+
+        for id_type in id_types:
+            collection = id2collection[id_type]
+            return_class = id2class[id_type]
+            ids = id_types[id_type]
+
+            cursor = collection.find({'_id': {'$in': ids}})
+            while True:
+                doc = cursor.next()
+                yield return_class(doc)
 
     @classmethod
     def get_by_id_on_field(cls, field_name, id):
@@ -54,15 +66,7 @@ class MongoDbEntity:
 
     @classmethod
     def find_one(cls, filter=None, projection=None):
-        """
-        If cls is derived from MongoDbEntity then {'_tp': cls.__name__} is added to the filter dictionary
-        If cls is MongoDbEntity then '_tp' is not used in the search (searching by '_id' doesn't require the '_tp')
-        projection contains the list of fields to return; if None then all the fields are returned
-        """
-        f = {'_tp': cls.__name__} if cls is not MongoDbEntity else {}
-        if filter:
-            f.update(filter)
-
+        collection = class2collection[cls]
         if projection:
             p = {}
             if not '_id' in projection:
@@ -71,21 +75,13 @@ class MongoDbEntity:
         else:
             p = None
 
-        doc = db.stuff.find_one(f, p)
+        doc = collection.find_one(filter, p)
         if doc:
             return cls(doc)
 
     @classmethod
     def find(cls, filter=None, projection=None):
-        """
-        If cls is derived from MongoDbEntity then {'_tp': cls.__name__} is added to the filter dictionary
-        If cls is MongoDbEntity then '_tp' is not used in the search (searching by '_id' doesn't require the '_tp')
-        projection contains the list of fields to return; if None then all the fields are returned
-        """
-        f = {'_tp': cls.__name__} if cls is not MongoDbEntity else {}
-        if filter:
-            f.update(filter)
-
+        collection = class2collection[cls]
         if projection:
             p = {}
             if '_id' not in projection:
@@ -94,9 +90,20 @@ class MongoDbEntity:
         else:
             p = None
 
-        cursor = db.stuff.find(f, p)
+        cursor = collection.find(filter, p)
         while True:
             yield cls(cursor.next())
+
+    @classmethod
+    def find_text(cls, text, skip, limit):
+        collection = class2collection[cls]
+        cursor = collection.find({'$text': {'$search': text}},
+                                 {'score': {'$meta': 'textScore'}}).sort([('score', {'$meta': 'textScore'})]).skip(
+            skip).limit(limit)
+        while True:
+            doc = cursor.next()
+            return_class = id2class[doc['_id'][:4]]
+            yield return_class(doc)
 
     def image(self, image_type):
         """
@@ -115,11 +122,9 @@ class MongoDbEntity:
 
     @property
     def address(self):
-        fields = [self.json['street'],
-                  self.json['city'],
-                  str(self.json['zip']),
-                  self.json['state']]
-        fields = [field for field in fields if field]
+        fields = [str(self.json[field_name])
+                  for field_name in ['street', 'city', 'zip', 'state']
+                  if field_name in self.json]
         return ', '.join(fields)
 
     @property
@@ -133,10 +138,13 @@ class MongoDbEntity:
         """return the posts addressed to self and to all the clubs etc. of self"""
         try:
             recipient_ids = [self.json['_id']]
-            recipient_ids.extend(club_id['id'] for club_id in self.json['club_ids'])
+            try:
+                recipient_ids.extend(self.json['club_ids'])
+            except KeyError:
+                pass
             return Post.get_by_id_on_field('recipient_ids', recipient_ids)
-        except:
-            return None
+        except Exception as e:
+            raise e
 
 
 class Club(MongoDbEntity):
@@ -184,20 +192,12 @@ class School(MongoDbEntity):
 class User(MongoDbEntity):
     @property
     def clubs(self):
-        """
-        The club_ids item of a user contains a dictionary with the clubs the user belongs to
-        :return: a list of Club objects with the dictionary mentioned above added to the user item
-        """
         if self._clubs is None:  # all the attirbutes not present in the json document are returned as None
             try:
-                club_ids = [club['id'] for club in self.club_ids]
-                self._clubs = sorted(self.get_by_ids(club_ids), key=lambda club: club.name)
+                self._clubs = sorted(self.get_by_ids(self.club_ids), key=lambda club: club.name)
                 for club in self._clubs:
-                    for user_data in self.club_ids:
-                        if club._id == user_data['id']:
-                            club.user_data = user_data
-                            break
-            except NotImplementedError:
+                    club.user_data = self.club_data and self.club_data[club._id]
+            except TypeError:
                 self._clubs = []
 
         return self._clubs
@@ -220,12 +220,11 @@ class User(MongoDbEntity):
         """ return the id of the new user """
         while True:
             try:
-                res = db.stuff.insert_one({'_id': 'user-{}'.format(random.randint(1, 1000000000)),
-                                           '_tp': 'User',
-                                           'username': username,
-                                           'email': email,
-                                           'password': security.hash_password(password)})
-            except errors.DuplicateKeyError as e:
+                res = db.user.insert_one({'_id': 'user-{}'.format(random.randint(1, 1000000000)),
+                                          'username': username,
+                                          'email': email,
+                                          'password': security.hash_password(password)})
+            except pymongo.errors.DuplicateKeyError:
                 pass
             else:
                 break
@@ -259,3 +258,33 @@ class User(MongoDbEntity):
             return {'search_value': '',
                     'search_url': 'search/',
                     'search_title': 'Search by School, Person, Club, Company, Competition, State, City'}
+
+
+id2class = {'club': Club,
+            'cmpn': Company,
+            'cmpt': Competition,
+            'coho': CompetitionHost,
+            'post': Post,
+            'scho': School,
+            'user': User}
+id2collection = {'club': db.club,
+                 'cmpn': db.company,
+                 'cmpt': db.competition,
+                 'coho': db.competition_host,
+                 'post': db.post,
+                 'scho': db.school,
+                 'user': db.user}
+class2id = {Club: 'club',
+            Company: 'cmpn',
+            Competition: 'cmpt',
+            CompetitionHost: 'coho',
+            Post: 'post',
+            School: 'scho',
+            User: 'user'}
+class2collection = {Club: db.club,
+                    Company: db.company,
+                    Competition: db.competition,
+                    CompetitionHost: db.competition_host,
+                    Post: db.post,
+                    School: db.school,
+                    User: db.user}
