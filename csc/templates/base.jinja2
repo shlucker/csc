@@ -19,25 +19,7 @@
 {% else %}
     {% include 'nav_unauthenticated.jinja2' %}
 {% endif %}
-
-<!--{% if user %}
-    <li>
-        <input id="search_box" name="search_value"
-               value="{{ user.search_box.search_value if user.search_box else '' }}"
-               data-search_url="{{ user.search_box.search_url if user.search_box else '' }}"
-               title='{{ user.search_box.search_title if user.search_box else '' }}'
-               autofocus>
-    </li>
-    <li><a href="{{ request.route_url('user', id=user._id) }}">{{ user.name }}</a></li>
-    {% if 'admin' in user %}
-        <li><a href="{{ request.route_url('create_user') }}">Create user</a></li>
-    {% endif %}-->
-
-{% endif %}
 <br>
-<div id="search_result">
-    <ul></ul>
-</div>
 {%- block content -%}
     Missing "content" block in jinja template!
 {%- endblock -%}
