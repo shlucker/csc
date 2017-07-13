@@ -11,9 +11,10 @@
     /* Create a Parallax Effect */
     .bgimg-1, .bgimg-2, .bgimg-3 {
         background-attachment: fixed;
-        background-position: center;
+        position: relative;
         background-repeat: no-repeat;
         background-size: cover;
+        z-index:-5000;
     }
 
     /* First image (Logo. Full height) */
@@ -251,3 +252,12 @@
     background: #222222;
     -webkit-transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
     transition: background 0.5s ease-in-out, color 0.5s ease-in-out;}
+
+.modal-body {
+    overflow-y:visible;
+}
+
+li
+{
+    z-index:10;
+}

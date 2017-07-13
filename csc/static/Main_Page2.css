@@ -117,7 +117,6 @@
     border-radius: 5px;
     color: #7986cb;
     min-width: 180px;
-    overflow: hidden;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -219,3 +218,17 @@
         transform: translate3d(0, 0, 0);
     }
 }
+    ul.dropdown-lr {
+        width: 500px;
+    }
+
+    /* mobile fix */
+    @media (max-width: 768px) {
+        .dropdown-lr h3 {
+            color: #eee;
+        }
+
+        .dropdown-lr label {
+            color: #eee;
+        }
+    }

@@ -22,7 +22,11 @@
     <link rel="stylesheet" href="{{ request.static_url('csc:static/Main_Page2.css') }}"/>
     <link rel="stylesheet" href="{{ request.static_url('csc:static/Main_Page3.js') }}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 </header>
+
 <body>
 
 <!-- Navbar (sit on top) -->
@@ -34,7 +38,7 @@
         </a>
         <a href="#home" class="w3-bar-item w3-button">HOME</a>
         <a href="#about" class="w3-bar-item w3-button w3-hide-small"><i class="glyphicon glyphicon--list-alt"></i> About</a>
-        <a href="#portfolio" class="w3-bar-item w3-button w3-hide-small"><i class="glyphicon glyphicon-user"></i>
+        <a href="test1" class="w3-bar-item w3-button w3-hide-small"><i class="glyphicon glyphicon-user"></i>
             Students</a>
         <a href="#contact" class="w3-bar-item w3-button w3-hide-small"><i class="glyphicon glyphicon-tower"></i>
             Academic Clubs</a>
@@ -43,26 +47,92 @@
         <a href="#contact" class="w3-bar-item w3-button w3-hide-small"><i class="glyphicon-glyphicon-link"></i>
             Competition
             Hosts</a>
-        <a href="#contact" class="w3-bar-item w3-button w3-hide-small pull-right"><i class="fa fa-envelope-link"></i>
-            Log in</a>
-
-        <a href="#contact" class="w3-bar-item w3-button w3-hide-small pull-right"><i class="fa fa-envelope-link"></i>Create
-            user</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right">
-            <form class="navbar-form navbar-right">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" type="submit">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-
-
-                    </div>
+        <a class="dropdown pull-right">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">Create User</a>
+            <ul class="dropdown-menu dropdow-lr animated flipInX" role="menu">
+                <div class="col-lg-12">
+                    <div class="text-center"><h3>Create User </h3></div>
+                    <form id="ajax-register-form" action="test8" method="post" role="form" autocomplete="off">
+                        <div class="form-group">
+                            <input type="text" name="username" id="username" tabindex="1" class="form-control"
+                                   placeholder="Username" value="">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" id="email" tabindex="1" class="form-control"
+                                   placeholder="Email Address" value="">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" id="password" tabindex="2" class="form-control"
+                                   placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="confirm-password" id="confirm-password" tabindex="2"
+                                   class="form-control" placeholder="Confirm Password">
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-6 col-xs-offset-3">
+                                    <input type="submit" name="register-submit" id="register-submit" tabindex="4"
+                                           class="form-control btn btn-info" value="Register Now">
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" class="hide" name="token" id="token"
+                               value="7c6f19960d63f53fcd05c3e0cbc434c0">
+                    </form>
                 </div>
-            </form>
+            </ul>
+        </a>
+        <a class="dropdown pull-right"></a>
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">Log In</a>
+            <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
+                <div class="col-lg-12">
+                    <div class="text-center"><h3><b>Log In</b></h3></div>
+                    <form id="ajax-login-form" action="http://phpoll.com/login/process" method="post" role="form"
+                          autocomplete="off">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" name="username" id="username" tabindex="1" class="form-control"
+                                   placeholder="Username" value="" autocomplete="off">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" tabindex="2" class="form-control"
+                                   placeholder="Password" autocomplete="off">
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-7">
+                                    <input type="checkbox" tabindex="3" name="remember" id="remember">
+                                    <label for="remember"> Remember Me</label>
+                                </div>
+                                <div class="col-xs-5 pull-right">
+                                    <input type="submit" name="login-submit" id="login-submit" tabindex="4"
+                                           class="form-control btn btn-success" value="Log In">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="text-center">
+                                        <a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot
+                                            Password?</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" class="hide" name="token" id="token"
+                               value="a465a2791ae0bae853cf4bf485dbe1b6">
+                    </form>
+                </div>
+            </ul>
         </a>
     </div>
+</div>
 
     <!-- Navbar on small screens -->
     <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
@@ -84,28 +154,33 @@
 <div class="w3-content w3-container w3-padding-64" id="about">
     <h3 class="w3-center">ABOUT UCTechWeb</h3>
     <p class="w3-center"><em>Misson</em></p>
-    <p>The University Connection Technology Web, also known as UCTechWeb is a social site that displays the importants
-        of Academic Clubs in a University. On this site you will be able to easily connect with similar clubs all around
-        the world to help overcome challenges that are faced everyday. You have the ability to contact the students in
-        any academic club associated with the site to ask questions or just to network. On top of that students will be
-        able to utilize the site to freelance, network, contact comapanies, obtain crucial competition information and
+    <p>The University Connection Technology Web, also known as UCTechWeb is a social site that displays the importance
+        of Academic Clubs in Universities. On this site you will be able to easily connect with similar clubs all around
+        the world that can possibly aid in overcoming challenges that are faced everyday. Students have the ability to
+        contact any student in
+        all academic clubs associated with UCTechWEB. On top of that, students will be
+        able to utilize the site to freelance, network, increase job opportunity, obtain crucial competition information
+        and
         much more. The goal of the site is to bring students together as well as increase the involvement of academic
-        clubs. </p>
+        clubs to help in team building and exposure in real world applications. </p>
     <div class="w3-row">
         <div class="w3-col m6 w3-center w3-padding-large">
-            <p><b><i class="icomoon icon-rocket w3-margin-right"></i>American Institute of Aeronautics and Astronautics</b></p><br>
+            <p><b><i class="icomoon icon-rocket w3-margin-right"></i>American Institute of Aeronautics and Astronautics</b>
+            </p><br>
             <img src="" class="w3-round w3-image w3-opacity w3-hover-opacity-off"
                  alt="Photo of Me" width="500" height="200">
         </div>
 
         <!-- Hide this text on small devices -->
         <div class="w3-col m6 w3-hide-small w3-padding-large">
-            <p>The site will also help display the achievements that students make in college. This will consist
+            <p>UCTechWeb will display the achievements that students make in clubs. This will consist
                 of awards, competition championships, extra involvement and more. We want students to get credit for the
-                extra hard work that they do ontop of their class work. UCTechWeb will help display such activity. </p>
+                extra hard work that they do on top of their class work. UCTechWeb will help display such activity and
+                hopefully show the value in extracurricular involvement. </p>
         </div>
     </div>
-    <p class="w3-large w3-center w3-padding-16">Though it's understood that GPA is important. We want to make sure that the hands on experience gets more credit:</p>
+    <p class="w3-large w3-center w3-padding-16">Though it's understood that GPA is important. We want to make sure that
+        the hands on experience gets more credit:</p>
     <p class="w3-wide"><i class="fa fa-camera"></i>Hands on experience</p>
     <div class="w3-light-grey">
         <div class="w3-container w3-padding-small w3-dark-grey w3-center" style="width:90%">95%</div>
@@ -156,7 +231,7 @@
     <div class="w3-row-padding w3-center">
         <div class="w3-col m3">
             <img src="/w3images/p1.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity"
-                 alt="The mist over the mountains">
+                 alt="Contact any club around the World">
         </div>
 
         <div class="w3-col m3">
@@ -196,6 +271,7 @@
                  alt="Sailing">
         </div>
         <button class="w3-button w3-padding-large w3-light-grey" style="margin-top:64px">LOAD MORE</button>
+
     </div>
 </div>
 
@@ -268,20 +344,6 @@
 
 <!-- Add Google Maps -->
 <script>
-    function myMap() {
-        myCenter = new google.maps.LatLng(41.878114, -87.629798);
-        var mapOptions = {
-            center: myCenter,
-            zoom: 12, scrollwheel: false, draggable: false,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
-
-        var marker = new google.maps.Marker({
-            position: myCenter,
-        });
-        marker.setMap(map);
-    }
 
     // Modal Image Gallery
     function onClick(element) {
@@ -319,6 +381,82 @@
 To use this code on your website, get a free API key from Google.
 Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
 -->
-
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">User Info</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form class="form-horizontal align-center" action="/action_page.php">
+                        <div class="form-group">
+                            <div class="col-xs-12 col-sm-4 form-group">
+                                <label class="control-label col-sm-2" for="pwd">First Name:</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="pwd" placeholder="First Name"
+                                           name="pwd">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 col-sm-4 form-group">
+                                <label class="control-label col-sm-2" for="pwd">Last Name:</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="pwd" placeholder="Last Name"
+                                           name="pwd">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 col-sm-4 form-group">
+                                <label class="control-label col-sm-2" for="pwd">Email:</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="pwd" placeholder="Email"
+                                           name="pwd">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 col-sm-4 form-group">
+                                <label class="control-label col-sm-2" for="pwd">Create Password:</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="pwd"
+                                           placeholder="at least 6 characters"
+                                           name="pwd">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 col-sm-4 form-group">
+                                <label class="control-label col-sm-2" for="pwd">Repeat Password:</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="pwd"
+                                           placeholder="at least 6 characters"
+                                           name="pwd">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                            </div>
+                        </div>
+                        <div class="form-group pull-left">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
