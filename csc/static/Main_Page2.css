@@ -219,7 +219,7 @@
     }
 }
     ul.dropdown-lr {
-        width: 500px;
+        width: 400px;
     }
 
     /* mobile fix */
@@ -232,3 +232,4 @@
             color: #eee;
         }
     }
+
