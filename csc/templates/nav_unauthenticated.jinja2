@@ -43,7 +43,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-xs-6 col-xs-offset-3">
-                                    <a href="test8" class="w3-button w3-blue" class="w3-margin-right">Register</a>
+                                    <input type="submit" class="btn btn-info" value="Register">
                                 </div>
                             </div>
                         </div>
@@ -105,9 +105,9 @@
             <form class="navbar-form pull-right w3-hide-small">
                 <div class="input-group">
                     <input type="text" id="search_box" name="search_value"
-                           value="{{ user.search_box.search_value if user.search_box else '' }}"
-                           data-search_url="{{ user.search_box.search_url if user.search_box else '' }}"
-                           title='{{ user.search_box.search_title if user.search_box else '' }}'
+                           value="{{ user.search_box.search_value if user and user.search_box else '' }}"
+                           data-search_url="{{ user.search_box.search_url if user and user.search_box else 'search/' }}"
+                           title='{{ user.search_box.search_title if user and user.search_box else 'Search by School, Person, Club, Company, Competition, State, City' }}'
                            class="form-control" placeholder="Search">
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="submit">
@@ -128,159 +128,6 @@
     <a href="" class="w3-bar-item w3-button" onclick="toggleFunction()">Create User</a>
     <a href="#" class="w3-bar-item w3-button">Search</a>
 </div>
-<div class="bgimg-1 w3-display-container" id="typewrite">
-    <div class="w3-display-middle" style="white-space:nowrap;">
-        <p class="w3-center w3-padding-medium w3-xlarge w3-wide w3-animate line-1 anim-typewriter">Welcome to The
-            University Connection Technology Web.</p>
-    </div>
-</div>
-<div class="w3-content w3-container w3-padding-64" id="about">
-    <h3 class="w3-center">ABOUT UCTechWeb</h3>
-    <p class="w3-center"><em>Misson</em></p>
-    <p>The University Connection Technology Web, also known as UCTechWeb is a dynamic website that understands the
-        importance
-        of Academic Clubs in schools and was built to help aid in the rapid growth of regular involvement. This site
-        connects you with similar clubs all around
-        the world that can possibly aid in overcoming challenges that are faced everyday. Students have the ability to
-        contact any student in
-        all academic clubs associated with UCTechWEB as well as companies and compeittion hosts. Students will also be
-        able to utilize the site to freelance, network, increase job opportunity, obtain crucial competition information
-        and much more. The goal of the site is to bring students together as well as increase the involvement of
-        academic
-        clubs to help in team building and exposure in real world applications. </p>
-    <div class="w3-row">
-        <!-- Hide this text on small devices -->
-    </div>
-    <p class="w3-large w3-center w3-padding-16">Though it's understood that GPA is important. We want to make sure that
-        the hands on experience gets more credit:</p>
-    <p class="w3-wide"><i class="fa fa-camera"></i>Hands on experience</p>
-    <div class="w3-light-grey">
-        <div class="w3-container w3-padding-small w3-dark-grey w3-center" style="width:90%">95%</div>
-    </div>
-    <p class="w3-wide"><i class="fa fa-laptop"></i>GPA</p>
-    <div class="w3-light-grey">
-        <div class="w3-container w3-padding-small w3-dark-grey w3-center" style="width:85%">85%</div>
-    </div>
-    <p class="w3-wide"><i class="fa fa-photo"></i>Communication</p>
-    <div class="w3-light-grey">
-        <div class="w3-container w3-padding-small w3-dark-grey w3-center" style="width:75%">75%</div>
-    </div>
-</div>
-
-<div class="w3-row w3-center w3-dark-grey w3-padding-16">
-    <div class="w3-quarter w3-section">
-        <span class="w3-xlarge">100000+</span><br>
-        Users
-    </div>
-    <div class="w3-quarter w3-section">
-        <span class="w3-xlarge">55+</span><br>
-        Companies
-    </div>
-    <div class="w3-quarter w3-section">
-        <span class="w3-xlarge">89+</span><br>
-        Competitions
-    </div>
-    <div class="w3-quarter w3-section">
-        <span class="w3-xlarge">100+</span><br>
-        Clubs
-    </div>
-</div>
-
-<!-- Second Parallax Image with Portfolio Text -->
-<div class="bgimg-2 w3-display-container" id="students1">
-    <div class="w3-display-middle">
-        <span class="w3-xxlarge w3-text-white w3-wide">Students</span>
-    </div>
-</div>
-
-<!-- Container (Portfolio Section) -->
-<div class="w3-content w3-container w3-padding-64" id="students">
-    <h3 class="w3-center">STUDENT BENEFITS</h3>
-    <p class="w3-center"><em>Let's change the norm by increasing the involvment<br> Students on UCTechWeb should take
-        advantage to all the different tools it has to offer. Check them out
-    </em></p><br>
-
-    <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
-    <div class="w3-row-padding w3-center">
-        <div class="w3-col m3">
-            <img src="/w3images/p1.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity"
-                 alt="Communicate with any academic club in the U.S.">
-        </div>
-
-        <div class="w3-col m3">
-            <img src="/w3images/p2.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity"
-                 alt="Share your successes with other colleges with videos, pictures, and posts.">
-        </div>
-
-        <div class="w3-col m3">
-            <img src="/w3images/p3.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity"
-                 alt="Make some extra money by freelancing for your community">
-        </div>
-
-        <div class="w3-col m3">
-            <img src="/w3images/p4.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity"
-                 alt="Have direct access to job opportunies opening up in companies around the world.">
-        </div>
-    </div>
-    <button class="w3-button w3-padding-large w3-light-grey center-block" style="margin-top:64px">Sign up.</button>
-</div>
-</div>
-<!-- Modal for full size images on click-->
-<div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
-    <span class="w3-button w3-large w3-black w3-display-topright" title="Close Modal Image"><i class="fa fa-remove"></i></span>
-    <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
-        <img id="img01" class="w3-image">
-        <p id="caption" class="w3-opacity w3-large"></p>
-    </div>
-</div>
-
-<!-- Third Parallax Image with Portfolio Text -->
-<div class="bgimg-3 w3-display-container w3-opacity-min">
-    <div class="w3-display-middle">
-        <span class="w3-xxlarge w3-text-white w3-wide">ALL OTHER USERS</span>
-    </div>
-</div>
-
-<!-- Container (Contact Section) -->
-<div align="center">
-    <div class="w3-content w3-container center-block" id="all users" align="center">
-        <h3 class="w3-center">Companies, Competition hosts, and Guests</h3>
-        <p class="w3-center"><em>You will be able to blah blah blah</em></p>
-        <div class="w3-row w3-padding-32 w3-section" align="center">
-            <div class="w3-col m8 w3-panel center-block" align="center">
-                <div class="w3-large w3-margin-bottom center-block" align="center">
-                    <i class="fa-fw w3-hover-text-black w3-xlarge center-block align-center" align="center"></i>
-                    <h3>Have Questions?</h3> Email us at:
-                    Support@UCTechWeb.com<br>
-                </div>
-                <form action="/action_page.php" target="_blank">
-                    <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
-                        <div class="w3-half">
-                            <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
-                        </div>
-                        <div class="w3-half">
-                            <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
-                        </div>
-                    </div>
-                    <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
-                    <button class="w3-button w3-black w3-left w3-section" type="submit">
-                        <i class="fa fa-paper-plane"></i> SEND MESSAGE
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Footer -->
-<footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
-    <a href="" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
-    <div class="w3-xlarge w3-section">
-    </div>
-    <p>UCTechWeb <a href="" title="Copyright 2017" target="_blank"
-                    class="w3-hover-text-green">Copyright 2017</a></p>
-</footer>
 
 <!-- Add Google Maps -->
 <script>
