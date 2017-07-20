@@ -1,69 +1,187 @@
-<div class="container">
-	<div class="row">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CSC {{ name }}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+    <script src="{{ request.static_url('csc:static/csc.js') }}"></script>
 
-                        <!-- Signin & Signup -->
-                        <a class="btn btn-primary" href="#" data-toggle="modal" data-target=".login-register-form">
-                           Login - Registration Modal
-                        </a>
+    <link rel="shortcut icon" href="{{ request.static_url('csc:static/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ request.static_url('csc:static/Main_Page.css') }}"/>
+    <link rel="stylesheet" href="{{ request.static_url('csc:static/Main_Page2.css') }}"/>
+    <link rel="stylesheet" href="{{ request.static_url('csc:static/Main_Page3.js') }}"/>
+    <link rel="stylesheet" href="{{ request.static_url('csc:static/csc.css') }}"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-                        <!-- Login / Register Modal-->
-                        <div class="modal fade login-register-form" role="dialog">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">
-                                            <span class="glyphicon glyphicon-remove"></span>
-                                        </button>
-                                        <ul class="nav nav-tabs">
-                                            <li class="active"><a data-toggle="tab" href="#login-form"> Login <span class="glyphicon glyphicon-user"></span></a></li>
-                                            <li><a data-toggle="tab" href="#registration-form"> Register <span class="glyphicon glyphicon-pencil"></span></a></li>
-                                        </ul>
+</head>
+<body>
+<nav class="navbar navbar-inverse fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header" id="myNavbar">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">UCTechWeb</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="#">Students</a></li>
+                <li><a href="#">Companies</a></li>
+                <li><a href="#">Competition Hosts</a></li>
+            </ul>
+            <form class="navbar-form pull-left">
+                <div class="input-group">
+                    <input type="text" id="search_box" name="search_value"
+                           value="{{ user.search_box.search_value if user and user.search_box else '' }}"
+                           data-search_url="{{ user.search_box.search_url if user and user.search_box else 'search/' }}"
+                           title='{{ user.search_box.search_title if user and user.search_box else 'Search by School, Person, Club, Company, Competition, State, City' }}'
+                           class="form-control" placeholder="Search">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="search_result">
+                </div>
+            </form>
+            <ul class="nav navbar-nav pull-right">
+                <ul class="dropdown-menu dropdown-lr animated flipInX pull-right" role="menu">
+                    <div class="col-lg-12">
+                        <div class="text-center"><h3>Create User </h3></div>
+                        <form id="ajax-register-form" action="{{ request.route_url('register') }}" method="post"
+                              role="form"
+                              autocomplete="off">
+                            <div class="form-group">
+                                <input type="text" name="username" id="username" tabindex="1" class="form-control"
+                                       placeholder="Username" value="">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" id="email" tabindex="1" class="form-control"
+                                       placeholder="Email Address" value="">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" id="password" tabindex="2" class="form-control"
+                                       placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="confirm-password" id="confirm-password" tabindex="2"
+                                       class="form-control" placeholder="Confirm Password">
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-xs-6 col-xs-offset-3">
+                                        <input type="submit" class="btn btn-info" value="Register">
                                     </div>
-                                    <div class="modal-body">
-                                        <div class="tab-content">
-                                            <div id="login-form" class="tab-pane fade in active">
-                                                <form action="/">
-                                                    <div class="form-group">
-                                                        <label for="email">Email:</label>
-                                                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="pwd">Password:</label>
-                                                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
-                                                    </div>
-                                                    <div class="checkbox">
-                                                        <label><input type="checkbox" name="remember"> Remember me</label>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-default">Login</button>
-                                                </form>
-                                            </div>
-                                            <div id="registration-form" class="tab-pane fade">
-                                                <form action="/">
-                                                    <div class="form-group">
-                                                        <label for="name">Your Name:</label>
-                                                        <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="newemail">Email:</label>
-                                                        <input type="email" class="form-control" id="newemail" placeholder="Enter new email" name="newemail">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="newpwd">Password:</label>
-                                                        <input type="password" class="form-control" id="newpwd" placeholder="New password" name="newpwd">
-                                                    </div>
-                                                    <button type="submit" class="btn btn-default">Register</button>
-                                                </form>
-                                            </div>
-
-                                        </div>
-                                    </div>
-<!--                                    <div class="modal-footer">-->
-<!--                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-<!--                                    </div>-->
                                 </div>
                             </div>
-                        </div>
-	</div>
-</div>
+                            <input type="hidden" class="hide" name="token" id="token"
+                                   value="7c6f19960d63f53fcd05c3e0cbc434c0">
+                        </form>
+                    </div>
+                </ul>
 
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sign Up<span class="caret"></span></a>
+                    <ul class="dropdown-menu dropdow-lr animated flipInX pull-right" role="menu">
+                        <div class="col-lg-12">
+                            <div class="text-center"><h3>Create User </h3></div>
+                            <form id="ajax-register-form" action="{{ request.route_url('register') }}" method="post"
+                                  role="form"
+                                  autocomplete="off">
+                                <div class="form-group">
+                                    <input type="text" name="username" id="username" tabindex="1" class="form-control"
+                                           placeholder="Username" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="email" id="email" tabindex="1" class="form-control"
+                                           placeholder="Email Address" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" id="password" tabindex="2"
+                                           class="form-control"
+                                           placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="confirm-password" id="confirm-password" tabindex="2"
+                                           class="form-control" placeholder="Confirm Password">
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-6 col-xs-offset-3">
+                                            <input type="submit" class="btn btn-info" value="Register">
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" class="hide" name="token" id="token"
+                                       value="7c6f19960d63f53fcd05c3e0cbc434c0">
+                            </form>
+                        </div>
+                    </ul>
+                </li>
+                <li class="dropdown pull-right">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="{{ request.route_url('login') }}">Log in</a>
+                    <ul class="dropdown-menu dropdown-lr animated slideInRight pull-right" role="menu">
+                        <div class="col-lg-12">
+                            <div class="text-center"><h3>Log in </h3></div>
+                            <form id="ajax-login-form" action="{{ request.route_url('login') }}" method="post"
+                                  role="form"
+                                  autocomplete="off">
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" name="username" id="username" tabindex="1" class="form-control"
+                                           placeholder="Username" value="" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" name="password" id="password" tabindex="2"
+                                           class="form-control"
+                                           placeholder="Password" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-7">
+                                            <input type="checkbox" tabindex="3" name="remember" id="remember">
+                                            <label for="remember"> Remember Me</label>
+                                        </div>
+                                        <div class="col-xs-5 pull-right">
+                                            <input type="submit" name="login-submit" id="login-submit" tabindex="4"
+                                                   class="form-control btn btn-success" value="Log In">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="text-center">
+                                                <a href="{{ request.route_url('recover') }}" tabindex="5"
+                                                   class="forgot-password">Forgot
+                                                    Password?</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" class="hide" name="token" id="token"
+                                       value="a465a2791ae0bae853cf4bf485dbe1b6">
+                            </form>
+                        </div>
+                    </ul>
+                </li>
+
+
+            </ul>
+            </ul>
+        </div>
+    </div>
+</nav>
+</body>
 </html>
