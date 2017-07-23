@@ -24,7 +24,7 @@ ul.dropdown-lr {
 
 .navbar {
   position: relative;
-  min-height: 50px;
+  min-height: 25px;
   margin-bottom: 0px;
   border: 1px solid transparent;
 }
@@ -32,47 +32,23 @@ ul.dropdown-lr {
     background-color: #0f0f0f;
 }
 
-@media(min-width:767px) {
-    .navbar {
-        padding: 20px 0;
-        -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
-        -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
-        transition: background .5s ease-in-out,padding .5s ease-in-out;
-    }
 
-    .top-nav-collapse {
-        padding: 0;
-    }
+.navbar {
+    height:35px;
 }
 
-/* Demo Sections - You can use these as guides or delete them - the scroller will work with any sort of height, fixed, undefined, or percentage based.
-The padding is very important to make sure the scrollspy picks up the right area when scrolled to. Adjust the margin and padding of sections and children
-of those sections to manage the look and feel of the site. */
+#authnav {
 
-.intro-section {
-    height: 100%;
-    padding-top: 150px;
-    text-align: center;
-    background: #fff;
+    height:55px;
+
+}
+#authdrop
+.dropdown-menu {
+    min-width: 30px;
+    background-color: #FFFFFF;
 }
 
-.about-section {
-    height: 100%;
-    padding-top: 150px;
-    text-align: center;
-    background: #eee;
-}
 
-.services-section {
-    height: 100%;
-    padding-top: 150px;
-    text-align: center;
-    background: #fff;
-}
-
-.contact-section {
-    height: 100%;
-    padding-top: 150px;
-    text-align: center;
-    background: #eee;
+body {
+    padding-top: 0px;
 }

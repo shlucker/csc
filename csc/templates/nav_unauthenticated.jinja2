@@ -1,4 +1,4 @@
-<nav class="navbar navbar fixed-top">
+<nav class="navbar fixed-top">
     <div class="container-fluid">
         <div class="navbar-header" id="myNavbar">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -10,67 +10,31 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active page-scroll"><a href="#">Home</a></li>
-                <li class="active page-scroll"><a href="#">Students</a></li>
-                <li class="page-scroll"><a href="#">Clubs</a></li>
-                <li><a href="#">Companies</a></li>
-                <li><a href="#">Competition Hosts</a></li>
+                <li><a href="#" class="button"><i class="glyphicon glyphicon-list-alt"></i>About</a></li>
+                <li><a href="#" class="button"><i class="glyphicon glyphicon-user"></i>Students</a></li>
+                <li><a href="#" class="button"><i class="glyphicon glyphicon-tower"></i>Clubs</a></li>
+                <li><a href="#" class="button"><i class="glyphicon glyphicon-globe"></i>Companies</a></li>
+                <li><a href="#" class="button"><i class="glyphicon glyphicon-cog"></i>Competition Host</a></li>
             </ul>
-            <form class="navbar-form pull-left">
-                <div class="input-group">
-                    <input type="text" id="search_box" name="search_value"
-                           value="{{ user.search_box.search_value if user and user.search_box else '' }}"
-                           data-search_url="{{ user.search_box.search_url if user and user.search_box else 'search/' }}"
-                           title='{{ user.search_box.search_title if user and user.search_box else 'Search by School, Person, Club, Company, Competition, State, City' }}'
-                           class="form-control" placeholder="Search">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" type="submit">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
+            <ul>
+                <form class="navbar-form pull-left">
+                    <div class="input-group">
+                        <input type="text" id="search_box" name="search_value"
+                               value="{{ user.search_box.search_value if user and user.search_box else '' }}"
+                               data-search_url="{{ user.search_box.search_url if user and user.search_box else 'search/' }}"
+                               title='{{ user.search_box.search_title if user and user.search_box else 'Search by School, Person, Club, Company, Competition, State, City' }}'
+                               class="form-control" placeholder="Search">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div id="search_result">
-                </div>
-            </form>
-            <ul class="nav navbar-nav pull-right">
-                <ul class="dropdown-menu dropdown-lr animated flipInX pull-right" role="menu">
-                    <div class="col-lg-12">
-                        <div class="text-center"><h3>Create User </h3></div>
-                        <form id="ajax-register-form" action="{{ request.route_url('register') }}" method="post"
-                              role="form"
-                              autocomplete="off">
-                            <div class="form-group">
-                                <input type="text" name="username" id="username" tabindex="1" class="form-control"
-                                       placeholder="Username" value="">
-                            </div>
-                            <div class="form-group">
-                                <input type="email" name="email" id="email" tabindex="1" class="form-control"
-                                       placeholder="Email Address" value="">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" name="password" id="password" tabindex="2" class="form-control"
-                                       placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" name="confirm-password" id="confirm-password" tabindex="2"
-                                       class="form-control" placeholder="Confirm Password">
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-xs-6 col-xs-offset-3">
-                                        <input type="submit" class="btn btn-info" value="Register">
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="hidden" class="hide" name="token" id="token"
-                                   value="7c6f19960d63f53fcd05c3e0cbc434c0">
-                        </form>
+                    <div id="search_result">
                     </div>
-                </ul>
-
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sign Up</a>
-                    <ul class="dropdown-menu dropdow-lr animated flipInX pull-right" role="menu">
+                </form>
+                <ul class="nav navbar-nav pull-right">
+                    <ul class="dropdown-menu dropdown-lr animated flipInX pull-right" role="menu">
                         <div class="col-lg-12">
                             <div class="text-center"><h3>Create User </h3></div>
                             <form id="ajax-register-form" action="{{ request.route_url('register') }}" method="post"
@@ -105,62 +69,101 @@
                             </form>
                         </div>
                     </ul>
-                </li>
-                <li class="dropdown pull-right">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="{{ request.route_url('login') }}">Log in</a>
-                    <ul class="dropdown-menu dropdown-lr animated slideInRight pull-right" role="menu">
-                        <div class="col-lg-12">
-                            <div class="text-center"><h3>Log in </h3></div>
-                            <form id="ajax-login-form" action="{{ request.route_url('login') }}" method="post"
-                                  role="form"
-                                  autocomplete="off">
-                                <div class="form-group">
-                                    <label for="username">Username</label>
-                                    <input type="text" name="username" id="username" tabindex="1" class="form-control"
-                                           placeholder="Username" value="" autocomplete="off">
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input type="password" name="password" id="password" tabindex="2"
-                                           class="form-control"
-                                           placeholder="Password" autocomplete="off">
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-xs-7">
-                                            <input type="checkbox" tabindex="3" name="remember" id="remember">
-                                            <label for="remember"> Remember Me</label>
-                                        </div>
-                                        <div class="col-xs-5 pull-right">
-                                            <input type="submit" name="login-submit" id="login-submit" tabindex="4"
-                                                   class="form-control btn btn-success" value="Log In">
-                                        </div>
+
+                    <li class="dropdown pull-right">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sign Up</a>
+                        <ul class="dropdown-menu dropdow-lr animated flipInX pull-right" role="menu">
+                            <div class="col-lg-12">
+                                <div class="text-center"><h3>Create User </h3></div>
+                                <form id="ajax-register-form" action="{{ request.route_url('register') }}" method="post"
+                                      role="form"
+                                      autocomplete="off">
+                                    <div class="form-group">
+                                        <input type="text" name="username" id="username" tabindex="1"
+                                               class="form-control"
+                                               placeholder="Username" value="">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="text-center">
-                                                <a href="{{ request.route_url('recover') }}" tabindex="5"
-                                                   class="forgot-password">Forgot
-                                                    Password?</a>
+                                    <div class="form-group">
+                                        <input type="email" name="email" id="email" tabindex="1" class="form-control"
+                                               placeholder="Email Address" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="password" id="password" tabindex="2"
+                                               class="form-control"
+                                               placeholder="Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="confirm-password" id="confirm-password"
+                                               tabindex="2"
+                                               class="form-control" placeholder="Confirm Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-xs-6 col-xs-offset-3">
+                                                <input type="submit" class="btn btn-info" value="Register">
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <input type="hidden" class="hide" name="token" id="token"
-                                       value="a465a2791ae0bae853cf4bf485dbe1b6">
-                            </form>
-                        </div>
-                    </ul>
-                </li>
-            </ul>
+                                    <input type="hidden" class="hide" name="token" id="token"
+                                           value="7c6f19960d63f53fcd05c3e0cbc434c0">
+                                </form>
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="dropdown pull-right">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="{{ request.route_url('login') }}">Log
+                            in</a>
+                        <ul class="dropdown-menu dropdown-lr animated slideInRight pull-right" role="menu">
+                            <div class="col-lg-12">
+                                <div class="text-center"><h3>Log in </h3></div>
+                                <form id="ajax-login-form" action="{{ request.route_url('login') }}" method="post"
+                                      role="form"
+                                      autocomplete="off">
+                                    <div class="form-group">
+                                        <label for="username">Username</label>
+                                        <input type="text" name="username" id="username" tabindex="1"
+                                               class="form-control"
+                                               placeholder="Username" value="" autocomplete="off">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" name="password" id="password" tabindex="2"
+                                               class="form-control"
+                                               placeholder="Password" autocomplete="off">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-xs-7">
+                                                <input type="checkbox" tabindex="3" name="remember" id="remember">
+                                                <label for="remember"> Remember Me</label>
+                                            </div>
+                                            <div class="col-xs-5 pull-right">
+                                                <input type="submit" name="login-submit" id="login-submit" tabindex="4"
+                                                       class="form-control btn btn-success" value="Log In">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="text-center">
+                                                    <a href="{{ request.route_url('recover') }}" tabindex="5"
+                                                       class="forgot-password">Forgot
+                                                        Password?</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" class="hide" name="token" id="token"
+                                           value="a465a2791ae0bae853cf4bf485dbe1b6">
+                                </form>
+                            </div>
+                        </ul>
+                    </li>
+                </ul>
         </div>
     </div>
 </nav>
 
 
 <!-- Add Google Maps -->
-
-</body>
-</html>

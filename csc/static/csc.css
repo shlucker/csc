@@ -9,11 +9,12 @@ ul#top_menu li {
 }
 
 #search_result {
+    background-color:white;
     display: none;
 }
 
 body {
-    padding-top: 5px;
+    padding-top: 0px;
 }
 
 
@@ -46,5 +47,4 @@ body {
     bottom: auto;
 }
 
-.navbar-nav>li>.dropdown-menu { width: 50px }
 

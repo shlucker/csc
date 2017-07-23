@@ -1,39 +1,44 @@
-<div class="w3-top w3-black">
-    <div class="w3-bar w3-black" id="myNavbar">
-        <a class="w3-bar-item w3-button w3-black w3-hover-black w3-hide-medium w3-hide-large w3-right"
-           href="Javascript:void(0);"
-           onclick="toggleFunction()" title="Toggle Navigation Menu">
-            <i class="fa fa-bars"></i>
-        </a>
-        <a href="{{ request.route_url('home') }}" class="w3-bar-item w3-button">UCTechWeb</a>
-        <a href="{{ request.route_url('home') }}" class="w3-bar-item w3-button"><i class="glyphicon glyphicon-home"></i>Home</a>
-        <a href="#about" class="w3-bar-item w3-button w3-hide-small"><i class="glyphicon glyphicon-list-alt"></i> Job
-            Opportunities</a>
-        <a href="#students" class="w3-bar-item w3-button w3-hide-small"><i class="glyphicon glyphicon-flash"></i>
-            Q-Jobs</a>
-        <a href="#all users" class="w3-bar-item w3-button w3-hide-small"><i class="glyphicon glyphicon-cloud"></i>
-            Forum</a>
-        <a href="#all users" class="w3-bar-item w3-button w3-hide-small"><i class="glyphicon glyphicon-link"></i>
-            My TechWebs</a>
-        <a href="#all users" class="w3-bar-item w3-button w3-hide-small"><i
-                class="glyphicon glyphicon-envelope"></i>
-            My Messages</a>
-        <a href="#all users" class="w3-bar-item w3-button w3-hide-small"><i
-                class="glyphicon glyphicon-tower"></i>
-            My Clubs</a>
-        <a href="{{ request.route_url('user', id=user._id) }}" class="w3-bar-item w3-button w3-hide-small pull-right"><i
-                class="glyphicon glyphicon-user"></i>
-            My Profile</a>
-        <a href="{{ request.route_url('logout') }}" class="w3-bar-item w3-button w3-hide-small pull-right"><i
-                class="glyphicon glyphicon-off"></i>
-            Log out</a>
-        <u>
-            <form class="navbar-form pull-right  w3-hide-small">
+<nav class="navbar navbar-static-top navbar-inverse" id="authnav">
+    <div class="container-fluid">
+        <div class="navbar-header" id="myNavbar">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ request.route_url('home') }}">UCTechWeb</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ request.route_url('home') }}">Home</a></li>
+                <li><a href="#">Job Opportunities</a></li>
+                <li><a href="#">Q-Jobs</a></li>
+                <li><a href="#">Forum</a></li>
+                <li><a href="">My TechWebs</a></li>
+                <li><a href="test1">My Messages</a></li>
+                <li class="dropdown" id="authdrop">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">My Clubs <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="test5" data-toggle="tooltip" data-placement="right"
+                               title="American Society of Mechanical Engineers">ASME</a></li>
+                        <li><a href="#" data-toggle="tooltip" data-placement="right"
+                               title="American Institute of Aeronautics and Astronautics">AIAA</a></li>
+                        <li><a href="#" data-toggle="tooltip" data-placement="right"
+                               title="Students for the Exploration and Development of Space">SEDS</a></li>
+                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="3D Printing">3DP</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+                <li><a href="{{ request.route_url('user', id=user._id) }}">My Profile</a></li>
+                <li><a href="{{ request.route_url('logout') }}">Log out</a></li>
+            </ul>
+            <form class="navbar-form pull-right">
                 <div class="input-group">
                     <input type="text" id="search_box" name="search_value"
-                           value="{{ user.search_box.search_value if user.search_box else '' }}"
-                           data-search_url="{{ user.search_box.search_url if user.search_box else '' }}"
-                           title='{{ user.search_box.search_title if user.search_box else '' }}'
+                           value="{{ user.search_box.search_value if user and user.search_box else '' }}"
+                           data-search_url="{{ user.search_box.search_url if user and user.search_box else 'search/' }}"
+                           title='{{ user.search_box.search_title if user and user.search_box else 'Search by School, Person, Club, Company, Competition, State, City' }}'
                            class="form-control" placeholder="Search">
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="submit">
@@ -44,13 +49,7 @@
                 <div id="search_result">
                 </div>
             </form>
-        </u>
+
+        </div>
     </div>
-</div>
-</div>
-<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium">
-    <a href="#about" class="w3-bar-item w3-button" onclick="toggleFunction()">About</a>
-    <a href="" class="w3-bar-item w3-button" onclick="toggleFunction()">Login</a>
-    <a href="" class="w3-bar-item w3-button" onclick="toggleFunction()">Create User</a>
-    <a href="#" class="w3-bar-item w3-button">Search</a>
-</div>
+</nav>
