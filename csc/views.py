@@ -9,93 +9,82 @@ from csc.models import User, Club, School, CompetitionHost, Company, Competition
 from .security import check_password
 
 
+def _get_user(view):
+    if view.username:
+        return User.get_by_username(view.username)
+
+
 class CscViews:
     def __init__(self, request):
         self.request = request
         self.username = request.authenticated_userid
 
-    def _get_user(self):
-        if self.username:
-            return User.get_by_username(self.username)
-
-    @view_config(route_name='club')
+    @view_config(route_name='club', renderer='templates/club.jinja2')
     def club(self):
-        user = self._get_user()
+        user = _get_user(self)
         club_id = self.request.matchdict['id']
 
         if not user:
             return HTTPFound(self.request.route_url('login'))
 
         club = Club.get_by_id(club_id)
-        return render_to_response('templates/club.jinja2',
-                                  {'name': 'User profile',
-                                   'user': user,
-                                   'club': club},
-                                  request=self.request)
+        return {'name': 'User profile',
+                'user': user,
+                'club': club}
 
-    @view_config(route_name='company')
+    @view_config(route_name='company', renderer='templates/company.jinja2')
     def company(self):
-        user = self._get_user()
+        user = _get_user(self)
         company_id = self.request.matchdict['id']
 
         if not user:
             return HTTPFound(self.request.route_url('login'))
 
         company = Company.get_by_id(company_id)
-        return render_to_response('templates/company.jinja2',
-                                  {'name': 'User profile',
-                                   'user': user,
-                                   'company': company},
-                                  request=self.request)
+        return {'name': 'User profile',
+                'user': user,
+                'company': company}
 
-    @view_config(route_name='competition')
+    @view_config(route_name='competition', renderer='templates/competition.jinja2')
     def competition(self):
-        user = self._get_user()
+        user = _get_user(self)
         competition_id = self.request.matchdict['id']
 
         if not user:
             return HTTPFound(self.request.route_url('login'))
 
         competition = Competition.get_by_id(competition_id)
-        return render_to_response('templates/competition.jinja2',
-                                  {'name': 'User profile',
-                                   'user': user,
-                                   'competition': competition},
-                                  request=self.request)
+        return {'name': 'User profile',
+                'user': user,
+                'competition': competition}
 
-    @view_config(route_name='competition_host')
+    @view_config(route_name='competition_host', renderer='templates/competition_host.jinja2')
     def competition_host(self):
-        user = self._get_user()
+        user = _get_user(self)
         competition_host_id = self.request.matchdict['id']
 
         if not user:
             return HTTPFound(self.request.route_url('login'))
 
         competition_host = CompetitionHost.get_by_id(competition_host_id)
-        return render_to_response('templates/competition_host.jinja2',
-                                  {'name': 'User profile',
-                                   'user': user,
-                                   'competition_host': competition_host},
-                                  request=self.request)
+        return {'name': 'User profile',
+                'user': user,
+                'competition_host': competition_host}
 
-    @view_config(route_name='create_user')
+    @view_config(route_name='create_user', renderer='templates/create_user.jinja2')
     def create_user(self):
-        user = self._get_user()
+        user = _get_user(self)
         if not user or not 'admin' in user:
             raise HTTPForbidden()
-        return render_to_response('templates/create_user.jinja2',
-                                  {'name': 'Create user',
-                                   'user': user},
-                                  request=self.request)
+        return {'name': 'Create user',
+                'user': user}
 
-    @view_config(route_name='home')
+    @view_config(route_name='home', renderer='templates/home.jinja2')
     def home(self):
-        user = self._get_user()
+        user = _get_user(self)
 
-        return render_to_response('templates/home.jinja2',
-                                  {'name': 'Home',
-                                   'user': user},
-                                  request=self.request)
+        return {'name': 'Home',
+                'user': user}
 
     @view_config(route_name='login', renderer='templates/login.jinja2')
     def login(self):
@@ -172,22 +161,20 @@ class CscViews:
                 'password': password,
                 'errors': errors}
 
-    @view_config(route_name='school')
+    @view_config(route_name='school', renderer='templates/school.jinja2')
     def school(self):
-        user = self._get_user()
+        user = _get_user(self)
         school_id = self.request.matchdict['id']
 
         if not user:
             return HTTPFound(self.request.route_url('login'))
 
         school = School.get_by_id(school_id)
-        return render_to_response('templates/school.jinja2',
-                                  {'name': 'User profile',
-                                   'user': user,
-                                   'school': school},
-                                  request=self.request)
+        return {'name': 'User profile',
+                'user': user,
+                'school': school}
 
-    @view_config(route_name='search')
+    @view_config(route_name='search', renderer='templates/search_result_small.jinja2')
     def search(self):
         txt = self.request.matchdict['txt']
 
@@ -196,93 +183,14 @@ class CscViews:
         clubs = list(Club.find_text(txt, 0, 5))
         schools = list(School.find_text(txt, 0, 5))
 
-        return render_to_response('templates/search_result_small.jinja2',
-                                  {'users': users,
-                                   'posts': posts,
-                                   'clubs': clubs,
-                                   'schools': schools},
-                                  request=self.request)
+        return {'users': users,
+                'posts': posts,
+                'clubs': clubs,
+                'schools': schools}
 
-    @view_config(route_name='test')
-    def test(self):
-        user = self._get_user()
-        return render_to_response('templates/test.jinja2',
-                                  {'user': user},
-                                  request=self.request)
-
-    @view_config(route_name='test1')
-    def test1(self):
-        user = self._get_user()
-        return render_to_response('templates/test1.jinja2',
-                                  {'user': user},
-                                  request=self.request)
-
-    @view_config(route_name='test2')
-    def test2(self):
-        user = self._get_user()
-        return render_to_response('templates/test2.jinja2',
-                                  {'user': user},
-                                  request=self.request)
-
-    @view_config(route_name='test3')
-    def test3(self):
-        user = self._get_user()
-        return render_to_response('templates/test3.jinja2',
-                                  {'user': user},
-                                  request=self.request)
-
-    @view_config(route_name='test4')
-    def test4(self):
-        user = self._get_user()
-        return render_to_response('templates/test4.jinja2',
-                                  {'user': user},
-                                  request=self.request)
-
-    @view_config(route_name='test5')
-    def test5(self):
-        user = self._get_user()
-        return render_to_response('templates/test5.jinja2',
-                                  {'user': user},
-                                  request=self.request)
-
-    @view_config(route_name='test6')
-    def test6(self):
-        user = self._get_user()
-        return render_to_response('templates/test6.jinja2',
-                                  {'user': user},
-                                  request=self.request)
-
-    @view_config(route_name='test7')
-    def test7(self):
-        user = self._get_user()
-        return render_to_response('templates/test7.jinja2',
-                                  {'user': user},
-                                  request=self.request)
-
-    @view_config(route_name='test8')
-    def test8(self):
-        user = self._get_user()
-        return render_to_response('templates/test8.jinja2',
-                                  {'user': user},
-                                  request=self.request)
-
-    @view_config(route_name='test9')
-    def test9(self):
-        user = self._get_user()
-        return render_to_response('templates/test9.jinja2',
-                                  {'user': user},
-                                  request=self.request)
-
-    @view_config(route_name='test10')
-    def test10(self):
-        user = self._get_user()
-        return render_to_response('templates/test10.jinja2',
-                                  {'user': user},
-                                  request=self.request)
-
-    @view_config(route_name='user')
+    @view_config(route_name='user', renderer='templates/user.jinja2')
     def user(self):
-        user = self._get_user()
+        user = _get_user(self)
 
         user_profile_id = self.request.matchdict['id']
 
@@ -296,8 +204,67 @@ class CscViews:
         if not user_profile:
             raise HTTPNotFound()
 
-        return render_to_response('templates/user.jinja2',
-                                  {'name': 'User profile',
-                                   'user': user,
-                                   'user_profile': user_profile},
-                                  request=self.request)
+        return {'name': 'User profile',
+                'user': user,
+                'user_profile': user_profile}
+
+
+class TemporaryViews:
+    def __init__(self, request):
+        self.request = request
+        self.username = request.authenticated_userid
+
+    @view_config(route_name='test', renderer='templates/test.jinja2')
+    def test(self):
+        user = _get_user(self)
+        return {'user': user}
+
+    @view_config(route_name='test1', renderer='templates/test1.jinja2')
+    def test1(self):
+        user = _get_user(self)
+        return {'user': user}
+
+    @view_config(route_name='test2', renderer='templates/test2.jinja2')
+    def test2(self):
+        user = _get_user(self)
+        return {'user': user}
+
+    @view_config(route_name='test3', renderer='templates/test3.jinja2')
+    def test3(self):
+        user = _get_user(self)
+        return {'user': user}
+
+    @view_config(route_name='test4', renderer='templates/test4.jinja2')
+    def test4(self):
+        user = _get_user(self)
+        return {'user': user}
+
+    @view_config(route_name='test5', renderer='templates/test5.jinja2')
+    def test5(self):
+        user = _get_user(self)
+        return {'user': user}
+
+    @view_config(route_name='test6', renderer='templates/test6.jinja2')
+    def test6(self):
+        user = _get_user(self)
+        return {'user': user}
+
+    @view_config(route_name='test7', renderer='templates/test7.jinja2')
+    def test7(self):
+        user = _get_user(self)
+        return {'user': user}
+
+    @view_config(route_name='test8', renderer='templates/test8.jinja2')
+    def test8(self):
+        user = _get_user(self)
+        return {'user': user}
+
+    @view_config(route_name='test9', renderer='templates/test9.jinja2')
+    def test9(self):
+        user = _get_user(self)
+        return {'user': user}
+
+    @view_config(route_name='test10', renderer='templates/test10.jinja2')
+    def test10(self):
+        user = _get_user(self)
+        return {'user': user}
