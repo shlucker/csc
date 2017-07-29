@@ -196,7 +196,10 @@ class User(MongoDbEntity):
             try:
                 self._clubs = sorted(self.get_by_ids(self.club_ids), key=lambda club: club.name)
                 for club in self._clubs:
-                    club.user_data = self.club_data and self.club_data[club._id]
+                    try:
+                        club.user_data = self.club_data[club._id]
+                    except KeyError as e:
+                        pass
             except TypeError:
                 self._clubs = []
 
