@@ -19,13 +19,16 @@
                 <li class="dropdown" id="authdrop">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">My Clubs <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="test5" data-toggle="tooltip" data-placement="right"
-                               title="American Society of Mechanical Engineers">ASME</a></li>
-                        <li><a href="#" data-toggle="tooltip" data-placement="right"
-                               title="American Institute of Aeronautics and Astronautics">AIAA</a></li>
-                        <li><a href="#" data-toggle="tooltip" data-placement="right"
-                               title="Students for the Exploration and Development of Space">SEDS</a></li>
-                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="3D Printing">3DP</a></li>
+                        {% if user.clubs %}
+                            {% for club in user.clubs %}
+                                <li><a href={{ request.route_url('club', id=club._id) }} data-toggle="tooltip"
+                                       data-placement="right"
+                                       title="{{ club.name }}">{{ club.short_name or club.name }}</a>
+                                </li>
+                            {% endfor %}
+                        {% else %}
+                            <li>Sorry, no clubs here :(</li>
+                        {% endif %}
                     </ul>
                 </li>
             </ul>
