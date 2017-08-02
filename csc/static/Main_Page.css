@@ -20,9 +20,10 @@ body, html {
 /* First image (Logo. Full height) */
 .bgimg-1 {
     background-image: url('/static/Engineerstuff_dark.jpg');
-    min-height: 100%;
+    min-height: 80%;
     margin-left: 0px;
     margin-right: 0px;
+    margin-top:25px;
 }
 
 /* Second image (Portfolio) */
@@ -41,7 +42,24 @@ body, html {
     margin-left: 0px;
     margin-right: 0px;
     width: 100%;
+    position:relative;
 }
+
+.post-content {
+    top:42%;
+    left:46%;
+    position: absolute;
+    color: #FFFFFF;
+    opacity:.8;
+}
+.post-content2 {
+    top:42%;
+    left:31%;
+    position: absolute;
+    color: #FFFFFF;
+    opacity:.8;
+}
+
 
 .handshake {
     background-image: url('gears.jpg');
@@ -82,7 +100,7 @@ body {
     position: absolute;
     top: 50%;
     text-align: center;
-    left: 30%;
+    left: 32%;
     width: 22.5em;
     margin: 0px;
     border-right: 2px solid rgba(255, 255, 255, .75);
@@ -103,7 +121,7 @@ body {
         width: 0;
     }
     to {
-        width: 25em;
+        width: 24.65em;
     }
 }
 
@@ -293,3 +311,12 @@ body {
 li {
     z-index: 10;
 }
+
+.navbar-toggle {
+    background-color: ghostwhite;
+}
+.icon-bar {
+    background-color: black;
+}
+
+.glyphicon:before { margin-right: 5px; }

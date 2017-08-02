@@ -23,32 +23,97 @@ ul.dropdown-lr {
 }
 
 .navbar {
-  position: relative;
-  min-height: 25px;
-  margin-bottom: 0px;
-  border: 1px solid transparent;
+    position: relative;
+    min-height: 25px;
+    margin-bottom: 0px;
+    border: 1px solid transparent;
 }
+
 .progress-bar-danger {
     background-color: #0f0f0f;
 }
 
-
 .navbar {
-    height:35px;
+    height: 35px;
 }
 
 #authnav {
 
-    height:55px;
+    height: 55px;
 
 }
+
 #authdrop
 .dropdown-menu {
     min-width: 30px;
     background-color: #FFFFFF;
 }
 
-
 body {
     padding-top: 0px;
+}
+
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#navtoptop {
+    margin-top: 10px
+}
+
+.logo, .intro, .topmenu, .content {
+    padding: 2px;
+}
+
+.topmenu {
+
+    background: #FFFFFF;
+    line-height: 20px;
+    letter-spacing: 1px;
+    width: 100%;
+    padding-left: 10px;
+     padding-right: 0px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+}
+
+.button {
+    color: black;
+    text-decoration: none;
+}
+
+.topmenu2 {
+
+    background: #0b0b0b;
+    line-height: 20px;
+    letter-spacing: 1px;
+    width: 100%;
+    padding-left: 0px;
+    left: 0px;
+
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+#header {
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    top: 0;
+}
+
+#container {
+    width: 100%;
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    overflow: auto;
 }

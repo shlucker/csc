@@ -1,12 +1,12 @@
-<nav class="navbar fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header" id="myNavbar">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+<nav class="navbar fixed-top" nav id="header">
+    <div class="container-fluid sticky topmenu">
+        <div class="navbar-header">
+            <button type="button" class="btn-navbar navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">UCTechWeb</a>
+            <a class="navbar-brand button" href="#">UCTechWeb</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
@@ -17,22 +17,7 @@
                 <li><a href="#" class="button"><i class="glyphicon glyphicon-cog"></i>Competition Host</a></li>
             </ul>
             <ul>
-                <form class="navbar-form pull-left">
-                    <div class="input-group">
-                        <input type="text" id="search_box" name="search_value"
-                               value="{{ user.search_box.search_value if user and user.search_box else '' }}"
-                               data-search_url="{{ user.search_box.search_url if user and user.search_box else 'search/' }}"
-                               title='{{ user.search_box.search_title if user and user.search_box else 'Search by School, Person, Club, Company, Competition, State, City' }}'
-                               class="form-control" placeholder="Search">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div id="search_result">
-                    </div>
-                </form>
+
                 <ul class="nav navbar-nav pull-right">
                     <ul class="dropdown-menu dropdown-lr animated flipInX pull-right" role="menu">
                         <div class="col-lg-12">
@@ -161,6 +146,23 @@
                         </ul>
                     </li>
                 </ul>
+                      <form class="navbar-form pull-right">
+                    <div class="input-group">
+                        <input type="text" id="search_box" name="search_value"
+                               value="{{ user.search_box.search_value if user and user.search_box else '' }}"
+                               data-search_url="{{ user.search_box.search_url if user and user.search_box else 'search/' }}"
+                               title='{{ user.search_box.search_title if user and user.search_box else 'Search by School, Person, Club, Company, Competition, State, City' }}'
+                               class="form-control" placeholder="Search">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="search_result">
+                    </div>
+                </form>
+            </ul>
         </div>
     </div>
 </nav>

@@ -22,13 +22,12 @@
 </header>
 <body>
 <div class="handshake">
-    <div class=" pull-left container">
+    <div class="container">
         <div id="signupbox" style=" margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="panel-title">Sign Up</div>
-                    <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink"
-                                                                                               href="test6">Sign
+                    <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="{{ request.route_url('recover') }}">Sign
                         In</a></div>
                 </div>
                 <div class="panel-body">
@@ -39,10 +38,11 @@
                             <div id="div_id_select" class="form-group required">
                                 <label for="id_select" class="control-label col-md-4  requiredField"> Select<span
                                         class="asteriskField">*</span> </label>
+
                                 <div class="controls col-md-8 " style="margin-bottom: 10px">
                                     <label class="radio-inline"><input type="radio" checked="checked" name="select"
                                                                        id="id_select_1" value="S"
-                                                                       style="margin-bottom: 10px">Student</label>
+                                                                       style="margin-bottom: 10px"><a href="#">Student</a></label>
                                     <label class="radio-inline"><input type="radio" checked="checked" name="select"
                                                                        id="id_select_1" value="S"
                                                                        style="margin-bottom: 10px">Company</label>
@@ -176,5 +176,3 @@
         </div>
     </div>
 </div>
-</body>
-</html>

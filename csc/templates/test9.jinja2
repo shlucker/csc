@@ -1,49 +1,78 @@
-<nav class="navbar navbar-inverse navbar-fixed-top navbar-collapse" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ request.route_url('home') }}">UCTechWeb</a>
+<html>
+<header>
+    <title>Form</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+    <script src="assets/js/bs-animation.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+    <script src="{{ request.static_url('csc:static/csc.js') }}"></script>
+    <link rel="stylesheet" href="{{ request.static_url('csc:static/csc.css') }}"/>
+    <link rel="shortcut icon" href="{{ request.static_url('csc:static/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ request.static_url('csc:static/Main_Page.css') }}"/>
+    <link rel="stylesheet" href="{{ request.static_url('csc:static/Main_Page2.css') }}"/>
+    <link rel="stylesheet" href="{{ request.static_url('csc:static/form.js') }}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</header>
+<body>
+<input type="radio" name="radionbutton" value="1" id="button1"/>
+<input type="radio" name="radionbutton" value="2" id="button2"/>
+<div class="handshake">
+    <div class="container">
+        <div id="signupbox" style=" margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info">
+                <div class="panel-heading center-block">
+                    <div class="panel-title center-block">Who are you?</div>
+                    <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink"
+                                                                                               href="{{ request.route_url('recover') }}">Sign
+                        In</a></div>
+                </div>
+                <div class="panel-body container-fluid">
+                    <form method="post" action=".">
+                        <input type='hidden' name='csrfmiddlewaretoken' value='XFe2rTYl9WOpV8U6X5CfbIuOZOELJ97S'/>
+                        <form class="form-horizontal" method="post">
+                            <input type='hidden'>
+                            <div id="div_id_select" class="form-group required">
+                                <div class="controls col-md-8 center-block" style="margin-left: 70px">
+
+                                    <label class="radio-inline"><input type="radio" checked="checked" name="select"
+                                                                       id="id_select_1" value="S"
+                                                                       style="margin-bottom: 10px">Student</label>
+                                    <label class="radio-inline"><input type="radio" checked="checked" name="select"
+                                                                       id="id_select_1" value="S"
+                                                                       style="margin-bottom: 10px">Company</label>
+                                    <label class="radio-inline"> <input type="radio" name="select" id="id_select_2"
+                                                                        value="P" style="margin-bottom: 10px">Competition
+                                        Host </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="controls col-md-offset-4 col-md-8 ">
+                                    <div id="div_id_terms" class="checkbox required">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="aab controls col-md-4 "></div>
+                                <div class="controls col-md-8 " style="margin-left: 170px">
+                                    <input type="submit" name="signup" value="next"
+                                           class="btn btn-primary btn btn-info"
+                                           id="submit-id-signup"/>
+                                </div>
+                            </div>
+                        </form>
+                    </form>
+                </div>
+            </div>
         </div>
-        <ul class="nav navbar-nav">
-            <li class=><a href="{{ request.route_url('home') }}">Home</a></li>
-            <li><a href="#">Job Opportunities</a></li>
-            <li><a href="#">Q-Jobs</a></li>
-            <li><a href="#">Forum</a></li>
-            <li><a href="test2">My TechWebs</a></li>
-            <li class=><a href="test1">My Messages</a></li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">My Clubs <span
-                        class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">ASME </a></li>
-                    <li><a href="#">AIAA</a></li>
-                    <li><a href="#">3DP </a></li>
-                </ul>
-            </li>
-            <li class=><a href="{{ request.route_url('user', id=user._id) }}">My Profile</a></li>
-            <li class="pull-right"><a href="{{ request.route_url('logout') }}">Logout</a></li>
-            <li>
-                <form class="navbar-form navbar-right">
-                    <div class="input-group pull-right">
-                        <input type="text" id="search_box" name="search_value"
-                               value="{{ user.search_box.search_value if user.search_box else '' }}"
-                               data-search_url="{{ user.search_box.search_url if user.search_box else '' }}"
-                               title='{{ user.search_box.search_title if user.search_box else '' }}'
-                               class="form-control" placeholder="Search">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div id="search_result">
-                    </div>
-                </form>
-            </li>
-        </ul>
     </div>
-</nav>
+</div>
+
