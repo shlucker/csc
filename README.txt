@@ -1,45 +1,11 @@
-csc
-===============================
-
-Getting Started
----------------
-
-- remove old python environment
-deactivate
-conda remove -y -n csc --all
-
-- remove old project
-cd \workspace
-rmdir /s /q csc
-
-- create python environment
-c:
-cd \workspace
-conda config -y --add channels conda-forge
-conda create -y -n csc pyramid pip
-activate csc
-pip install pony bcrypt xlrd pyramid_jinja2 pyramid_debugtoolbar waitress
-conda install -y cookiecutter
-
-- create project
-c:
-cd \workspace
-activate csc
-cookiecutter https://github.com/Pylons/pyramid-cookiecutter-starter
-y
-csc
-csc
-1
-cd csc
-
-- run test
-pip install -e ".[testing]"
-pytest
-
-- run server
-pserve development.ini
-
-
-- add mixins to editor result
-(\w*)\((.*)\):
-$1($2, csc.model_mixins.$1Mixin):
+Chat Application
+Forum (Stack Overflow?)
+Managing attachments/file storage
+Deployment on the web (Amazon?)
+Test Suite (everything, per key)
+User Registeration/authentication
+Payment process for companies/comp hosts
+guest
+Validating the user
+Switching from Pyramid to Flask
+Map
