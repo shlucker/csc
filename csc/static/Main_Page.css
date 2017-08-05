@@ -19,47 +19,79 @@ body, html {
 
 /* First image (Logo. Full height) */
 .bgimg-1 {
-    background-image: url('/static/Engineerstuff_dark.jpg');
+    background-image: url('/static/Engineerstuff_dark_blue.jpg');
     min-height: 80%;
     margin-left: 0px;
     margin-right: 0px;
-    margin-top:25px;
+    margin-top: 25px;
 }
 
 /* Second image (Portfolio) */
 .bgimg-2 {
-    background-image: url('/static/Create_it.jpg');
-    min-height: 400px;
-    margin-left: 0px;
-    margin-right: 0px;
-    width: 100%
-}
-
-/* Third image (Contact) */
-.bgimg-3 {
-    background-image: url('/static/Printer.jpg');
+    background-image: url('/static/Create_it_blue.jpg');
     min-height: 400px;
     margin-left: 0px;
     margin-right: 0px;
     width: 100%;
-    position:relative;
+
+}
+
+/* Third image (Contact) */
+.bgimg-3 {
+    background-image: url('/static/Printer_blue.jpg');
+    min-height: 400px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 100%;
+    position: relative;
+}
+
+.bgimg-4 {
+    background-image: url('/static/mapblue.jpeg');
+    min-height: 400px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 35px;
+    width: 100%;
+}
+
+.companyform {
+    padding-top: 50px;
+    border:5px solid;
 }
 
 .post-content {
-    top:42%;
-    left:46%;
+    top: 42%;
+    left: 46%;
     position: absolute;
     color: #FFFFFF;
-    opacity:.8;
-}
-.post-content2 {
-    top:42%;
-    left:31%;
-    position: absolute;
-    color: #FFFFFF;
-    opacity:.8;
+    opacity: .8;
 }
 
+.post-content3 {
+    top: 22%;
+    left: 40%;
+    position: absolute;
+    color: #FFFFFF;
+    opacity: .9;
+    margin: 0 auto;
+}
+
+.form1 {
+    padding-top:50px;
+    position: absolute;
+    color: grey;
+    opacity: .9;
+    margin: 0 auto;
+}
+
+.post-content2 {
+    top: 42%;
+    left: 31%;
+    position: absolute;
+    color: #FFFFFF;
+    opacity: .8;
+}
 
 .handshake {
     background-image: url('gears.jpg');
@@ -315,8 +347,12 @@ li {
 .navbar-toggle {
     background-color: ghostwhite;
 }
+
 .icon-bar {
     background-color: black;
 }
 
-.glyphicon:before { margin-right: 5px; }
+.glyphicon:before {
+    margin-right: 5px;
+}
+
