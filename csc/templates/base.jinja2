@@ -9,24 +9,25 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
-    <script src="{{ request.static_url('csc:static/csc.js') }}"></script>
+    <script src="{{ url_for('static', filename='csc.js') }}"></script>
 
-    <link rel="shortcut icon" href="{{ request.static_url('csc:static/favicon.ico') }}">
-    <link rel="stylesheet" href="{{ request.static_url('csc:static/Main_Page.css') }}"/>
-    <link rel="stylesheet" href="{{ request.static_url('csc:static/Main_Page2.css') }}"/>
-    <script src= "csc:static/main_page3.js"></script>
-    <link rel="stylesheet" href="{{ request.static_url('csc:static/csc.css') }}"/>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Main_Page.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Main_Page2.css') }}"/>
+    <script src="static/main_page3.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='csc.css') }}"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
 <body>
-{% if user %}
+{% if user.is_authenticated %}
     {% include 'nav_authenticated.jinja2' %}
 {% else %}
     {% include 'nav_unauthenticated.jinja2' %}
 {% endif %}
 <br>
+{% include 'flash.jinja2' %}
 {%- block content -%}
     Missing "content" block in jinja template!
 {%- endblock -%}

@@ -1255,8 +1255,8 @@ db.club.insert_many([
      'school_id': 'scho-19', }])
 
 db.company.create_index([('name', pymongo.TEXT)],
-                     name='TextIndex',
-                     weights={'name': 1})
+                        name='TextIndex',
+                        weights={'name': 1})
 db.company.insert_many([
     {'_id': 'cmpn-1',
      'name': 'GM',
@@ -1276,9 +1276,9 @@ db.company.insert_many([
      'city': 'Las Vegas', 'state': 'Florida'}])
 
 db.competition.create_index([('name', pymongo.TEXT),
-                      ('description', pymongo.TEXT)],
-                     name='TextIndex',
-                     weights={'name': 3})
+                             ('description', pymongo.TEXT)],
+                            name='TextIndex',
+                            weights={'name': 3})
 db.competition.insert_many([
     {'_id': 'cmpt-1',
      'name': 'ASME Robotics',
@@ -1298,10 +1298,10 @@ db.competition.insert_many([
      'competition_host_id': 2}])
 
 db.competition_hosts.create_index([('name', pymongo.TEXT),
-                      ('city', pymongo.TEXT),
-                      ('state', pymongo.TEXT)],
-                     name='TextIndex',
-                     weights={'name': 10})
+                                   ('city', pymongo.TEXT),
+                                   ('state', pymongo.TEXT)],
+                                  name='TextIndex',
+                                  weights={'name': 10})
 db.competition_hosts.insert_many([
     {'_id': 'competition_host-1',
      'name': 'ASME National',

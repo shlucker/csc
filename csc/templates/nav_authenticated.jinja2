@@ -6,11 +6,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ request.route_url('home') }}">UCTechWeb</a>
+            <a class="navbar-brand" href="{{ url_for('home') }}">UCTechWeb</a>
         </div>
         <div class="collapse navbar-collapse topmenu2 sticky" id="myNavbar">
             <ul class="nav navbar-nav ">
-                <li><a href="{{ request.route_url('home') }}">Home</a></li>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
                 <li><a href="#">Job Opportunities</a></li>
                 <li><a href="#">Q-Jobs</a></li>
                 <li><a href="#">Forum</a></li>
@@ -21,7 +21,7 @@
                     <ul class="dropdown-menu">
                         {% if user.clubs %}
                             {% for club in user.clubs %}
-                                <li><a href={{ request.route_url('club', id=club._id) }} data-toggle="tooltip"
+                                <li><a href={{ url_for('club', id=club._id) }} data-toggle="tooltip"
                                        data-placement="right"
                                        title="{{ club.name }}">{{ club.short_name or club.name }}</a>
                                 </li>
@@ -33,8 +33,8 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav pull-right">
-                <li><a href="{{ request.route_url('user', id=user._id) }}">My Profile</a></li>
-                <li><a href="{{ request.route_url('logout') }}">Log out</a></li>
+                <li><a href="{{ url_for('user', id=user._id) }}">My Profile</a></li>
+                <li><a href="{{ url_for('logout') }}">Log out</a></li>
             </ul>
             <form class="navbar-form pull-right">
                 <div class="input-group fluid">

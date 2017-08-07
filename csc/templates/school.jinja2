@@ -17,7 +17,7 @@
     <h2>Clubs</h2>
     <ul>
         {% for club in school.clubs %}
-            <li><a href="{{ request.route_url('club', id=club._id) }}">{{ club.name }}</a></li>
+            <li><a href="{{ url_for('club', id=club._id) }}">{{ club.name }}</a></li>
         {% endfor %}
     </ul>
 {% endblock %}

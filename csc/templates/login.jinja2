@@ -5,16 +5,20 @@
     <span>{{ message }}</span>
 
     <form action="{{ url }}" method="post">
-        <input type="hidden" name="came_from" value="{{ came_from }}"/>
+        <input type="hidden" name="came_from" value="{{ came_from }}">
 
         <label for="username">Username</label>
-        <input type="text" id="username" name="username" value="{{ username }}"/>
+        <input type="text" id="username" name="username" value="{{ username }}">
         <br>
 
         <label for="password">Password</label>
-        <input type="password" id="password" name="password"/>
+        <input type="password" id="password" name="password">
         <br>
 
-        <input type="submit" name="form.submitted" value="Log In"/>
+        <input type="checkbox" id="remember" name="remember" value="{{ remember }}">
+        <label for="remember"> Remember Me</label>
+        <br>
+
+        <input type="submit" name="form.submitted" value="Log In">
     </form>
 {% endblock %}

@@ -31,7 +31,7 @@
                                 <div id="collapsible-{{ club._id }}" class="collapse">
                                     <p>{{ user_profile.position_in_club(club._id) }}</p>
                                     <p>Member: ???</p>
-                                    <p><a href="{{ request.route_url('club', id=club._id) }}">Go to {{ club.name }}
+                                    <p><a href="{{ url_for('club', id=club._id) }}">Go to {{ club.name }}
                                         Page</a></p>
                                 </div>
                             </div>

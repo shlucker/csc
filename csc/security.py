@@ -10,7 +10,3 @@ def hash_password(pw):
 def check_password(pw, hashed_pw):
     expected_hash = hashed_pw.encode('utf8')
     return bcrypt.checkpw(pw.encode('utf8'), expected_hash)
-
-
-def groupfinder(userid, request):
-    return []

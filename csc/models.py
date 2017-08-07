@@ -2,9 +2,11 @@ import random
 import re
 from collections import defaultdict
 
+import flask_login
 import pymongo
 
-from csc import security
+import csc.security as security
+from csc import login_manager
 
 client = pymongo.MongoClient()
 db = client['csc']
@@ -29,13 +31,16 @@ class MongoDbEntity:
 
     @classmethod
     def get_by_id(cls, id):
-        prefix = id[:4]
-        collection = id2collection[prefix]
-        return_class = id2class[id[:4]]
+        try:
+            prefix = id[:4]
+            collection = id2collection[prefix]
+            return_class = id2class[id[:4]]
 
-        doc = collection.find_one({'_id': id})
-        if doc:
-            return return_class(doc)
+            doc = collection.find_one({'_id': id})
+            if doc:
+                return return_class(doc)
+        except:
+            pass
 
     @classmethod
     def get_by_ids(cls, ids):
@@ -189,7 +194,14 @@ class School(MongoDbEntity):
         return User.find({'school_ids': self.json['_id']})
 
 
-class User(MongoDbEntity):
+class User(MongoDbEntity, flask_login.UserMixin):
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.get_by_username(user_id)
+
+    def get_id(self):
+        return self.username
+
     @property
     def clubs(self):
         if self._clubs is None:  # all the attirbutes not present in the json document are returned as None

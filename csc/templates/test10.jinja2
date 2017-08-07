@@ -5,8 +5,8 @@
            onclick="toggleFunction()" title="Toggle Navigation Menu">
             <i class="fa fa-bars"></i>
         </a>
-        <a href="{{ request.route_url('home') }}" class="w3-bar-item w3-button">UCTechWeb</a>
-        <a href="{{ request.route_url('home') }}" class="w3-bar-item w3-button"><i class="glyphicon glyphicon-home"></i>Home</a>
+        <a href="{{ url_for('home') }}" class="w3-bar-item w3-button">UCTechWeb</a>
+        <a href="{{ url_for('home') }}" class="w3-bar-item w3-button"><i class="glyphicon glyphicon-home"></i>Home</a>
         <a href="#about" class="w3-bar-item w3-button w3-hide-small"><i class="glyphicon glyphicon-list-alt"></i> Job
             Opportunities</a>
         <a href="#students" class="w3-bar-item w3-button w3-hide-small"><i class="glyphicon glyphicon-flash"></i>
@@ -21,10 +21,10 @@
         <a href="#all users" class="w3-bar-item w3-button w3-hide-small"><i
                 class="glyphicon glyphicon-tower"></i>
             My Clubs</a>
-        <a href="{{ request.route_url('user', id=user._id) }}" class="w3-bar-item w3-button w3-hide-small pull-right"><i
+        <a href="{{ url_for('user', id=user._id) }}" class="w3-bar-item w3-button w3-hide-small pull-right"><i
                 class="glyphicon glyphicon-user"></i>
             My Profile</a>
-        <a href="{{ request.route_url('logout') }}" class="w3-bar-item w3-button w3-hide-small pull-right"><i
+        <a href="{{ url_for('logout') }}" class="w3-bar-item w3-button w3-hide-small pull-right"><i
                 class="glyphicon glyphicon-off"></i>
             Log out</a>
         <u>

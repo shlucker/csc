@@ -2,7 +2,7 @@
     <div>
         <div>Users</div>
         {% for user in users %}
-            <div><a href="{{ request.route_url('user', id=user._id) }}">{{ user.name }}</a></div>
+            <div><a href="{{ url_for('user', id=user._id) }}">{{ user.name }}</a></div>
         {% endfor %}
     </div>
 {% endif %}
@@ -10,7 +10,7 @@
     <div>
         <div>Clubs</div>
         {% for club in clubs %}
-            <div><a href="{{ request.route_url('club', id=club._id) }}">{{ club.name }}</a></div>
+            <div><a href="{{ url_for('club', id=club._id) }}">{{ club.name }}</a></div>
         {% endfor %}
     </div>
 {% endif %}
@@ -18,7 +18,7 @@
     <div>
         <div>Posts</div>
         {% for post in posts %}
-            <div><a href="{{ request.route_url('post', id=post._id) }}">{{ post.name }}</a></div>
+            <div><a href="{{ url_for('post', id=post._id) }}">{{ post.name }}</a></div>
         {% endfor %}
     </div>
 {% endif %}
@@ -26,7 +26,7 @@
     <div>
         <div>Schools</div>
         {% for school in schools %}
-            <div><a href="{{ request.route_url('school', id=school._id) }}">{{ school.name }}</a></div>
+            <div><a href="{{ url_for('school', id=school._id) }}">{{ school.name }}</a></div>
         {% endfor %}
     </div>
 {% endif %}
