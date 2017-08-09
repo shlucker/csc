@@ -14,14 +14,14 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='Main_Page.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='Main_Page2.css') }}"/>
-    <script src="static/main_page3.js"></script>
+    <script src="/static/main_page3.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='csc.css') }}"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
 <body>
-{% if user.is_authenticated %}
+{% if current_user.is_authenticated %}
     {% include 'nav_authenticated.jinja2' %}
 {% else %}
     {% include 'nav_unauthenticated.jinja2' %}

@@ -29,13 +29,8 @@ def login():
     else:
         if flask.request.method == 'POST':
             flask.flash("<strong>Invalid Credentials.</strong> Please try again.", "danger")
-        return flask.render_template('login.jinja2',
-                                     entries={'name': 'Login',
-                                              'message': 'message',
-                                              'url': 'login_url',
-                                              'username': username,
-                                              'remember': remember,
-                                              'came_from': came_from})
+        return flask.render_template('login.jinja2', name='Login', message='message', url='login_url',
+                                     username=username, remember=remember, came_from=came_from)
 
 
 @app.route('/logout')
@@ -56,10 +51,7 @@ def club(id):
         return flask.redirect(flask.url_for('login'))
 
     club = Club.get_by_id(id)
-    return flask.render_template('club.jinja2',
-                                 entries={'name': 'User profile',
-                                          'user': flask_login.current_user,
-                                          'club': club})
+    return flask.render_template('club.jinja2', name='User profile', club=club)
 
 
 @app.route('/company/<id>')
@@ -68,23 +60,16 @@ def company(id):
         return flask.redirect(flask.url_for('login'))
 
     company = Company.get_by_id(id)
-    return flask.render_template('company.jinja2',
-                                 entries={'name': 'User profile',
-                                          'user': flask_login.current_user,
-                                          'company': company})
+    return flask.render_template('company.jinja2', name='User profile', company=company)
 
 
 @app.route('/competition/<id>')
-@app.route('/Competition/<id>')
 def competition(id):
     if not flask_login.current_user:
         return flask.redirect(flask.url_for('login'))
 
     competition = Competition.get_by_id(id)
-    return flask.render_template('competition.jinja2',
-                                 entries={'name': 'User profile',
-                                          'user': flask_login.current_user,
-                                          'competition': competition})
+    return flask.render_template('competition.jinja2', name='User profile', competition=competition)
 
 
 @app.route('/competition_host/<id>')
@@ -93,34 +78,29 @@ def competition_host(id):
         return flask.redirect(flask.url_for('login'))
 
     competition_host = CompetitionHost.get_by_id(id)
-    return flask.render_template('competition_host.jinja2',
-                                 entries={'name': 'User profile',
-                                          'user': flask_login.current_user,
-                                          'competition_host': competition_host})
+    return flask.render_template('competition_host.jinja2', name='User profile', competition_host=competition_host)
 
 
 @app.route('/create_user')
 def create_user():
     if not user or not 'admin' in user:
         raise flask.abort(403)
-    return flask.render_template('create_user.jinja2',
-                                 entries={'name': 'Create user',
-                                          'user': flask_login.current_user})
+    return flask.render_template('create_user.jinja2', name='Create user')
 
 
 @app.route('/entity/<id>')
 def entity(id):
     """ Redirect to user, club or any other endpoint identified by id
     I don't like this function, this should never be called, but it works for now """
-    prefix = ''.split('-')[0]
-    endpoint = id2collection(prefix)
+    prefix = id.split('-')[0]
+    endpoint = id2collection[prefix].name
     return flask.redirect(flask.url_for(endpoint, id=id))
 
 
 @app.route('/')
 @app.route('/home')
 def home():
-    return flask.render_template('home.jinja2', name='Home', user=flask_login.current_user)
+    return flask.render_template('home.jinja2', name='Home')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -160,11 +140,7 @@ def register():
             User.create(username=username, email=email, password=password)
             return flask.redirect(flask.url_for('login', username=username))
 
-    return flask.render_template('register.jinja2',
-                                 entries={'username': username,
-                                          'email': email,
-                                          'password': password,
-                                          'errors': errors})
+    return flask.render_template('register.jinja2', username=username, email=email, password=password, errors=errors)
 
 
 @app.route('/school/<id>')
@@ -173,10 +149,7 @@ def school(id):
         return flask.redirect(flask.url_for('login'))
 
     school = School.get_by_id(id)
-    return flask.render_template('school.jinja2',
-                                 entries={'name': 'User profile',
-                                          'user': flask_login.current_user,
-                                          'school': school})
+    return flask.render_template('school.jinja2', name='User profile', school=school)
 
 
 @app.route('/search/<txt>')
@@ -186,18 +159,14 @@ def search(txt):
     clubs = list(Club.find_text(txt, 0, 5))
     schools = list(School.find_text(txt, 0, 5))
 
-    return flask.render_template('search_result_small.jinja2',
-                                 entries={'users': users,
-                                          'posts': posts,
-                                          'clubs': clubs,
-                                          'schools': schools})
+    return flask.render_template('search_result_small.jinja2', users=users, posts=posts, clubs=clubs, schools=schools)
 
 
 @app.route('/user/<id>')
 def user(id):
     if not flask_login.current_user:
         return flask.redirect(flask.url_for('login'))
-    if not 'admin' in user and user._id != id:
+    if not 'admin' in flask_login.current_user and flask_login.current_user._id != id:
         raise flask.abort(403)
 
     user_profile = User.get_by_id(id)
@@ -205,63 +174,60 @@ def user(id):
     if not user_profile:
         raise flask.abort(404)
 
-    return flask.render_template('user.jinja2',
-                                 entries={'name': 'User profile',
-                                          'user': flask_login.current_user,
-                                          'user_profile': user_profile})
+    return flask.render_template('user.jinja2', name='User profile', user_profile=user_profile)
 
 
 ########## TemporaryViews ##########
 @app.route('/test')
 def test():
-    return flask.render_template('test.jinja2', entries={'user': flask_login.current_user})
+    return flask.render_template('test.jinja2')
 
 
 @app.route('/test1')
 def test1():
-    return flask.render_template('test1.jinja2', entries={'user': flask_login.current_user})
+    return flask.render_template('test1.jinja2')
 
 
 @app.route('/test2')
 def test2():
-    return flask.render_template('test2.jinja2', entries={'user': flask_login.current_user})
+    return flask.render_template('test2.jinja2')
 
 
 @app.route('/test3')
 def test3():
-    return flask.render_template('test3.jinja2', entries={'user': flask_login.current_user})
+    return flask.render_template('test3.jinja2')
 
 
 @app.route('/test4')
 def test4():
-    return flask.render_template('test4.jinja2', entries={'user': flask_login.current_user})
+    return flask.render_template('test4.jinja2')
 
 
 @app.route('/test5')
 def test5():
-    return flask.render_template('test5.jinja2', entries={'user': flask_login.current_user})
+    return flask.render_template('test5.jinja2')
 
 
 @app.route('/test6')
 def test6():
-    return flask.render_template('test6.jinja2', entries={'user': flask_login.current_user})
+    return flask.render_template('test6.jinja2')
 
 
 @app.route('/test7')
 def test7():
-    return flask.render_template('test7.jinja2', entries={'user': flask_login.current_user})
+    return flask.render_template('test7.jinja2')
 
 
 @app.route('/test8')
 def test8():
-    return flask.render_template('test8.jinja2', entries={'user': flask_login.current_user})
+    return flask.render_template('test8.jinja2')
 
 
 @app.route('/test9')
 def test9():
-    return flask.render_template('test9.jinja2', entries={'user': flask_login.current_user})
+    return flask.render_template('test9.jinja2')
 
 
 @app.route('/test10')
 def test10():
-    return flask.render_template('test10.jinja2', entries={'user': flask_login.current_user})
+    return flask.render_template('test10.jinja2')

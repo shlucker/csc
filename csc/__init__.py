@@ -2,6 +2,7 @@ import flask
 import flask_login
 
 app = flask.Flask(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.secret_key = "super secret key"
 
 login_manager = flask_login.LoginManager()

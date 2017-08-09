@@ -5,9 +5,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="{{ request.static_url('csc:static/csc.js') }}"></script>
-    <link rel="stylesheet" href="{{ request.static_url('csc:static/csc.css') }}"/>
-    <link rel="shortcut icon" href="{{ request.static_url('csc:static/favicon.ico') }}">
+    <script src="{{ url_for('static', filename='csc.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='csc.css') }}"/>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top navbar-collapse" role="navigation">

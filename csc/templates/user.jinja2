@@ -4,7 +4,7 @@
     <div class="container-fluid bg-1 row center">
         <div class="col-md-4 row"><h1 align="center">{{ user_profile.name }}</h1></div>
         <div class="container row ">
-            <img src="{{ request.static_url('csc:static/' + user_profile.photo) if user_profile.photo else request.static_url('csc:static/question_mark.jpg') }}"
+            <img src="{{ url_for('static', filename=user_profile.photo) if user_profile.photo else url_for('static',filename='question_mark.jpg') }}"
                  class="img-responsive img-square center-block" alt="Drone" width="300" height="350"></div>
         <div class="text-center">
             <button type="button" class="btn btn-primary">Photos</button>
@@ -25,7 +25,7 @@
                             <div class="col-sm-4">
                                 <p class="text-center"><h4>{{ club.name }}</h4><br>
                                 <a href="#collapsible-{{ club._id }}" data-toggle="collapse">
-                                    <img src="{{ club.image('cover') if club.image('cover') else request.static_url('csc:static/question_mark.jpg') }}"
+                                    <img src="{{ club.image('cover') if club.image('cover') else url_for('static', filename='question_mark.jpg') }}"
                                          class="img-circle person" alt="Drone" width="255" height="255">
                                 </a>
                                 <div id="collapsible-{{ club._id }}" class="collapse">
@@ -61,7 +61,7 @@
 
     <div class="container fluid text-center">
         {% if user_profile.resume %}
-            <h3><a href="{{ request.static_url('csc:static/' + user_profile.resume) }}">My Resume</a></h3>
+            <h3><a href="{{ url_for('static', filename=user_profile.resume) }}">My Resume</a></h3>
         {% else %}
             <h3>Sorry, no resume here :(</h3>
         {% endif %}

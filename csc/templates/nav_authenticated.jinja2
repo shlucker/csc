@@ -19,8 +19,8 @@
                 <li class="dropdown" id="authdrop">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">My Clubs <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        {% if user.clubs %}
-                            {% for club in user.clubs %}
+                        {% if current_user.clubs %}
+                            {% for club in current_user.clubs %}
                                 <li><a href={{ url_for('club', id=club._id) }} data-toggle="tooltip"
                                        data-placement="right"
                                        title="{{ club.name }}">{{ club.short_name or club.name }}</a>
@@ -33,15 +33,15 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav pull-right">
-                <li><a href="{{ url_for('user', id=user._id) }}">My Profile</a></li>
+                <li><a href="{{ url_for('user', id=current_user._id) }}">My Profile</a></li>
                 <li><a href="{{ url_for('logout') }}">Log out</a></li>
             </ul>
             <form class="navbar-form pull-right">
                 <div class="input-group fluid">
                     <input type="text" id="search_box" name="search_value"
-                           value="{{ user.search_box.search_value if user and user.search_box else '' }}"
-                           data-search_url="{{ user.search_box.search_url if user and user.search_box else 'search/' }}"
-                           title='{{ user.search_box.search_title if user and user.search_box else 'Search by School, Person, Club, Company, Competition, State, City' }}'
+                           value="{{ current_user.search_box.search_value if current_user and current_user.search_box else '' }}"
+                           data-search_url="{{ current_user.search_box.search_url if current_user and current_user.search_box else 'search/' }}"
+                           title='{{ current_user.search_box.search_title if current_user and current_user.search_box else 'Search by School, Person, Club, Company, Competition, State, City' }}'
                            class="form-control" placeholder="Search">
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="submit">

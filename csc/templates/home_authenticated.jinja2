@@ -1,17 +1,17 @@
-{% if user %}
-    <p>Your school is: {{ user.school.name }}</p>
+{% if current_user %}
+    <p>Your school is: {{ current_user.school.name }}</p>
 {% endif %}
-{% if user and user.clubs %}
+{% if current_user and current_user.clubs %}
     <p>Your clubs are:</p>
     <ul>
-        {% for club in user.clubs %}
+        {% for club in current_user.clubs %}
             <li>{{ club.name }} - {{ club.school.name }}</li>
         {% endfor %}
     </ul>
 {% endif %}
-{% if user.to_posts %}
+{% if current_user.to_posts %}
     <h2>Posts to you</h2>
-    {% for post in user.to_posts %}
+    {% for post in current_user.to_posts %}
         {% include 'post.jinja2' %}
     {% endfor %}
 {% endif %}

@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
     <script src="assets/js/bs-animation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
-    <script src="{{ request.static_url('csc:static/csc.js') }}"></script>
-    <link rel="stylesheet" href="{{ request.static_url('csc:static/csc.css') }}"/>
-    <link rel="shortcut icon" href="{{ request.static_url('csc:static/favicon.ico') }}">
-    <link rel="stylesheet" href="{{ request.static_url('csc:static/Main_Page.css') }}"/>
-    <link rel="stylesheet" href="{{ request.static_url('csc:static/Main_Page2.css') }}"/>
-    <link rel="stylesheet" href="{{ request.static_url('csc:static/Main_Page3.js') }}"/>
+    <script src="{{ url_for('static', filename='csc.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='csc.css') }}"/>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Main_Page.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Main_Page2.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Main_Page3.js') }}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </header>
@@ -129,9 +129,9 @@
             <form class="navbar-form navbar-right">
                 <div class="input-group pull-right">
                     <input type="text" id="search_box" name="search_value"
-                           value="{{ user.search_box.search_value if user.search_box else '' }}"
-                           data-search_url="{{ user.search_box.search_url if user.search_box else '' }}"
-                           title='{{ user.search_box.search_title if user.search_box else '' }}'
+                           value="{{ current_user.search_box.search_value if current_user.search_box else '' }}"
+                           data-search_url="{{ current_user.search_box.search_url if current_user.search_box else '' }}"
+                           title='{{ current_user.search_box.search_title if current_user.search_box else '' }}'
                            class="form-control" placeholder="Search">
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="submit">
