@@ -1,78 +1,37 @@
-<html>
-<header>
-    <title>Form</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" media="all">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
-    <script src="assets/js/bs-animation.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
-    <script src="{{ url_for('static', filename='csc.js') }}"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='csc.css') }}"/>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='Main_Page.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for('static', filename='Main_Page2.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for('static', filename='form.js') }}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</header>
-<body>
-<input type="radio" name="radionbutton" value="1" id="button1"/>
-<input type="radio" name="radionbutton" value="2" id="button2"/>
-<div class="handshake">
-    <div class="container">
-        <div id="signupbox" style=" margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-            <div class="panel panel-info">
-                <div class="panel-heading center-block">
-                    <div class="panel-title center-block">Who are you?</div>
-                    <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink"
-                                                                                               href="{{ url_for('recover') }}">Sign
-                        In</a></div>
-                </div>
-                <div class="panel-body container-fluid">
-                    <form method="post" action=".">
-                        <input type='hidden' name='csrfmiddlewaretoken' value='XFe2rTYl9WOpV8U6X5CfbIuOZOELJ97S'/>
-                        <form class="form-horizontal" method="post">
-                            <input type='hidden'>
-                            <div id="div_id_select" class="form-group required">
-                                <div class="controls col-md-8 center-block" style="margin-left: 70px">
-
-                                    <label class="radio-inline"><input type="radio" checked="checked" name="select"
-                                                                       id="id_select_1" value="S"
-                                                                       style="margin-bottom: 10px">Student</label>
-                                    <label class="radio-inline"><input type="radio" checked="checked" name="select"
-                                                                       id="id_select_1" value="S"
-                                                                       style="margin-bottom: 10px">Company</label>
-                                    <label class="radio-inline"> <input type="radio" name="select" id="id_select_2"
-                                                                        value="P" style="margin-bottom: 10px">Competition
-                                        Host </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="controls col-md-offset-4 col-md-8 ">
-                                    <div id="div_id_terms" class="checkbox required">
-
+<ul class="dropdown-menu dropdow-lr animated flipInX pull-right" role="menu">
+                            <div class="col-lg-12">
+                                <div class="text-center"><h3>Create User </h3></div>
+                                <form id="ajax-register-form" action="{{ request.route_url('register') }}" method="post"
+                                      role="form"
+                                      autocomplete="off">
+                                    <div class="form-group">
+                                        <input type="text" name="username" id="username" tabindex="1"
+                                               class="form-control"
+                                               placeholder="Username" value="">
                                     </div>
-
-                                </div>
+                                    <div class="form-group">
+                                        <input type="email" name="email" id="email" tabindex="1" class="form-control"
+                                               placeholder="Email Address" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="password" id="password" tabindex="2"
+                                               class="form-control"
+                                               placeholder="Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="confirm-password" id="confirm-password"
+                                               tabindex="2"
+                                               class="form-control" placeholder="Confirm Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-xs-6 col-xs-offset-3">
+                                                <input type="submit" class="btn btn-info" value="Register">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" class="hide" name="token" id="token"
+                                           value="7c6f19960d63f53fcd05c3e0cbc434c0">
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <div class="aab controls col-md-4 "></div>
-                                <div class="controls col-md-8 " style="margin-left: 170px">
-                                    <input type="submit" name="signup" value="next"
-                                           class="btn btn-primary btn btn-info"
-                                           id="submit-id-signup"/>
-                                </div>
-                            </div>
-                        </form>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+                        </ul>

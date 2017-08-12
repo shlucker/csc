@@ -1,219 +1,285 @@
 {% extends "base.jinja2" %}
 
 {% block content %}
-    <div class="container-fluid bg-1 row center">
-        <div class="col-md-4"><h3 align="center">Expected Graduation:May 2017</h3></div>
-        <div class="col-md-4"><h3 align="center">Brandon Torres</h3></div>
-        <div class="col-md-4"><h3 align="center">Mechanical Engineering</h3></div>
-        <div class="container">
-            <img src="/static/Brandon_Pic.jpg" class="img-responsive img-square center-block" alt="Drone" width="300"
-                 height="350"></div>
-        <div class="text-center">
-            <button type="button" class="btn btn-primary">Photos</button>
-            <button type="button" class="btn btn-primary">Videos</button>
-            <button type="button" class="btn btn-primary">Message</button>
-            <button type="button" class="btn btn-primary">Email</button>
-            <button type="button" class="btn btn-primary">Call</button>
-            <div class="container">
-                <div id="band" class="container text-center">
-                    <h3>University of Missouri Columbia</h3>
-                    <p><em>About me</em></p>
-                    <p>I am currently a student at the University of Missouri Columbia majoring in Mechanical &
-                        Aerospace Engineering. To date I have gained hands on experience in many areas of aerospace
-                        engineering including competing in an Intercollegiate Rocket Engineering Competition for AIAA
-                        (American Institute of Aeronautics and Astronautics) MU and an Unmanned Aerial Vehicle
-                        Competition for ASME (American Society of Mechanical Engineers). As of now I hold an officer
-                        position in 4 academic clubs and 1 national Vice Chair of Communications of the Student District
-                        Operating board of District 2 for ASME. At the University of Missouri I am trying not only to
-                        obtain great education but to make a difference for the future of the Engineering program. One
-                        way I have reached that goal was recently I co-founded the first MU chapter academic club SEDS.
-                        (Students for the Exploration and Development of Space). The club is designed to promote space
-                        exploration and develop a better understanding of space. Other than engineering competitions I
-                        try to reach out to the younger generation students in our local community to help promote the
-                        importance of studying STEM base subjects. Hosting rocket camps, traveling to schools to teach,
-                        and giving tours are just a small amount of the involvement that I’ve done.</p>
-                    <br>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <p class="text-center"><h4>The American Society of Mechanical Engineers</h4></p><br>
-                            <a href="#demo" data-toggle="collapse">
-                                <img src="static/Drone.jpg" class="img-circle person" alt="Drone" width="255"
-                                     height="255">
-                            </a>
-                            <div id="demo" class="collapse">
-                                <p>Position:Vice President 2014</p>
-                                <p>Member:4 years</p>
-                                <p><a href="/test2">Go to ASME Page</a></p>
-                            </div>
+
+    <div container>
+        <div class="center-block">
+            <div class="container col-sm-6">
+                <div id="signupbox" style=" margin-top:50px"
+                     class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Students</div>
                         </div>
-                        <div class="col-sm-4">
-                            <p class="text-center"><h4>The American Institute of Aeronautics and Astronautics</h4></p>
-                            <br>
-                            <a href="#demo2" data-toggle="collapse">
-                                <img src="static/Rocket.jpg" class="img-circle person" alt="Rocket" width="255"
-                                     height="255">
-                            </a>
-                            <div id="demo2" class="collapse">
-                                <p>Position:Treasurer</p>
-                                <p>Member:4 years</p>
-                                <a href="#demo">Go to AIAA Page</a>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <p class="text-center"><h4>3D Printing Club</h4></p>
-                            <br>
-                            <a href="#demo3" data-toggle="collapse">
-                                <img src="/static/3dp.jpg" class="img-circle person" alt="Rocket" width="255"
-                                     height="255">
-                            </a>
-                            <div id="demo3" class="collapse">
-                                <p>Position:Secretary</p>
-                                <p>Member:4 years</p>
-                                <a href="/test2">Go to 3DP Page</a>
-                            </div>
+                        <div class="panel-body">
+                            <form method="post" action="">
+                                <form class="form-horizontal" method="post">
+                                    <div id="div_id_username" class="form-group required">
+                                        <label for="id_username" class="control-label col-md-4  requiredField">
+                                            Username<span
+                                                class="asteriskField">*</span> </label>
+                                        <div class="controls col-md-8 ">
+                                            <input class="input-md  textinput textInput form-control" id="id_username"
+                                                   maxlength="30" name="username" placeholder="Display User Name"
+                                                   style="margin-bottom: 10px" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div id="div_id_email" class="form-group required">
+                                        <label for="id_email" class="control-label col-md-4  requiredField"> E-mail<span
+                                                class="asteriskField">*</span> </label>
+                                        <div class="controls col-md-8 ">
+                                            <input class="input-md emailinput form-control" id="id_email" name="email"
+                                                   placeholder="Use School Email Address"
+                                                   style="margin-bottom: 10px"
+                                                   type="email"/>
+                                        </div>
+                                    </div>
+                                    <div id="div_id_password1" class="form-group required">
+                                        <label for="id_password1"
+                                               class="control-label col-md-4  requiredField">Password<span
+                                                class="asteriskField">*</span> </label>
+                                        <div class="controls col-md-8 ">
+                                            <input class="input-md textinput textInput form-control" id="id_password1"
+                                                   name="password1" placeholder="********" style="margin-bottom: 10px"
+                                                   type="password"/>
+                                        </div>
+                                    </div>
+                                    <div id="div_id_password2" class="form-group required">
+                                        <label for="id_password2" class="control-label col-md-4  requiredField">
+                                            Re:password<span
+                                                class="asteriskField">*</span> </label>
+                                        <div class="controls col-md-8 ">
+                                            <input class="input-md textinput textInput form-control" id="id_password2"
+                                                   name="password2" placeholder="********" style="margin-bottom: 10px"
+                                                   type="password"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="aab controls col-md-4 "></div>
+                                        <div class="controls col-md-8 ">
+                                            <a href="test8" class="btn btn-primary" role="button">Next</a>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="embed-responsive embed-responsive-4by3">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/rsOfBM7p8JM"></iframe>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <h3>American Society of Mechanical Engineers</h3><br>
-                <h4><strong>MISSION:</strong> Design a small UAV to carry a cargo through two gates, see below, drop a
-                    payload and return to the starting point. This is an initial proof of concept prototype. You must
-                    design and build, at a minimum, the propulsion and control system for the UAV yourself. You cannot
-                    purchase and modify an existing commercially available vehicle. The device must be able to maneuver
-                    around and through obstacles, change height, and pass through a hoop for sizing.</h4><br>
-                <p><strong>My Part:</strong> I was incharge of the design team. I blah blah blah</p>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="embed-responsive embed-responsive-4by3">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/oSbm2S1ukgs"></iframe>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <h3>American Institute of Aeronautics and Astronautics</h3><br>
-                <h4><strong>MISSION:</strong> In this competition, students are tasked to build a rocket that can carry
-                    a 10 lb payload to 25,000 ft AGL for the Advanced category. Students are awarded more points in the
-                    competition for the amount of parts designed and manufactured by the students themselves such as
-                    avionics, propulsion, structures, recovery, and payloads. </h4><br>
-                <p><strong>My Part:</strong> I was in charge of designing the recovery mechanism for the rocket. </p>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="embed-responsive embed-responsive-4by3">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/1A430v-jIDM"></iframe>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <h3>3d Printing Club</h3><br>
-                <h4><strong>MISSION:</strong> 3DPC's goal is to give students the opportunity to dive into the emerging
-                    technology of 3D printing through hands-on learning and skills development. Please visit
-                    3dmizzou.com for more information.</h4><br>
-                <p><strong>My Part:</strong> I development a plan to create bobble heads for students to raise money for
-                    the club. We were able to raise $1300 in only 6 hours allowing us to purchase high dollar equipment
-                    for the club.</p>
-            </div>
-        </div>
-    </div>
-    <div class="container fluid text-center">
-        <h3><a href="\static\Fake Resume.pdf">My Resume</a></h3>
-        <br>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel-footer">
-                        <div class="row">
-                            <div class="col-lg-2">
-                                <ul class="list-unstyled">
-                                    <li><h4 class="text-primary">STUFF</h4>
-                                    <li>
-                                    <li><a href="#" id="">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                </ul>
-                            </div>
 
-                            <div class="col-lg-2">
-                                <ul class="list-unstyled">
-                                    <li><h4 class="text-primary">STUFF</h4>
-                                    <li>
-                                    <li><a href="#" id="">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                </ul>
-                                <ul class="list-unstyled">
-                                    <li><h4 class="text-primary">STUFF</h4>
-                                    <li>
-                                    <li><a href="#" id="">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                </ul>
-                            </div>
 
-                            <div class="col-lg-2">
-                                <ul class="list-unstyled">
-                                    <li><h4 class="text-primary">STUFF</h4>
-                                    <li>
-                                    <li><a href="#" id="">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                </ul>
-                            </div>
+    <div container>
+        <div class="center-block">
+            <div class="container col-sm-6">
+                <div id="signupbox" style=" margin-top:50px"
+                     class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Company</div>
+                        </div>
+                        <div class="panel-body">
+                            <form method="post" action="">
+                                <form class="form-horizontal" method="post">
+                                    <div id="div_id_username" class="form-group required">
+                                        <label for="id_username" class="control-label col-md-4  requiredField">
+                                            Username<span
+                                                class="asteriskField">*</span> </label>
+                                        <div class="controls col-md-8 ">
+                                            <input class="input-md  textinput textInput form-control" id="id_username"
+                                                   maxlength="30" name="username" placeholder="Company User Name"
+                                                   style="margin-bottom: 10px" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div id="div_id_email" class="form-group required">
+                                        <label for="id_email" class="control-label col-md-4  requiredField">E-mail<span
+                                                class="asteriskField">*</span> </label>
+                                        <div class="controls col-md-8 ">
+                                            <input class="input-md emailinput form-control" id="id_email" name="email"
+                                                   placeholder="Use Company Email Address"
+                                                   style="margin-bottom: 10px"
+                                                   type="email"/>
+                                        </div>
+                                    </div>
+                                    <div id="div_id_password1" class="form-group required">
+                                        <label for="id_password1"
+                                               class="control-label col-md-4  requiredField">Password<span
+                                                class="asteriskField">*</span> </label>
+                                        <div class="controls col-md-8 ">
+                                            <input class="input-md textinput textInput form-control" id="id_password1"
+                                                   name="password1" placeholder="********" style="margin-bottom: 10px"
+                                                   type="password"/>
+                                        </div>
+                                    </div>
+                                    <div id="div_id_password2" class="form-group required">
+                                        <label for="id_password2" class="control-label col-md-4  requiredField">
+                                            Re:password<span
+                                                class="asteriskField">*</span> </label>
+                                        <div class="controls col-md-8 ">
+                                            <input class="input-md textinput textInput form-control" id="id_password2"
+                                                   name="password2" placeholder="********" style="margin-bottom: 10px"
+                                                   type="password"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="aab controls col-md-4 "></div>
+                                        <div class="controls col-md-8 ">
+                                            <a href="test8" class="btn btn-primary" role="button">Next</a>
+                                        </div>
+                                    </div>
 
-                            <div class="col-lg-2">
-                                <ul class="list-unstyled">
-                                    <li><h4 class="text-primary">STUFF</h4>
-                                    <li>
-                                    <li><a href="#" id="">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                    <li><a href="#" id="Techinfo">thing</a></li>
-                                </ul>
-                            </div>
+                                </form>
 
-                            <div class="col-lg-2">
-                                <ul class="list-unstyled">
-                                    <li><h4 class="text-danger">Sign up</h4>
-                                    <li>
-                                </ul>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <br><br><br>
+
+
+    <div container>
+        <div class="center-block">
+            <div class="container col-sm-6">
+                <div id="signupbox" style=" margin-top:50px"
+                     class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Competition Host</div>
+                        </div>
+                        <div class="panel-body">
+                            <form method="post" action="">
+                                <form class="form-horizontal" method="post">
+                                    <div id="div_id_username" class="form-group required">
+                                        <label for="id_username" class="control-label col-md-4  requiredField">
+                                            Username<span
+                                                class="asteriskField">*</span> </label>
+                                        <div class="controls col-md-8 ">
+                                            <input class="input-md  textinput textInput form-control" id="id_username"
+                                                   maxlength="30" name="username" placeholder="Host User Name"
+                                                   style="margin-bottom: 10px" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div id="div_id_email" class="form-group required">
+                                        <label for="id_email" class="control-label col-md-4  requiredField"> E-mail<span
+                                                class="asteriskField">*</span> </label>
+                                        <div class="controls col-md-8 ">
+                                            <input class="input-md emailinput form-control" id="id_email" name="email"
+                                                   placeholder="Host Email Address"
+                                                   style="margin-bottom: 10px"
+                                                   type="email"/>
+                                        </div>
+                                    </div>
+                                    <div id="div_id_password1" class="form-group required">
+                                        <label for="id_password1"
+                                               class="control-label col-md-4  requiredField">Password<span
+                                                class="asteriskField">*</span> </label>
+                                        <div class="controls col-md-8 ">
+                                            <input class="input-md textinput textInput form-control" id="id_password1"
+                                                   name="password1" placeholder="********" style="margin-bottom: 10px"
+                                                   type="password"/>
+                                        </div>
+                                    </div>
+                                    <div id="div_id_password2" class="form-group required">
+                                        <label for="id_password2" class="control-label col-md-4  requiredField">
+                                            Re:password<span
+                                                class="asteriskField">*</span> </label>
+                                        <div class="controls col-md-8 ">
+                                            <input class="input-md textinput textInput form-control" id="id_password2"
+                                                   name="password2" placeholder="********" style="margin-bottom: 10px"
+                                                   type="password"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="aab controls col-md-4 "></div>
+                                        <div class="controls col-md-8 ">
+                                            <a href="test8" class="btn btn-primary" role="button">Next</a>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div container>
+        <div class="center-block">
+            <div class="container col-sm-6">
+                <div id="signupbox" style=" margin-top:50px"
+                     class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Guest</div>
+                        </div>
+                        <div class="panel-body">
+                            <form method="post" action="">
+                                <form class="form-horizontal" method="post">
+                                    <div id="div_id_username" class="form-group required">
+                                        <label for="id_username" class="control-label col-md-4  requiredField">
+                                            Username<span
+                                                class="asteriskField">*</span> </label>
+                                        <div class="controls col-md-8 ">
+                                            <input class="input-md  textinput textInput form-control" id="id_username"
+                                                   maxlength="30" name="username" placeholder="Display User Name"
+                                                   style="margin-bottom: 10px" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div id="div_id_email" class="form-group required">
+                                        <label for="id_email" class="control-label col-md-4  requiredField"> E-mail<span
+                                                class="asteriskField">*</span> </label>
+                                        <div class="controls col-md-8 ">
+                                            <input class="input-md emailinput form-control" id="id_email" name="email"
+                                                   placeholder=" Email Address"
+                                                   style="margin-bottom: 10px"
+                                                   type="email"/>
+                                        </div>
+                                    </div>
+                                    <div id="div_id_password1" class="form-group required">
+                                        <label for="id_password1"
+                                               class="control-label col-md-4  requiredField">Password<span
+                                                class="asteriskField">*</span> </label>
+                                        <div class="controls col-md-8 ">
+                                            <input class="input-md textinput textInput form-control" id="id_password1"
+                                                   name="password1" placeholder="********" style="margin-bottom: 10px"
+                                                   type="password"/>
+                                        </div>
+                                    </div>
+                                    <div id="div_id_password2" class="form-group required">
+                                        <label for="id_password2" class="control-label col-md-4  requiredField">
+                                            Re:password<span
+                                                class="asteriskField">*</span> </label>
+                                        <div class="controls col-md-8 ">
+                                            <input class="input-md textinput textInput form-control" id="id_password2"
+                                                   name="password2" placeholder="********" style="margin-bottom: 10px"
+                                                   type="password"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="aab controls col-md-4 "></div>
+                                        <div class="controls col-md-8 ">
+                                            <a href="test8" class="btn btn-primary" role="button">Next</a>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
