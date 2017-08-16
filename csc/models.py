@@ -8,7 +8,7 @@ import pymongo
 import csc.security as security
 from csc import login_manager
 
-client = pymongo.MongoClient()
+client = pymongo.MongoClient('0.0.0.0', 27017)
 db = client['csc']
 
 
