@@ -1,0 +1,15 @@
+{% extends "base.jinja2" %}
+
+{% block content %}
+    {% if token=='send' %}
+        Your email address has not been verified.<br>
+        Click <a href="{{ url_for('verify_email', email=email, token=token) }}">here</a> to send a verification email.
+    {% else %}
+        An email has been sent to the address {{ email }}.<br>
+        Please click on the link in the email to verify the email address.<br>
+        <br>
+        <a href="{{ url_for('verify_email', email=email, token='send') }}">
+            Send another verification email.
+        </a>
+    {% endif %}
+{% endblock %}

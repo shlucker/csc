@@ -7,6 +7,7 @@ import pymongo
 
 import csc.security as security
 from csc import login_manager
+import csc.exceptions as exceptions
 
 client = pymongo.MongoClient()
 db = client['csc']
@@ -17,6 +18,8 @@ def underscorize(txt):
 
 
 class MongoDbEntity:
+    """ Base class for all the collections in the database """
+
     def __init__(self, json):
         self.json = json
 
@@ -29,8 +32,82 @@ class MongoDbEntity:
     def __contains__(self, a):
         return a in self.json
 
+    def __repr__(self):
+        if 'username' in self:
+            return '<{} - {} - {}>'.format(str(str(self.__class__)[1:-1]), self._id, self.username)
+        return '<{} - {}>'.format(str(str(self.__class__)[1:-1]), self._id)
+
+    @classmethod
+    def find(cls, filter=None, projection=None):
+        """
+        Generic helper for the mongo db find method.
+        Each returned object is casted to the correct class depending on the first 4 characters of the _id
+        """
+        assert not cls is MongoDbEntity and not cls is LoggableUser, \
+            'MongoDbEntity.find_one is intended to be called by an instance of a derived ' \
+            'class, not directely by a MongoDbEntity instance'
+
+        collection = class2collection[cls]
+        if projection:
+            p = {}
+            if '_id' not in projection:
+                p['_id'] = 0
+            p.update({k: 1 for k in projection})
+        else:
+            p = None
+
+        cursor = collection.find(filter, p)
+        while True:
+            yield cls(cursor.next())
+
+    @classmethod
+    def find_one(cls, filter=None, projection=None):
+        """
+        Generic helper for the mongo db find_one method.
+        The returned object is casted to the correct class depending on the first 4 characters of the _id
+        """
+        assert not cls is MongoDbEntity and not cls is LoggableUser, \
+            'MongoDbEntity.find_one is intended to be called by an instance of a derived ' \
+            'class, not directely by a MongoDbEntity instance'
+
+        collection = class2collection[cls]
+        if projection:
+            p = {}
+            if not '_id' in projection:
+                p['_id'] = 0
+            p.update({k: 1 for k in projection})
+        else:
+            p = None
+
+        doc = collection.find_one(filter, p)
+        if doc:
+            return cls(doc)
+
+    @classmethod
+    def find_text(cls, text, skip, limit):
+        """ Text search sorted by textScore """
+        assert not cls is MongoDbEntity and not cls is LoggableUser, \
+            'MongoDbEntity.find_one is intended to be called by an instance of a derived ' \
+            'class, not directely by a MongoDbEntity instance'
+
+        collection = class2collection[cls]
+        cursor = (collection
+                  .find({'$text': {'$search': text}},
+                        {'score': {'$meta': 'textScore'}})
+                  .sort([('score', {'$meta': 'textScore'})])
+                  .skip(skip)
+                  .limit(limit))
+        while True:
+            doc = cursor.next()
+            return_class = id2class[doc['_id'][:4]]
+            yield return_class(doc)
+
     @classmethod
     def get_by_id(cls, id):
+        """
+        The first 4 characters of the id determine what sub-class to search and return
+        (unlike the find<...> methods that are intended to be called as method of the sub-class)
+        """
         try:
             prefix = id[:4]
             collection = id2collection[prefix]
@@ -44,6 +121,7 @@ class MongoDbEntity:
 
     @classmethod
     def get_by_ids(cls, ids):
+        """ find all the objects listed in ids, searching one collection at a time (regardless of the order of ids) """
         id_types = defaultdict(list)
         for i in ids:
             id_types[i[:4]].append(i)
@@ -61,54 +139,13 @@ class MongoDbEntity:
     @classmethod
     def get_by_id_on_field(cls, field_name, id):
         """
-        id can be an id "club 1" or a list of ids ["club 1", "club 3"]
-        Example: to find all the users with 'club 3' in the list of clubs:
-            User.get_by_id_on_field('clubs', 'club 3')
+        id can be an id "club-1" or a list of ids ["club-1", "club-3"]
+        Example: to find all the users with 'club-3' in the list of clubs:
+            User.get_by_id_on_field('clubs', 'club-3')
         """
         cursor = cls.find({field_name: {'$in': id}})
         while True:
             yield cls(next(cursor))
-
-    @classmethod
-    def find_one(cls, filter=None, projection=None):
-        collection = class2collection[cls]
-        if projection:
-            p = {}
-            if not '_id' in projection:
-                p['_id'] = 0
-            p.update({k: 1 for k in projection})
-        else:
-            p = None
-
-        doc = collection.find_one(filter, p)
-        if doc:
-            return cls(doc)
-
-    @classmethod
-    def find(cls, filter=None, projection=None):
-        collection = class2collection[cls]
-        if projection:
-            p = {}
-            if '_id' not in projection:
-                p['_id'] = 0
-            p.update({k: 1 for k in projection})
-        else:
-            p = None
-
-        cursor = collection.find(filter, p)
-        while True:
-            yield cls(cursor.next())
-
-    @classmethod
-    def find_text(cls, text, skip, limit):
-        collection = class2collection[cls]
-        cursor = collection.find({'$text': {'$search': text}},
-                                 {'score': {'$meta': 'textScore'}}).sort([('score', {'$meta': 'textScore'})]).skip(
-            skip).limit(limit)
-        while True:
-            doc = cursor.next()
-            return_class = id2class[doc['_id'][:4]]
-            yield return_class(doc)
 
     def image(self, image_type):
         """
@@ -138,9 +175,15 @@ class MongoDbEntity:
             return sorted(School.get_by_ids(self.school_ids), key=lambda school: school.name)
         return []
 
+    def set_field_value(self, field_name, value):
+        collection = id2collection[self._id[:4]]
+        collection.find_one_and_update(
+            {'_id': self._id},
+            {'$set': {field_name: value}})
+
     @property
     def to_posts(self):
-        """return the posts addressed to self and to all the clubs etc. of self"""
+        """ return the posts addressed to self and to all the clubs etc. of self """
         try:
             recipient_ids = [self.json['_id']]
             try:
@@ -152,13 +195,99 @@ class MongoDbEntity:
             raise e
 
 
+class LoggableUser(MongoDbEntity, flask_login.UserMixin):
+    """ All the objects that represent members that can login derive this class instead of MongoDbEntity """
+
+    @staticmethod
+    def create(username, email, password, member_type):
+        """ return the id of the new user/company/host """
+        if member_type not in ('user', 'cmpn', 'coho'):
+            raise TypeError('Unexpected member type: {}'.format(member_type))
+
+        if LoggableUser.get_by_email(email):
+            raise exceptions.DuplicatedEmail
+
+        while True:
+            try:
+                # TODO the random number is an ugly temporary trick to make unique id
+                collection = id2collection[member_type]
+                res = collection.insert_one({'_id': '{}-{}'.format(member_type, random.randint(1, 1000000000)),
+                                             'username': username,
+                                             'email': email,
+                                             'password': security.hash_password(password)})
+                if (member_type != 'user' and
+                        db.user.find_one({'$or': [{'username': username}, {'email': email}]}) or
+                                member_type != 'cmpn' and db.competition.find_one(
+                            {'$or': [{'username': username}, {'email': email}]}) or member_type != 'coho' and
+                    db.competition_host.find_one(
+                        {'$or': [{'username': username}, {'email': email}]})):
+                    raise pymongo.errors.DuplicateKeyError()
+
+            except pymongo.errors.DuplicateKeyError as e:
+                if 'index: username' in e.args[0]:
+                    raise exceptions.DuplicatedUserName
+                if 'index: email' in e.args[0]:
+                    raise exceptions.DuplicatedEmail
+                # the duplicated field is the _id, because the random number is duplicated
+            else:
+                break
+
+        return res.inserted_id
+
+    @staticmethod
+    def get_by_email(email):
+        """
+        Find user, company or competition host by email, starting by user because it
+        is the case most of times
+        """
+        user = User.find_one({'email': email})
+        if user:
+            return user
+
+        company = Company.find_one({'email': email})
+        if company:
+            return company
+
+        competition_host = CompetitionHost.find_one({'email': email})
+        if competition_host:
+            return competition_host
+
+    @staticmethod
+    def get_by_username(username):
+        """
+        Find user, company or competition host by username, starting by user because it
+        is the case the 90% of times
+        """
+        user = User.find_one({'username': username})
+        if user:
+            return user
+
+        company = Company.find_one({'username': username})
+        if company:
+            return company
+
+        competition_host = CompetitionHost.find_one({'username': username})
+        if competition_host:
+            return competition_host
+
+    def get_id(self):
+        return self.username
+
+    def set_email_verified(self):
+        collection = id2collection[self._id[:4]]
+        collection.find_one_and_update(
+            {'_id': self._id},
+            {'$set': {'email_verified': 1},
+             '$unset': {'verify_email_token': ''}})
+
+
 class Club(MongoDbEntity):
     @property
     def school(self):
         return School(School.find_one({'_id': self.school_id}))
 
 
-class Company(MongoDbEntity):
+class Company(LoggableUser):
     pass
 
 
@@ -167,7 +296,7 @@ class Competition(MongoDbEntity):
         return User.find({'competition_ids': self.json['_id']}, projection)
 
 
-class CompetitionHost(MongoDbEntity):
+class CompetitionHost(LoggableUser):
     pass
 
 
@@ -194,13 +323,10 @@ class School(MongoDbEntity):
         return User.find({'school_ids': self.json['_id']})
 
 
-class User(MongoDbEntity, flask_login.UserMixin):
+class User(LoggableUser):
     @login_manager.user_loader
     def load_user(user_id):
         return User.get_by_username(user_id)
-
-    def get_id(self):
-        return self.username
 
     @property
     def clubs(self):
@@ -230,40 +356,12 @@ class User(MongoDbEntity, flask_login.UserMixin):
     def competitions(self):
         return sorted(Competition.get_by_ids(self.competition_ids), key=lambda competition: competition.name)
 
-    @staticmethod
-    def create(username, email, password):
-        """ return the id of the new user """
-        while True:
-            try:
-                res = db.user.insert_one({'_id': 'user-{}'.format(random.randint(1, 1000000000)),
-                                          'username': username,
-                                          'email': email,
-                                          'password': security.hash_password(password)})
-            except pymongo.errors.DuplicateKeyError:
-                pass
-            else:
-                break
-
-        return res.inserted_id
-
     @property
     def school(self):
         try:
             return School.get_by_id(self.school_ids[0])
         except:
             return None
-
-    @staticmethod
-    def get_by_email(email):
-        user = User.find_one({'email': email})
-        if user:
-            return User(user)
-
-    @staticmethod
-    def get_by_username(username):
-        user = User.find_one({'username': username})
-        if user:
-            return User(user)
 
     @property
     def search_box(self):

@@ -1,0 +1,58 @@
+{% extends "base.jinja2" %}
+
+{% block content %}
+    <div class="bgimg-4">
+        <div class="center-block">
+            <div class="text-center post-content3">
+                <span class="text-top"><h1>SELECT A TYPE OF USER</h1></span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row center-block text-center">
+        <div class="col-sm-4 border container-fluid" style="border:5px solid #cecece">
+            <h2>Companies</h2>
+            <u1 class="list text-center">
+                <li>Get updated on every academic club in the nation</li>
+                <li>Have the ability to get a message across the university clubs</li>
+                <li>Find the students are most passionate about what they do</li>
+                <li>Be able to follow clubs or Universities to see how they are doing.</li>
+            </u1>
+            <a href="{{ url_for('register', member_type='company') }}" class="btn btn-primary" role="button">Company
+                Sign-up</a>
+        </div>
+        <div class="col-sm-4 border container-fluid" style="border:5px solid #cecece">
+            <h1>Students</h1>
+            <u1 class="list text-center">
+                <li>Sign up under your club and represent your school to companies!</li>
+                <li>Communicate with all other University Clubs around the nation!</li>
+                <li>Ask questions on a user friendly in-house Forum</li>
+                <li>Keep up with the NewsFeed of the Other Clubs</li>
+                <li>Utilize your page to recruit students and impress employers</li>
+                <li>Compete with other Univerities.</li>
+                <p><h4>Guests</h4></p>
+                <li>Be able to seek tutoring or students that can help you build</li>
+                <li>See what all universities clubs are doing</li>
+            </u1>
+            <div class="btn-group">
+                <a href="{{ url_for('register', member_type='student') }}" class="btn btn-primary" role="button">Student
+                    Sign-up</a>
+                <a href="{{ url_for('register', member_type='guest') }}" class="btn btn-primary" role="button">Guest
+                    Sign-up</a>
+            </div>
+            </ul>
+            </u1>
+        </div>
+        <div class="col-sm-4 border container-fluid" style="border:5px solid #cecece">
+            <h2>Competition Host</h2>
+            <u1 class="list text-center">
+                <li>Get updated on every academic club in the nation</li>
+                <li>Have the ability to get a message across the university clubs</li>
+                <li>Find the students are most passionate about what they do</li>
+                <li>Be able to follow clubs or Universities to see how they are doing.</li>
+            </u1>
+            <a href="{{ url_for('register', member_type='host') }}" class="btn btn-primary" role="button">Host
+                Sign-up</a>
+        </div>
+    </div>
+{% endblock %}

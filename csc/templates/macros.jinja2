@@ -3,3 +3,16 @@
             src='https://maps.google.com/maps?&amp;q="{{ address|urlencode }}"&amp;output=embed'>
     </iframe>
 {%- endmacro -%}
+
+{% macro render_field(field) %}
+    <dt>{{ field.label }}
+    <dd>{{ field(**kwargs)|safe }}
+        {% if field.errors %}
+            <ul class=errors>
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </dd>
+{% endmacro %}
