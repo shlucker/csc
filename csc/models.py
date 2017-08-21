@@ -9,7 +9,7 @@ import csc.security as security
 from csc import login_manager
 import csc.exceptions as exceptions
 
-client = pymongo.MongoClient()
+client = pymongo.MongoClient('0.0.0.0', 27017)
 db = client['csc']
 
 
