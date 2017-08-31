@@ -1,0 +1,22 @@
+<form action="send_mass_message" method="post">
+{% if users %}
+    <div>
+        <div>Users</div>
+        {% for user in users %}
+            <div><a href="{{ url_for('send_mass_message', id_to_add=user._id) }}">{{ user.name }}</a></div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% if clubs %}
+    <div>
+        <div>Clubs</div>
+        {% for club in clubs %}
+            <div><a href="{{ url_for('send_mass_message', id_to_add=club._id) }}">{{ club.name }}</a></div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% if not users and not clubs %}
+    <div>Sorry, nothing to show</div>
+{% endif %}
+<hr>
+</form>

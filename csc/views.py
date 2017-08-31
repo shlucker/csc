@@ -203,7 +203,7 @@ def school(id):
     return flask.render_template('school.jinja2', name='User profile', school=school)
 
 
-@app.route('/search/<txt>')
+@app.route('/search/<txt>' )
 def search(txt):
     users = list(User.find_text(txt, 0, 5))
     posts = list(Post.find_text(txt, 0, 5))
@@ -211,6 +211,34 @@ def search(txt):
     schools = list(School.find_text(txt, 0, 5))
 
     return flask.render_template('search_result_small.jinja2', users=users, posts=posts, clubs=clubs, schools=schools)
+
+@app.route('/send_mass_message/', methods=['GET'])
+@app.route('/send_mass_message/<id_to_add>', methods=['GET', 'POST'])
+def send_mass_message(id_to_add=None):
+    if not flask_login.current_user:
+        return flask.redirect(flask.url_for('login'))
+    #if not 'admin' in flask_login.current_user and flask_login.current_user._id != id:
+    #    raise flask.abort(403)
+
+    if id_to_add is not None:
+        new_user = User.get_by_id(id)
+        new_club = Club.get_by_id(id)
+    recipient_list = []
+    users = []
+    clubs = []
+
+    #if not user_profile:
+    #    raise flask.abort(404)
+
+    return flask.render_template('mass_message_comp.jinja2', name='Send Mass Message', recipient_list=recipient_list,  users=users, clubs=clubs)
+
+
+@app.route('/send_mass_message/append_search/<txt>')
+def append_search(txt):
+    users = list(User.find_text(txt, 0, 5))
+    clubs = list(Club.find_text(txt, 0, 5))
+
+    return flask.render_template('append_result_small.jinja2', users=users, clubs=clubs)
 
 
 @app.route('/terms_and_conditions')

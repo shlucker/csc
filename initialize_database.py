@@ -38,7 +38,7 @@ db.school.insert_many([
      'website': 'bryanu.edu',
      'description': 'Bryan University has been providing focused, relevant career training programs to students since '
                     '1982, when it was founded in order to meet the growing demands of students. As a career '
-                    'education institution, Bryan University’s goal quickly became to teach students courses that '
+                    'education institution, Bryan University\'s goal quickly became to teach students courses that '
                     'directly related to their field of study, providing relevant information, skills and knowledge. '
                     'Our mission is to improve the lives of our students, our team and our employers. We accomplish '
                     'our mission by providing quality education in an environment that enables our team to thrive and '
@@ -529,7 +529,7 @@ db.user.insert_many([
      'username': 'brandon',
      'password': hash_password('torres'),
      'photo': 'Brandon_Pic.jpg',
-     'about_me': 'I am currently a student at the University of Missouri Columbia majoring in Mechanical & Aerospace Engineering. To date I have gained hands on experience in many areas of aerospace engineering including competing in an Intercollegiate Rocket Engineering Competition for AIAA (American Institute of Aeronautics and Astronautics) MU and an Unmanned Aerial Vehicle Competition for ASME (American Society of Mechanical Engineers). As of now I hold an officer position in 4 academic clubs and 1 national Vice Chair of Communications of the Student District Operating board of District 2 for ASME. At the University of Missouri I am trying not only to obtain great education but to make a difference for the future of the Engineering program. One way I have reached that goal was recently I co-founded the first MU chapter academic club SEDS. (Students for the Exploration and Development of Space). The club is designed to promote space exploration and develop a better understanding of space. Other than engineering competitions I try to reach out to the younger generation students in our local community to help promote the importance of studying STEM base subjects. Hosting rocket camps, traveling to schools to teach, and giving tours are just a small amount of the involvement that I’ve done.',
+     'about_me': 'I am currently a student at the University of Missouri Columbia majoring in Mechanical & Aerospace Engineering. To date I have gained hands on experience in many areas of aerospace engineering including competing in an Intercollegiate Rocket Engineering Competition for AIAA (American Institute of Aeronautics and Astronautics) MU and an Unmanned Aerial Vehicle Competition for ASME (American Society of Mechanical Engineers). As of now I hold an officer position in 4 academic clubs and 1 national Vice Chair of Communications of the Student District Operating board of District 2 for ASME. At the University of Missouri I am trying not only to obtain great education but to make a difference for the future of the Engineering program. One way I have reached that goal was recently I co-founded the first MU chapter academic club SEDS. \(Students for the Exploration and Development of Space\). The club is designed to promote space exploration and develop a better understanding of space. Other than engineering competitions I try to reach out to the younger generation students in our local community to help promote the importance of studying STEM base subjects. Hosting rocket camps, traveling to schools to teach, and giving tours are just a small amount of the involvement that I\'ve done.',
      'major': 'Mechanical Engineering',
      'city': 'University City',
      'state': 'Missouri',
@@ -1179,7 +1179,7 @@ db.club.insert_many([
      'name': 'Electrical & Computer',
      'school_id': 'scho-43'},
     {'_id': 'club-23',
-     'name': 'Engineer’s Club / St. Pat’s Board',
+     'name': 'Engineer\'s Club / St. Pat\'s Board',
      'school_id': 'scho-5'},
     {'_id': 'club-24',
      'name': 'Engineering Ambassadors',
@@ -1197,13 +1197,13 @@ db.club.insert_many([
      'name': 'Eta Kappa Nu - Honors Society',
      'school_id': 'scho-99'},
     {'_id': 'club-29',
-     'name': 'E-Week (Engineers’ Week)',
+     'name': 'E-Week (Engineers\' Week)',
      'school_id': 'scho-45'},
     {'_id': 'club-30',
      'name': 'Formula Car Racing Team (FSAE)',
      'school_id': 'scho-27'},
     {'_id': 'club-31',
-     'name': 'Graduates’ Club of Biological Engineering (GCBE)',
+     'name': 'Graduates\' Club of Biological Engineering (GCBE)',
      'school_id': 'scho-44'},
     {'_id': 'club-32',
      'name': 'IEEE CIS Society',
@@ -1295,7 +1295,7 @@ db.club.insert_many([
      'name': 'Timber Bridge Team',
      'school_id': 'scho-103', },
     {'_id': 'club-61',
-     'name': 'Torq’N Tigers Tractor Pulling TeamGeneral Interest',
+     'name': 'Torq\'N Tigers Tractor Pulling TeamGeneral Interest',
      'school_id': 'scho-92', },
     {'_id': 'club-62',
      'name': 'Upsilon Pi Epsilon - Honors Society',

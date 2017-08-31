@@ -1,0 +1,45 @@
+{% extends "base.jinja2" %}
+
+{% block content %}
+    <h1>Select Recipients</h1>
+    <form class="navbar-form pull-right">
+        <div class="input-group">
+            <input type="text" id="search_box" name="search_value"
+                value="{{ current_user.search_box.search_value if current_user and current_user.search_box else '' }}"
+                data-search_url="{{ current_user.search_box.search_url if current_user and current_user.search_box else 'search/' }}"
+                title='{{ current_user.search_box.search_title if current_user and current_user.search_box else 'Search by School, Person, Club, Company, Competition, State, City' }}'
+                class="form-control" placeholder="Search">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="Add">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </div>
+        </div>
+        <div id="search_result">
+        </div>
+    </form>
+    <form method="get">
+
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" value="{{ username }}"/>
+        <span>{{ errors['username'] }}</span>
+        <br>
+
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" value="{{ email }}"/>
+        <span>{{ errors['email'] }}</span>
+        <br>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" value="{{ password }}"/>
+        <span>{{ errors['password'] }}</span>
+        <br>
+
+        <label for="confirm-password">Confirm password</label>
+        <input type="password" id="confirm-password" name="confirm-password"/>
+        <span>{{ errors['confirm-password'] }}</span>
+        <br>
+
+        <input type="submit" name="form.submitted" value="Register"/>
+    </form>
+{% endblock %}
