@@ -1,70 +1,212 @@
-<nav class="navbar navbar-fixed-top" nav id="header">
-    <div class="container-fluid sticky topmenu">
-        <div class="navbar-header">
-            <button type="button" class="btn-navbar navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand button" href="{{ url_for('home') }}">UCTechWeb</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li><a href="#" class="button"><i class="glyphicon glyphicon-list-alt"></i>About</a></li>
-                <li><a href="#" class="button"><i class="glyphicon glyphicon-user"></i>Students</a></li>
-                <li><a href="#" class="button"><i class="glyphicon glyphicon-tower"></i>Clubs</a></li>
-                <li><a href="#" class="button"><i class="glyphicon glyphicon-globe"></i>Companies</a></li>
-                <li><a href="#" class="button"><i class="glyphicon glyphicon-cog"></i>Competition Host</a></li>
-            </ul>
-            <ul>
+<nav class="navbar navbar-fixed-top navbar-light navbar-toggleable-md bg-faded pt-4 pb-4 topmenu">
 
-                <ul class="nav navbar-nav pull-right">
-                    <ul class="dropdown-menu dropdown-lr animated flipInX pull-right" role="menu">
+    {#<nav class="navbar navbar-toggleable-md navbar-fixed-top navbar-light bg-faded topmenu justify-content-between" id="header">#}
+    <div class="navbar-header">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#search_result"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand button" href="{{ url_for('home') }}">UCTechWeb</a>
+    </div>
+
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+
+            <li class="nav-item nav-link active" href="#">
+                <span class="fa fa-list-alt" aria-hidden="true"></span>
+                <span class="navbar-text">&nbsp;About</span>
+            </li>
+            <li class="nav-item nav-link" href="#">
+                <span class="fa fa-university" aria-hidden="true"></span>
+                <span class="navbar-text">&nbsp;Clubs</span>
+            </li>
+            <li class="nav-item nav-link" href="#">
+                <span class="fa fa-globe" aria-hidden="true"></span>
+                <span class="navbar-text">&nbsp;Companies</span>
+            </li>
+            <li class="nav-item nav-link" href="#">
+                <span class="fa fa-cog" aria-hidden="true"></span>
+                <span class="navbar-text">&nbsp; Competition Hosts</span>
+            </li>
+            <li class="nav-item nav-link" href="#">
+                <span class="fa fa-user-circle" aria-hidden="true"></span>
+                <span class="navbar-text">&nbsp; Students</span>
+            </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right ml-auto">
+            <li class="dropdown">
+                <a class="nav-item nav-link dropdown-toggle" href="{{ url_for('register_preview') }}">Sign Up</a>
+            </li>
+            <li class="dropdown">
+                <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown" href="{{ url_for('login') }}">Log
+                    in</a>
+
+                <ul class="dropdown-menu dropdown-lr animated slideInRight pull-right" role="menu">
+                    <div class="col-lg-12">
+                        <h3>Log in </h3>
+                        <form id="ajax-login-form" action="{{ url_for('login') }}" method="post"
+                              role="form"
+                              autocomplete="off">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" name="username" id="username" tabindex="1"
+                                       class="form-control"
+                                       placeholder="Username" value="" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password" tabindex="2"
+                                       class="form-control"
+                                       placeholder="Password" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-xs-7">
+                                        <input type="checkbox" tabindex="3" name="remember" id="remember">
+                                        <label for="remember"> Remember Me</label>
+                                    </div>
+                                    <div class="col-xs-5 pull-right">
+                                        <input type="submit" name="login-submit" id="login-submit" tabindex="4"
+                                               class="form-control btn btn-success" value="Log In">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="text-center">
+                                            <a href="{{ url_for('recover') }}" tabindex="5"
+                                               class="forgot-password">Forgot
+                                                Password?</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" class="hide" name="token" id="token"
+                                   value="a465a2791ae0bae853cf4bf485dbe1b6">
+                        </form>
+
+                    </div>
+                </ul>
+            </li>
+        </ul>
+        <form class="navbar-form visible-lg-block pl-3">
+            <div class="input-group">
+                <input type="text" id="search_box" name="search_value"
+                       value="{{ current_user.search_box.search_value if current_user and current_user.search_box else '' }}"
+                       data-search_url="{{ current_user.search_box.search_url if current_user and current_user.search_box else 'search/' }}"
+                       title='{{ current_user.search_box.search_title if current_user and current_user.search_box else 'Search by School, Person, Club, Company, Competition, State, City' }}'
+                       class="form-control" placeholder="Search">
+                <div class="input-group-btn mr-sm-2">
+                    <button class="btn btn-default" type="submit">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    {#
+
+    <div class="navbar-collapse collapse d-flex justify-content-start" id="navbar">
+        <div class="navbar-nav pt-2">
+            <a class="nav-item nav-link active" href="#"><i class="fa fa-list-alt" aria-hidden="true"></i>About</a>
+            <a class="nav-item nav-link active" href="#"><i class="fa fa-user-circle" aria-hidden="true"></i>Students</a>
+            <a class="nav-item nav-link active" href="#"><i class="fa fa-university" aria-hidden="true"></i>Clubs</a>
+            <a class="nav-item nav-link active" href="#"><i class="fa fa-globe" aria-hidden="true"></i>Companies</a>
+            <a class="nav-item nav-link active" href="#"><i class="fa fa-cog" aria-hidden="true"></i>Competition
+                Host</a>
+        </div>
+
+        <div class="navbar-nav ml-auto p-2 ">
+
+            <ul class="nav navbar-nav visible-lg-block">
+                <li class="dropdown visible-lg-block">
+                    <a class="nav-item nav-link dropdown-toggle" href="{{ url_for('register_preview') }}">Sign Up</a>
+                </li>
+                <li class="dropdown visible-lg-block pr-0">
+                    <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown" href="{{ url_for('login') }}">Log
+                        in</a>
+
+                    <ul class="dropdown-menu dropdown-lr animated slideInRight pull-right" role="menu">
                         <div class="col-lg-12">
-                            <div class="text-center"><h3>Create User </h3></div>
-                            <form id="ajax-register-form" action="{{ url_for('register') }}" method="post"
+                            <h3>Log in </h3>
+                            <form id="ajax-login-form" action="{{ url_for('login') }}" method="post"
                                   role="form"
                                   autocomplete="off">
                                 <div class="form-group">
-                                    <input type="text" name="username" id="username" tabindex="1" class="form-control"
-                                           placeholder="Username" value="">
+                                    <label for="username">Username</label>
+                                    <input type="text" name="username" id="username" tabindex="1"
+                                           class="form-control"
+                                           placeholder="Username" value="" autocomplete="off">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" name="email" id="email" tabindex="1" class="form-control"
-                                           placeholder="Email Address" value="">
-                                </div>
-                                <div class="form-group">
+                                    <label for="password">Password</label>
                                     <input type="password" name="password" id="password" tabindex="2"
                                            class="form-control"
-                                           placeholder="Password">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" name="confirm-password" id="confirm-password" tabindex="2"
-                                           class="form-control" placeholder="Confirm Password">
+                                           placeholder="Password" autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-xs-6 col-xs-offset-3">
-                                            <input type="submit" class="btn btn-info" value="Register">
+                                        <div class="col-xs-7">
+                                            <input type="checkbox" tabindex="3" name="remember" id="remember">
+                                            <label for="remember"> Remember Me</label>
+                                        </div>
+                                        <div class="col-xs-5 pull-right">
+                                            <input type="submit" name="login-submit" id="login-submit" tabindex="4"
+                                                   class="form-control btn btn-success" value="Log In">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="text-center">
+                                                <a href="{{ url_for('recover') }}" tabindex="5"
+                                                   class="forgot-password">Forgot
+                                                    Password?</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <input type="hidden" class="hide" name="token" id="token"
-                                       value="7c6f19960d63f53fcd05c3e0cbc434c0">
+                                       value="a465a2791ae0bae853cf4bf485dbe1b6">
                             </form>
+
                         </div>
                     </ul>
+                </li>
+            </ul>
+            <form class="navbar-form visible-lg-block pl-3">
+                <div class="input-group">
+                    <input type="text" id="search_box" name="search_value"
+                           value="{{ current_user.search_box.search_value if current_user and current_user.search_box else '' }}"
+                           data-search_url="{{ current_user.search_box.search_url if current_user and current_user.search_box else 'search/' }}"
+                           title='{{ current_user.search_box.search_title if current_user and current_user.search_box else 'Search by School, Person, Club, Company, Competition, State, City' }}'
+                           class="form-control" placeholder="Search">
+                    <div class="input-group-btn mr-sm-2">
+                        <button class="btn btn-default" type="submit">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
 
-                    <li class="dropdown pull-right">
-                        <a class="dropdown-toggle" href="{{ url_for('register_preview') }}">Sign Up</a>
-                    </li>
-                    <li class="dropdown pull-right">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="{{ url_for('login') }}">Log
-                            in</a>
-                        <ul class="dropdown-menu dropdown-lr animated slideInRight pull-right" role="menu">
-                            <div class="col-lg-12">
-                                <div class="text-center"><h3>Log in </h3></div>
-                                <form id="ajax-login-form" action="{{ url_for('login') }}" method="post"
+            </form>
+        </div>
+    </div>#}
+</nav>
+<div class="d-flex align-right" id="search_result">
+</div>
+
+
+{#    Form for searching
+                  #}
+
+{#        form for ajax login
+                 <form id="ajax-login-form" action="{{ url_for('login') }}" method="post"
                                       role="form"
                                       autocomplete="off">
                                     <div class="form-group">
@@ -104,31 +246,64 @@
                                     </div>
                                     <input type="hidden" class="hide" name="token" id="token"
                                            value="a465a2791ae0bae853cf4bf485dbe1b6">
-                                </form>
+                                </form>#}
+
+{#   <li class="dropdown pull-right visible-lg-block">
+                        <a class="dropdown-toggle" href="{{ url_for('register_preview') }}">Sign Up</a>
+                    </li>
+                    <li class="dropdown pull-right visible-lg-block">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="{{ url_for('login') }}">Log
+                            in</a>
+                        <ul class="dropdown-menu dropdown-lr animated slideInRight pull-right" role="menu">
+                            <div class="col-lg-12">
+                                <div class="text-center"><h3>Log in </h3></div>
+
                             </div>
                         </ul>
-                    </li>
-                </ul>
-                      <form class="navbar-form pull-right">
-                    <div class="input-group">
-                        <input type="text" id="search_box" name="search_value"
-                               value="{{ current_user.search_box.search_value if current_user and current_user.search_box else '' }}"
-                               data-search_url="{{ current_user.search_box.search_url if current_user and current_user.search_box else 'search/' }}"
-                               title='{{ current_user.search_box.search_title if current_user and current_user.search_box else 'Search by School, Person, Club, Company, Competition, State, City' }}'
-                               class="form-control" placeholder="Search">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div id="search_result">
-                    </div>
-                </form>
-            </ul>
-        </div>
-    </div>
-</nav>
+                    </li>#}
 
+{#  <ul>
+
+                <ul class="nav navbar-nav pull-right">
+                    <ul class="dropdown-menu dropdown-lr animated flipInX pull-right" role="menu">
+                        <div class="col-lg-12">
+                            <div class="text-center"><h3>Create User </h3></div>
+                            <form id="ajax-register-form" action="{{ url_for('register') }}" method="post"
+                                  role="form"
+                                  autocomplete="off">
+                                <div class="form-group">
+                                    <input type="text" name="username" id="username" tabindex="1" class="form-control"
+                                           placeholder="Username" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="email" id="email" tabindex="1" class="form-control"
+                                           placeholder="Email Address" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" id="password" tabindex="2"
+                                           class="form-control"
+                                           placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="confirm-password" id="confirm-password" tabindex="2"
+                                           class="form-control" placeholder="Confirm Password">
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-6 col-xs-offset-3">
+                                            <input type="submit" class="btn btn-info" value="Register">
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" class="hide" name="token" id="token"
+                                       value="7c6f19960d63f53fcd05c3e0cbc434c0">
+                            </form>
+                        </div>
+                    </ul>
+
+
+                </ul>
+
+            </ul>#}
 
 <!-- Add Google Maps -->
