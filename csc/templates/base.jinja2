@@ -4,18 +4,31 @@
     <title>CSC {{ name }}</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" media="all">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
-    <script src="{{ url_for('static', filename='csc.js') }}"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='csc.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='Main_Page.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='Main_Page2.css') }}"/>
-    <script src="/static/main_page3.js"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='csc.css') }}"/>
+
+<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
+
+{#<script src="https://npmcdn.com/bootstrap@4.0.0-alpha.5/dist/js/bootstrap.min.js"></script>#}
+
+
+<script src="{{ url_for('static', filename='csc.js') }}"></script>
+<script src="/static/main_page3.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -31,6 +44,7 @@
 {%- block content -%}
     Missing "content" block in jinja template!
 {%- endblock -%}
-  <!-- {% include 'footer.jinja2' %}-->
+<!-- {% include 'footer.jinja2' %}-->
 </body>
+
 </html>

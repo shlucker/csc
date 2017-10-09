@@ -35,14 +35,3 @@ $(document).ready(function(){
     $('[data-toggle="popover"]').popover();
 });
 
-var button1 = document.getElementById("button1");
-var button2 = document.getElementById("button2");
-var button3 = document.getElementById("button3");
-
-if (button1.checked){
-    alert("radio1 selected");
-}else if (button2.checked) {
-    alert("radio2 selected");
-}else if (button3.checked) {
-    alert("radio3 selected");
-}

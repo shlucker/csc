@@ -220,6 +220,8 @@ def send_mass_message(id_to_add=None):
     #if not 'admin' in flask_login.current_user and flask_login.current_user._id != id:
     #    raise flask.abort(403)
 
+    if flask.request.method == 'Post':
+        print(flask.request.method)
     if id_to_add is not None:
         new_user = User.get_by_id(id)
         new_club = Club.get_by_id(id)
@@ -315,3 +317,8 @@ def test9():
 @app.route('/test10')
 def test10():
     return flask.render_template('test10.jinja2')
+
+
+@app.route('/test11')
+def test11():
+    return flask.render_template('test11.jinja2')

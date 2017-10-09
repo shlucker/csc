@@ -277,7 +277,7 @@ var searchBox = {
     last_search: '',
 
     clearSearchText: function () {
-        $('.search_box').val('').focus();
+        $('#search_box').val('').focus();
         searchBox.updateSearchResults();
     },
 
@@ -289,7 +289,7 @@ var searchBox = {
                 break;
             case 38:// up
                 if (!searchBox.selectedItem) {
-                    var items = $('.search_result li');
+                    var items = $('#search_result li');
                     if (items.length)
                         searchBox.selectItem(items[0]);
                 } else
@@ -297,7 +297,7 @@ var searchBox = {
                 break;
             case 40:// down
                 if (!searchBox.selectedItem) {
-                    var items = $('.search_result li');
+                    var items = $('#search_result li');
                     if (items.length)
                         searchBox.selectItem(items[items.length - 1]);
                 } else
@@ -322,10 +322,10 @@ var searchBox = {
     },
 
     updateSearchResults: function () {
-        var search_box = $('.search_box');
+        var search_box = $('#search_box');
         var search_url = search_box.attr('data-search_url');
         var search_value = encodeURIComponent(search_box.val());
-        var search_result = $('.search_result');
+        var search_result = $('#search_result');
         search_result.visible(search_box.val());
         if (searchBox.last_search != search_value) {
             searchBox.last_search = search_value;
@@ -334,7 +334,7 @@ var searchBox = {
     },
 
     init: function () {
-        var sb = $('.search_box');
+        var sb = $('#search_box');
         if (!sb.length)
             return;
         sb.keyup(searchBox.updateSearchResults);

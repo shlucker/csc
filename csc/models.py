@@ -9,7 +9,10 @@ import csc.security as security
 from csc import login_manager
 import csc.exceptions as exceptions
 
-client = pymongo.MongoClient('0.0.0.0', 27017)
+# Necessary to fix a bug in docker container deployment so the two apps are able to talk to one another
+#client = pymongo.MongoClient('0.0.0.0', 27017)
+# typical dev branch configuration
+client = pymongo.MongoClient('localhost', 27017)
 db = client['csc']
 
 

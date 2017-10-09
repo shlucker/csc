@@ -21,4 +21,4 @@ class RegistrationForm(wtforms.Form):
         wtforms.validators.EqualTo('confirm', message='Passwords must match')
     ])
     confirm = wtforms.PasswordField('Confirm password')
-    accept_tos = wtforms.BooleanField('I accept the TOS', [wtforms.validators.DataRequired()])
+    accept_tos = wtforms.BooleanField('I accept the Terms of Service', [wtforms.validators.DataRequired()])

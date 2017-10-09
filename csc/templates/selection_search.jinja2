@@ -2,8 +2,9 @@
 
 {% block content %}
     <h1>Select Recipients</h1>
-    <form class="navbar-form pull-right">
+    <form class="navbar-form pull-right" method="post">
         <div class="input-group">
+            <input type="hidden" id="recipient_list" value =" {{ recipient_list }} }}">
             <input type="text" id="search_box" name="search_value"
                 value="{{ current_user.search_box.search_value if current_user and current_user.search_box else '' }}"
                 data-search_url="{{ current_user.search_box.search_url if current_user and current_user.search_box else 'search/' }}"

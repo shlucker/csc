@@ -1,9 +1,9 @@
-<form action="send_mass_message" method="post">
+<div>
 {% if users %}
     <div>
         <div>Users</div>
         {% for user in users %}
-            <div><a href="{{ url_for('send_mass_message', id_to_add=user._id) }}">{{ user.name }}</a></div>
+            <div><p value="{{user._id }}">{{ user.name }}</p></div>
         {% endfor %}
     </div>
 {% endif %}
@@ -11,7 +11,7 @@
     <div>
         <div>Clubs</div>
         {% for club in clubs %}
-            <div><a href="{{ url_for('send_mass_message', id_to_add=club._id) }}">{{ club.name }}</a></div>
+            <div><p value="{{ club._id }}">{{ club.name }}</p></div>
         {% endfor %}
     </div>
 {% endif %}
@@ -19,4 +19,4 @@
     <div>Sorry, nothing to show</div>
 {% endif %}
 <hr>
-</form>
+</div>

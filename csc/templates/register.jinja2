@@ -3,17 +3,101 @@
 {% from 'macros.jinja2' import render_field %}
 
 {% block content %}
-    <h1>Register</h1>
-    <form method=post>
-        <dl>
-            {{ render_field(form.member_type) }}
-            {{ render_field(form.username, autofocus=True) }}
-            {{ render_field(form.email) }}
-            {{ render_field(form.password) }}
-            {{ render_field(form.confirm) }}
-            {{ render_field(form.accept_tos) }}
-            <dd><a href="{{ url_for('terms_and_conditions') }}" target="_blank">Terms and conditions</a>
-                <input type=submit value=Register></dd>
-        </dl>
-    </form>
+    <div class="row">
+        <div class="col-sm-2">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-8" style="background-color: #f8f8f8">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form action="{{ url_for('register') }}" class="form-horizontal" method=post autocomplete="off">
+                            <div class="heading">
+                                <h3>Join UC Tech Web</h3>
+                            </div>
+
+                            <div class="form-group {% if form.member_type.errors %} has-error {% endif %}">
+                                {{ form.member_type.label(class="col-sm-2") }}
+                                <div class="col-sm-5">
+                                    {{ form.member_type }}
+                                </div>
+                            </div>
+                            <div class="form-group {% if form.email.errors %} has-error {% endif %}">
+                                {{ form.email.label(class="col-sm-2") }}
+                                <div class="col-sm-5">
+                                    {{ form.email(placeholder="E.g. brucewayne@wayne.com", class="form-control") }}
+                                </div>
+                                <p class="col-sm-5 help-block">
+                                    {{ form.email.errors[0] }}
+                            </div>
+                            <div class="form-group {% if form.username.errors %} has-error {% endif %}">
+                                {{ form.username.label(class="col-sm-2") }}
+                                <div class="col-sm-5">
+                                    {{ form.username(placeholder="E.g. ashwinhegde", class="form-control") }}
+                                </div>
+                                <p class="col-sm-5 help-block">
+                                    {{ form.username.errors[0] }}
+                                </p>
+                            </div>
+                            <div class="form-group {% if form.password.errors %} has-error {% endif %}">
+                                {{ form.password.label(class="col-sm-2") }}
+                                <div class="col-sm-5">
+                                    {{ form.password(placeholder="Min. 6 Characters", class="form-control") }}
+                                </div>
+                                <div class="col-sm-5 help-block">
+                                    {{ form.password.errors[0] }}
+                                </div>
+
+                            </div>
+
+                            <div class="form-group {% if form.confirm.errors %} has-error {% endif %}">
+                                {{ form.confirm.label(class="col-sm-2") }}
+                                <div class="col-sm-5">
+                                    {{ form.confirm(placeholder="Min. 6 Characters", class="form-control") }}
+                                </div>
+                                <div class="col-sm-5 help-block">
+                                    {{ form.confirm.errors[0] }}
+                            </div>
+                            </div>
+
+
+                            <div class="form-group {% if form.accept_tos.errors %} has-error {% endif %}">
+                                {{ form.accept_tos.label (class="col-sm-2") }}
+                                <div class="col-sm-5">
+                                    <div class="row">
+
+                                    {{ form.accept_tos(class="col-5") }}
+                                    <button class="btn btn-success col-7" type="submit">Sign Up</button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5 help-block">
+                                    {{ form.accept_tos.errors[0] }}
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+        </div>
+    </div>
+
 {% endblock %}
+
+
+{#    <dl>
+                    {{ render_field(form.member_type) }}
+                    {{ render_field(form.username, autofocus=True) }}
+                    {{ render_field(form.email) }}
+                    {{ render_field(form.password) }}
+                    {{ render_field(form.confirm) }}
+                    {{ render_field(form.accept_tos) }}
+                    <dd><a href="{{ url_for('terms_and_conditions') }}" target="_blank">Terms and conditions</a>
+                        <input type=submit value=Register></dd>
+                </dl>#}

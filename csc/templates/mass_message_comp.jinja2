@@ -1,4 +1,4 @@
-{% extends "base.jinja2" %}
+{% extends "base_noNav.jinja2" %}
 
 {% block content %}
     <div class="container">
@@ -8,7 +8,7 @@
     <div class="row">
         <form >
             <div class="input-group">
-                <input type="text" id="select_search_box" name="select_search_value" autocomplete="off"
+                <input type="text" id="search_box" name="search_value" autocomplete="off"
                     value="{{ current_user.search_box.search_value if current_user and current_user.search_box else '' }}"
                     data-search_url="{{ 'append_search/' }}"
                     title='{{  'Search by Person or Club' }}'
