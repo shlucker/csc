@@ -1,15 +1,18 @@
-<nav class="navbar navbar-static-top navbar-inverse topmenu2 sticky leftbar">
-    <div class="container-fluid" id="header">
-        <div class="navbar-header topmenu2 sticky" id="myNavbar">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+
+        <!-- Logo-->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#MyNavbar">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url_for('home') }}">UCTechWeb</a>
+            <a href="{{ url_for('home') }}" class="navbar-brand">UCTechWeb</a>
         </div>
-        <div class="collapse navbar-collapse topmenu2 sticky" id="myNavbar">
-            <ul class="nav navbar-nav ">
+        <!-- Menu Items-->
+        <div class="collapse navbar-collapse" id="MyNavbar">
+            <ul class="nav navbar-nav">
                 <li><a href="{{ url_for('home') }}">Home</a></li>
                 <li><a href="#">Job Opportunities</a></li>
                 <li><a href="#">Q-Jobs</a></li>

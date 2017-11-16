@@ -525,7 +525,7 @@ db.user.insert_many([
     {'_id': 'user-2',
      'name': 'Brandon Torres',
      'admin': 1,
-     'email': 'brandon.torres@gmail.com',
+     'email': 'torresftw06@gmail.com',
      'username': 'brandon',
      'password': hash_password('torres'),
      'photo': 'Brandon_Pic.jpg',

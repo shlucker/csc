@@ -51,7 +51,7 @@ body, html {
     min-height: 400px;
     margin-left: 0px;
     margin-right: 0px;
-    margin-top: 35px;
+    margin-top: 25px;
     width: 100%;
 }
 
@@ -340,10 +340,6 @@ body {
     overflow-y: visible;
 }
 
-.navbar-toggle {
-    background-color: ghostwhite;
-}
-
 .icon-bar {
     background-color: black;
 }
@@ -352,3 +348,26 @@ body {
     margin-right: 5px;
 }
 
+
+        .row.content {
+            height: 1000px
+        }
+
+        /* Set gray background color and 100% height */
+        .sidenav {
+            padding-top: 100px;
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 25px;
+            }
+
+            .row.content {
+                height: auto;
+            }
+        }

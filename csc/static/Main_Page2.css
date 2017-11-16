@@ -14,43 +14,13 @@ ul.dropdown-lr {
     }
 }
 
-.navbar-nav > li > .dropdown-menu {
-    width: 100px
-}
-
-.dropdown-menu {
-    min-width: 300px;
-}
-
-.navbar {
-    position: relative;
-    min-height: 25px;
-    margin-bottom: 0px;
-    border: 1px solid transparent;
-}
 
 .progress-bar-danger {
     background-color: #0f0f0f;
 }
 
-.navbar {
-    height: 35px;
-}
-
-#authnav {
-
-    height: 55px;
-
-}
-
-#authdrop
-.dropdown-menu {
-    min-width: 30px;
-    background-color: #FFFFFF;
-}
-
 body {
-    padding-top: 0px;
+    padding-top: 8px;
 }
 
 .center-block {
@@ -70,7 +40,7 @@ body {
 .topmenu {
 
     background: #FFFFFF;
-    line-height: 20px;
+    line-height: 15px;
     letter-spacing: 1px;
     width: 100%;
     padding-left: 10px;
@@ -81,6 +51,7 @@ body {
 .sticky {
     position: fixed;
     top: 0;
+    width: 100%;
 }
 
 .button {
@@ -91,12 +62,17 @@ body {
 .topmenu2 {
 
     background: #0b0b0b;
-    line-height: 20px;
+    line-height: 40px;
     letter-spacing: 1px;
     width: 100%;
-    padding-left: 0px;
+    padding-left: 5px;
     left: 0px;
 
+}
+
+.Feedpage {
+
+    padding-top: 49px;
 }
 
 html, body {
@@ -117,4 +93,14 @@ html, body {
     top: 50px;
     bottom: 0;
     overflow: auto;
+}
+
+.wrapper {
+  width: 35%;
+}
+
+.wrapper2 {
+  width: 70%;
+        top: 50px;
+    bottom: 0;
 }
